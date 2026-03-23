@@ -1,0 +1,102 @@
+erDiagram 
+USER{
+    int user_id PK
+    string email  
+    string password_hash 
+    string first_name 
+    string last_name 
+    datetime created_at 
+    int role_id FK
+}
+
+WEDDING_PLAN {
+    int wedding_plan_id PK
+    int user_id FK
+    string user_nickname
+    string partner_nickname
+    date wedding_date 
+    int guest_count
+    decimal budget
+    datetime created_at 
+}
+
+CATEGORY {
+    int category_id PK 
+    string category_name 
+}
+
+GUEST {
+    int guest_id PK 
+    int wedding_plan_id FK
+    string e-mail 
+    string guest_name
+    string guest_surname
+    string rsvp_status 
+}
+
+OUR_WEDDING {
+    int our_wedding_id PK 
+    string profile_image
+    int wedding_plan_id FK 
+}
+
+WEDDING_PLAN_CATEGORY {
+    int wedding_plan_category_id PK 
+    int wedding_plan_id FK 
+    int category_id FK 
+    boolean is_selected  
+}
+
+VENDOR {
+    int vendor_id PK 
+    string vendor_name 
+    int category_id FK
+    int user_id FK
+}
+
+ROLE{
+    int role_id PK
+    string role_name 
+}
+
+
+RESET_PASSWORD {
+    int reset_password_id PK
+    int user_id FK
+    string reset_token
+    datetime expires_at
+}
+
+SETTINGS_THEME {
+    int settings_theme_id PK
+    int user_id FK
+    boolean dark_mode 
+}
+
+CHAT {
+    int chat_id PK
+    boolean is_group
+    string chat_name  
+}
+
+CHAT_MEMBER {
+        int chat_member_id PK
+        int chat_id FK
+        int user_id FK
+    }
+
+    CHAT_MESSAGE {
+        int message_id PK
+        int chat_id FK
+        int sender_id FK
+        string message_content
+        datetime sent_at
+    }
+
+
+
+
+
+
+
+
