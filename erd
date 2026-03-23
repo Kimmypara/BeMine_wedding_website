@@ -9,6 +9,11 @@ USER{
     int role_id FK
 }
 
+ROLE{
+    int role_id PK
+    string role_name 
+}
+
 WEDDING_PLAN {
     int wedding_plan_id PK
     int user_id FK
@@ -20,9 +25,54 @@ WEDDING_PLAN {
     datetime created_at 
 }
 
+OUR_WEDDING {
+    int our_wedding_id PK 
+    string profile_image
+    int wedding_plan_id FK 
+}
+
 CATEGORY {
     int category_id PK 
     string category_name 
+}
+
+TASK {
+    int task_id PK
+    int category_id FK
+    string task_name
+}
+
+WEDDING_PLAN_TASK {
+    int wedding_plan_task_id PK
+    int wedding_plan_id FK
+    int task_id FK
+    boolean is_selected
+    boolean is_completed
+    datetime completed_at
+}
+
+VENDOR {
+    int vendor_id PK 
+    string vendor_name 
+    int category_id FK
+    int user_id FK
+    decimal price_min
+    decimal price_max
+}
+
+BOOKING {
+    int booking_id PK
+    int wedding_plan_id FK
+    int vendor_id FK
+    int task_id FK
+    int status_id FK
+    decimal booked_price
+    datetime booked_at
+}
+
+BOOKING_STATUS {
+    int status_id PK
+    string status_name
 }
 
 GUEST {
@@ -33,32 +83,6 @@ GUEST {
     string guest_surname
     string rsvp_status 
 }
-
-OUR_WEDDING {
-    int our_wedding_id PK 
-    string profile_image
-    int wedding_plan_id FK 
-}
-
-WEDDING_PLAN_CATEGORY {
-    int wedding_plan_category_id PK 
-    int wedding_plan_id FK 
-    int category_id FK 
-    boolean is_selected  
-}
-
-VENDOR {
-    int vendor_id PK 
-    string vendor_name 
-    int category_id FK
-    int user_id FK
-}
-
-ROLE{
-    int role_id PK
-    string role_name 
-}
-
 
 RESET_PASSWORD {
     int reset_password_id PK
@@ -94,7 +118,25 @@ CHAT_MEMBER {
     }
 
 
-
+ROLE ||--o{ USER : has
+USER ||--o{ WEDDING_PLAN : creates
+WEDDING_PLAN ||--|| OUR_WEDDING : has
+WEDDING_PLAN ||--o{ GUEST : has
+WEDDING_PLAN ||--o{ WEDDING_PLAN_TASK : includes
+WEDDING_PLAN ||--o{ BOOKING : makes
+CATEGORY ||--o{ TASK : contains
+CATEGORY ||--o{ VENDOR : groups
+TASK ||--o{ WEDDING_PLAN_TASK : tracked_in
+TASK ||--o{ BOOKING : fulfills
+USER ||--o{ VENDOR : owns
+VENDOR ||--o{ BOOKING : receives
+BOOKING_STATUS ||--o{ BOOKING : defines
+USER ||--o{ RESET_PASSWORD : requests
+USER ||--|| SETTINGS_THEME : has
+CHAT ||--o{ CHAT_MEMBER : contains
+USER ||--o{ CHAT_MEMBER : joins
+CHAT ||--o{ CHAT_MESSAGE : has
+USER ||--o{ CHAT_MESSAGE : sends
 
 
 
