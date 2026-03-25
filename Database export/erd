@@ -1,0 +1,286 @@
+erDiagram 
+USERS{
+    int user_id PK
+    string email  
+    string password_hash 
+    string first_name 
+    string last_name 
+    datetime created_at 
+    int role_id FK
+}
+
+ROLE{
+    int role_id PK
+    string role_name 
+}
+
+WEDDING_PLAN {
+    int wedding_plan_id PK
+    int user_id FK
+    string user_nickname
+    string partner_nickname
+    date wedding_date 
+    int guest_count
+    decimal budget
+    datetime created_at 
+}
+
+OUR_WEDDING {
+    int our_wedding_id PK 
+    string profile_image
+    int wedding_plan_id FK 
+}
+
+CATEGORY {
+    int category_id PK 
+    string category_name 
+}
+
+TASK {
+    int task_id PK
+    int category_id FK
+    string task_name
+}
+
+WEDDING_PLAN_TASK {
+    int wedding_plan_task_id PK
+    int wedding_plan_id FK
+    int task_id FK
+    boolean is_selected
+    boolean is_completed
+    datetime is_completed
+}
+
+VENDOR {
+    int vendor_id PK 
+    string vendor_name 
+    int category_id FK
+    int user_id FK
+    decimal price_min
+    decimal price_max
+}
+
+BOOKING {
+    int booking_id PK
+    int wedding_plan_id FK
+    int vendor_id FK
+    int task_id FK
+    int booking_status_id FK
+    decimal booked_price
+    datetime booked_at
+}
+
+BOOKING_STATUS {
+    int booking_status_id PK
+    string booking_status_name
+}
+
+
+GUEST {
+    int guest_id PK 
+    int wedding_plan_id FK
+    string email 
+    string guest_name
+    string guest_surname
+    string rsvp_status 
+}
+
+RESET_PASSWORD {
+    int reset_password_id PK
+    int user_id FK
+    string reset_token
+    datetime expires_at
+}
+
+SETTINGS_THEME {
+    int settings_theme_id PK
+    int user_id FK
+    boolean dark_mode 
+}
+
+CHAT {
+    int chat_id PK
+    boolean is_group
+    string chat_name  
+}
+
+CHAT_MEMBER {
+        int chat_member_id PK
+        int chat_id FK
+        int user_id FK
+    }
+
+    CHAT_MESSAGE {
+        int chat_message_id PK
+        int chat_id FK
+        int sender_id FK
+        string message_content
+        datetime sent_at
+    }
+
+
+ROLE ||--o{ USER : has
+USER ||--o{ WEDDING_PLAN : creates
+WEDDING_PLAN ||--|| OUR_WEDDING : has
+WEDDING_PLAN ||--o{ GUEST : has
+WEDDING_PLAN ||--o{ WEDDING_PLAN_TASK : includes
+WEDDING_PLAN ||--o{ BOOKING : makes
+CATEGORY ||--o{ TASK : contains
+CATEGORY ||--o{ VENDOR : groups
+TASK ||--o{ WEDDING_PLAN_TASK : tracked_in
+TASK ||--o{ BOOKING : fulfills
+USER ||--o{ VENDOR : owns
+VENDOR ||--o{ BOOKING : receives
+BOOKING_STATUS ||--o{ BOOKING : defines
+USER ||--o{ RESET_PASSWORD : requests
+USER ||--|| SETTINGS_THEME : has
+CHAT ||--o{ CHAT_MEMBER : contains
+USER ||--o{ CHAT_MEMBER : joins
+CHAT ||--o{ CHAT_MESSAGE : has
+USER ||--o{ CHAT_MESSAGE : sends
+
+
+
+
+
+
+https://mermaid.live/edit#pako:eNqVVlFz4jYQ_isePZMMEAiJ37jDyXVyCRlMetMOMxrFFkbFlqgkJ7mS_PdKsmxkmdArvNi7q_12v9Xueg8SlmIQAsxnBGUcFcGKPsXRYr-igfoRKoNSYA5JGjzeVTIhOaFZgAtE8iBoyXZIiFfGU7hBYtNWrQkXElJU4LY8R21xiiSWRL0mHKvHFCIZHGLhLMc6lhsVy8eKruhi_j3ad_VerEZsQcyxH9Fs9tvDLXz8Pn0InPOvOE3VAbjLEXX9uDzctH0bMSXJVvv32OCSdpQ6wQbHvBwgshIrNhJWUmmNcUIKlAfPZZpheYohk9b8aQFtam5WrOSwRjRJeVXjbE00bwXK8Odc3NzVMF-ny-h2vvjDxUhUKBnjP48BNDq3BMtpfOc6kEhsfcpdpx7txrxitVNR6PtupXIMqJtrN7Ba9szUbUI0IAIKnONElaCjSFixy3GjOZSslqui2cB_jx5m84Ub7QumKePHiLQap10-Y-nYha0v046TBMOC0KNi9GYD-zKf33kXSWW4bS7Rr7F3SOYUp1omJJKlOBawhlWUmQA9Qq2qYdMGDePldPkUu7Ef3HvDwSqcu3T7FMVL92zVl25BTqVdD8gzMyFbsspRZ1JUYlHyjoaLlx2sIqwbZxHF0RI-TuP4x3wxc8PkWGAJmyH8a_OrOiQVjdTjFr_tiNIeyFW4S0VuDJffovuoRS6WUjkTUG5wgf8LuW6UFPEtLNQCagbLt2mL92SDpOvM6bCMs3LXnjLa2LSG6w7eR_dfoqa_Wp4LXDy3d5sPfOPJ_UwMjH6wUHE8vY18rAILoSbr_8ERqmvaSE6itb-EUYnrTdGqnDouTdmaGKtNGby_n52xfaA3fBAGaktX276Wt9ZiaBeM8Naltn1_D9xdY111zJTLqpdOGHQHd6goSPIyxZ-cqAdTGBRoq42afWQNrBfNDyL0iIGduWFgbpGwy-hEQJKjRM8ZQtu2h1DWZa6WaO4R2gCxVx2Hfe0c5jjB5EWn4s2vjmWK14RiD8WbCNrf33qiuGaqYl772pqYnrOO3IZx-XPB2jZ_sYrgrpOqFY5cMk-vr7qormj1Bz2QcZKCUPIS90CBuZqj6hWYtloBM2JWIFSPeoCsgOp2dWaH6J-MFfUxVdhsA8I1yoV6K3e6N-wnbmNimuyr_toC4cVoYnyAcA_eQHg26A8uzsdX19eXg8nVeDweDXrgp5JPhuej_uVw1L-YXE76g_HlRw_8Y3CH55P-1XBwPbqejPvjwfCqB3BKJOP31Se2-dL--BdIcb98
+
+
+
+CREATE TABLE users (
+ user_id int PRIMARY KEY AUTO_INCREMENT,
+ email VARCHAR (255),
+ password_hash VARCHAR (255),
+ first_name VARCHAR(255),
+ last_name VARCHAR(255),
+ created_at DATETIME,
+ role_id int,
+ FOREIGN KEY (role_id) REFERENCES role(role_id)
+);
+
+CREATE TABLE role(
+    role_id int PRIMARY KEY AUTO_INCREMENT ,
+    role_name VARCHAR(100)
+    );
+    
+CREATE TABLE wedding_plan(
+	wedding_plan_id int PRIMARY KEY AUTO_INCREMENT,
+    user_id int,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    user_nickname VARCHAR(100),
+    partner_nickname VARCHAR(100),
+    wedding_date DATE ,
+    guest_count int,
+    budget DECIMAL ,
+    created_at DATETIME
+);
+
+CREATE TABLE our_wedding(
+our_wedding_id int PRIMARY KEY AUTO_INCREMENT ,
+    profile_image VARCHAR(500),
+    wedding_plan_id int,
+    FOREIGN KEY (wedding_plan_id) REFERENCES wedding_plan(wedding_plan_id) 
+);
+
+CREATE TABLE category(
+category_id int PRIMARY KEY AUTO_INCREMENT ,
+    category_name VARCHAR(255)
+);
+
+CREATE TABLE task(
+    task_id int PRIMARY KEY AUTO_INCREMENT ,
+    category_id int ,
+    FOREIGN KEY (category_id) REFERENCES category(category_id),
+    task_name VARCHAR(255)
+    );
+    
+ CREATE TABLE wedding_plan_task (
+ wedding_plan_task_id int PRIMARY KEY AUTO_INCREMENT ,
+  wedding_plan_id int,
+     FOREIGN KEY (wedding_plan_id) REFERENCES wedding_plan(wedding_plan_id),
+   task_id int,
+     FOREIGN KEY (task_id) REFERENCES task(task_id),
+     is_selected BOOLEAN ,
+     is_completed BOOLEAN ,
+     is_completed DATETIME
+ );  
+ 
+ CREATE TABLE vendor(
+     vendor_id int PRIMARY KEY AUTO_INCREMENT ,
+     vendor_name VARCHAR(500),
+     category_id int,
+     FOREIGN KEY (category_id) REFERENCES category(category_id),
+      user_id int,
+     FOREIGN KEY (user_id) REFERENCES users(user_id),
+     price_min DECIMAL,
+     price_max DECIMAL
+     );
+     
+     CREATE TABLE booking(
+     booking_id int PRIMARY KEY AUTO_INCREMENT ,
+     wedding_plan_id int,
+     FOREIGN KEY (wedding_plan_id) REFERENCES wedding_plan(wedding_plan_id),   
+     vendor_id int,
+     FOREIGN KEY (vendor_id) REFERENCES vendor(vendor_id),   
+     task_id int,
+     FOREIGN KEY (task_id) REFERENCES task(task_id),
+     booking_status_id int,
+     FOREIGN KEY (booking_status_id) REFERENCES booking_status(booking_status_id),  
+      booked_price DECIMAL,
+      booked_at DATETIME   
+     );
+     
+     CREATE TABLE booking_status(
+     booking_status_id int PRIMARY KEY AUTO_INCREMENT,
+       booking_status_name VARCHAR(100)  
+     );
+     
+     CREATE TABLE guest(
+     guest_id int PRIMARY KEY AUTO_INCREMENT ,
+        wedding_plan_id int,
+     FOREIGN KEY (wedding_plan_id) REFERENCES wedding_plan(wedding_plan_id), 
+     email VARCHAR(255),
+      guest_name VARCHAR(255),
+     guest_surname VARCHAR(255),
+      rsvp_status VARCHAR(100)   
+     );
+     
+     CREATE TABLE reset_password(
+     reset_password_id int PRIMARY KEY AUTO_INCREMENT ,
+      user_id int,
+     FOREIGN KEY (user_id) REFERENCES users(user_id), 
+      reset_token VARCHAR(255),
+       expires_at DATETIME  
+     );
+     
+   CREATE TABLE settings_theme(
+       settings_theme_id int PRIMARY KEY AUTO_INCREMENT ,
+     user_id int,
+     FOREIGN KEY (user_id) REFERENCES users(user_id),
+       dark_mode BOOLEAN
+       );
+       
+       create table chat(
+       chat_id int PRIMARY KEY AUTO_INCREMENT ,
+       is_group BOOLEAN,
+       chat_name VARCHAR(500)    
+       );
+       
+       CREATE TABLE chat_member(
+       chat_member_id int PRIMARY KEY AUTO_INCREMENT,
+        chat_id int,
+     FOREIGN KEY (chat_id) REFERENCES chat(chat_id), 
+        user_id int,
+     FOREIGN KEY (user_id) REFERENCES users(user_id)    
+       );
+       
+       CREATE TABLE chat_message(
+       chat_message_id int PRIMARY KEY AUTO_INCREMENT,
+        chat_id int,
+     FOREIGN KEY (chat_id) REFERENCES chat(chat_id),
+            sender_id int,
+     FOREIGN KEY (sender_id) REFERENCES users(user_id),  
+     message_content VARCHAR,
+       sent_at DATETIME    
+       );
