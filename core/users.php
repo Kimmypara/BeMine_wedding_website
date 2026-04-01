@@ -64,25 +64,24 @@ public $is_active;
     // create a new user record
 public function create(){
     $query = "INSERT INTO {$this->table}
-    (first_name, last_name)
-    VALUES (:first_name, :last_name);";
+    (first_name, last_name, email,password_hash, created_at,role_id, is_active)
+    VALUES (:first_name, :last_name, :email, :password_hash, :created_at, :role_id, :is_active);";
 
     $stmt = $this->conn->prepare($query);
 
     // clean up data sent by user
   
-    $this->first_name = htmlspecialchars(strip_tags($this->first_name));
+     $this->first_name = htmlspecialchars(strip_tags($this->first_name));
     $this->last_name = htmlspecialchars(strip_tags($this->last_name));
     $this->email = htmlspecialchars(strip_tags($this->email));
     $this->password_hash = htmlspecialchars(strip_tags($this->password_hash));
-    $this->created_at = htmlspecialchars(strip_tags($this->created_at));
     $this->role_id = htmlspecialchars(strip_tags($this->role_id));
     $this->is_active = htmlspecialchars(strip_tags($this->is_active));
-
+    $this->created_at = date('Y-m-d H:i:s');
 
     // bind parameters to sql statement
 
-    $stmt->bindParam(":first_name", $this->first_name);
+     $stmt->bindParam(":first_name", $this->first_name);
     $stmt->bindParam(":last_name", $this->last_name);
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":password_hash", $this->password_hash);
@@ -150,11 +149,11 @@ public function updatePassword(){
 
     // clean up data sent by user
     $this->user_id = htmlspecialchars(strip_tags($this->user_id));
-    $this->age = htmlspecialchars(strip_tags($this->age));
+    $this->password_hash = htmlspecialchars(strip_tags($this->password_hash));
 
     // bind parameters to sql statement
     $stmt->bindParam(":user_id", $this->user_id);
-    $stmt->bindParam(":age", $this->age);
+    $stmt->bindParam(":password_hash", $this->password_hash);
 
     if($stmt->execute()){
         return true;
