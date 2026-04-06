@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2026 at 01:41 PM
+-- Generation Time: Apr 02, 2026 at 07:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -148,6 +148,15 @@ CREATE TABLE `role` (
   `role_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`role_id`, `role_name`) VALUES
+(1, 'Admin'),
+(2, 'Couple'),
+(3, 'Vendor');
+
 -- --------------------------------------------------------
 
 --
@@ -184,10 +193,18 @@ CREATE TABLE `users` (
   `password_hash` varchar(255) DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
   `role_id` int(11) DEFAULT NULL,
   `is_active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_name`, `created_at`, `role_id`, `is_active`) VALUES
+(2, 'kimberly.parascandalo.e22247@mcast.edu.mt', 'password**', 'postman', 'test', NULL, 1, 1),
+(3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -216,8 +233,15 @@ CREATE TABLE `wedding_plan` (
   `wedding_date` date DEFAULT NULL,
   `guest_count` int(11) DEFAULT NULL,
   `budget` decimal(10,0) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL
+  `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wedding_plan`
+--
+
+INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `partner_nickname`, `wedding_date`, `guest_count`, `budget`, `created_at`) VALUES
+(4, 2, 'Kim', 'Para', '2026-01-02', 200, 10000, '2026-04-02 15:02:40');
 
 -- --------------------------------------------------------
 
@@ -307,7 +331,8 @@ ALTER TABLE `reset_password`
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
-  ADD PRIMARY KEY (`role_id`);
+  ADD PRIMARY KEY (`role_id`),
+  ADD UNIQUE KEY `unique_role_name` (`role_name`);
 
 --
 -- Indexes for table `settings_theme`
@@ -417,7 +442,7 @@ ALTER TABLE `reset_password`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `settings_theme`
@@ -435,7 +460,7 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -447,7 +472,7 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
