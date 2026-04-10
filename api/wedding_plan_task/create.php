@@ -15,7 +15,7 @@ $wedding_plan_task = new WeddingPlanTask($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // fill in wedding plan task instance properties with decoded values from request
-$wedding_plan_task->wedding_plan_task_id = $data->wedding_plan_task_id;
+
 $wedding_plan_task->wedding_plan_id = $data->wedding_plan_id;
 $wedding_plan_task->task_id = $data->task_id;
 $wedding_plan_task->is_selected = $data->is_selected;

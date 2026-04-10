@@ -37,7 +37,7 @@ public $is_active;
 
     // read a single user record by Id
     public function readSingle(){
-        $query = "SELECT *
+        $query = "SELECT user_id, first_name, last_name, email, created_at, role_id, is_active
         FROM {$this->table} AS {$this->alias}
         WHERE {$this->alias}.user_id = ?
         LIMIT 1;";
@@ -47,12 +47,11 @@ public $is_active;
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row > 0){
-           
+        if ($row){
+            $this->user_id = $row["user_id"];
             $this->first_name = $row["first_name"];
             $this->last_name = $row["last_name"];
             $this->email = $row["email"];
-            $this->password_hash = $row["password_hash"];
             $this->created_at = $row["created_at"];
             $this->role_id = $row["role_id"];
             $this->is_active = $row["is_active"];
@@ -106,7 +105,7 @@ public function update(){
             SET first_name = :first_name,
                 last_name = :last_name,
                 email = :email,
-                password_hash = :password_hash
+                password_hash = :password_hash,
                 is_active = :is_active
                 WHERE user_id = :user_id;";
 
@@ -130,12 +129,12 @@ public function update(){
     $stmt->bindParam(":is_active", $this->is_active);
 
 
-    if($stmt->execute()){
-        return true;
+     if($stmt->execute()){
+        if($stmt->rowCount() > 0){
+            return true;
+        }
     }
-   
-    printf("Error %s. \n", $stmt->error);
-    
+
     return false;
 }
 
@@ -156,11 +155,11 @@ public function updatePassword(){
     $stmt->bindParam(":password_hash", $this->password_hash);
 
     if($stmt->execute()){
-        return true;
+        if($stmt->rowCount() > 0){
+            return true;
+        }
     }
-   
-    printf("Error %s. \n", $stmt->error);
-    
+
     return false;
 }
 

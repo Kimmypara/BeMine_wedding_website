@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2026 at 07:45 PM
+-- Generation Time: Apr 10, 2026 at 12:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,6 +58,13 @@ CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `category_name`) VALUES
+(1, 'Photography');
 
 -- --------------------------------------------------------
 
@@ -181,6 +188,13 @@ CREATE TABLE `task` (
   `task_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `task`
+--
+
+INSERT INTO `task` (`task_id`, `category_id`, `task_name`) VALUES
+(3, 1, 'quotation');
+
 -- --------------------------------------------------------
 
 --
@@ -195,15 +209,15 @@ CREATE TABLE `users` (
   `last_name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `role_id` int(11) DEFAULT NULL,
-  `is_active` tinyint(1) DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
+) ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_name`, `created_at`, `role_id`, `is_active`) VALUES
-(2, 'kimberly.parascandalo.e22247@mcast.edu.mt', 'password**', 'postman', 'test', NULL, 1, 1),
+(2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$U33z/1A0soexRv0vNgFXO.OFyrPC1rCQ3GklOmlN.icfa2DqkFEYa', 'Kimberly', 'Para', NULL, 1, 1),
 (3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 2, 1);
 
 -- --------------------------------------------------------
@@ -241,7 +255,8 @@ CREATE TABLE `wedding_plan` (
 --
 
 INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `partner_nickname`, `wedding_date`, `guest_count`, `budget`, `created_at`) VALUES
-(4, 2, 'Kim', 'Para', '2026-01-02', 200, 10000, '2026-04-02 15:02:40');
+(4, 2, 'Kim', 'Para', '2026-01-02', 200, 10000, '2026-04-02 15:02:40'),
+(5, 2, 'Kim', 'Para', '2026-01-02', 200, 10000, '2026-04-10 11:16:11');
 
 -- --------------------------------------------------------
 
@@ -257,6 +272,14 @@ CREATE TABLE `wedding_plan_task` (
   `completed_at` datetime DEFAULT NULL,
   `is_completed` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wedding_plan_task`
+--
+
+INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`) VALUES
+(1, 4, 3, 1, '2026-04-10 11:13:36', 0),
+(2, 4, 3, 1, '2026-04-10 11:15:50', 0);
 
 --
 -- Indexes for dumped tables
@@ -400,7 +423,7 @@ ALTER TABLE `booking_status`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -442,7 +465,7 @@ ALTER TABLE `reset_password`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `settings_theme`
@@ -454,13 +477,13 @@ ALTER TABLE `settings_theme`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -472,13 +495,13 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
