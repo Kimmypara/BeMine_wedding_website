@@ -22,11 +22,31 @@ $users->last_name = $data->last_name;
 $users->password_hash = password_hash($data->password, PASSWORD_DEFAULT);
 $users->is_active = $data->is_active;
 
-if($users->update()){
+// validate
+if (
+    empty($users->email) ||
+    empty($users->first_name) ||
+    empty($users->last_name) ||
+    empty($data->password) 
+){
+    http_response_code(400);
+    echo json_encode(array("message" => "User not updated. Missing or invalid input."));
+}
+elseif($users->invalidEmail($users->email)){
+    http_response_code(400);
+    echo json_encode(array("message" => "Invalid email format."));
+}
+elseif($users->emailExists()){
+    http_response_code(409);
+    echo json_encode(array("message" => "User not updated. E-mail already exists."));
+}
+elseif($users->update()){
+    http_response_code(200);
     echo json_encode(array("message" => "User updated."));
 }
 else{
-echo json_encode(array("message" => "User not updated."));
-    }
+    http_response_code(500);
+    echo json_encode(array("message" => "Server error."));
+}
 
 ?>

@@ -97,6 +97,20 @@ public function update(){
     
     return false;
 }
+
+public function roleExists(){
+    $query = "SELECT role_id
+              FROM {$this->table}
+              WHERE role_name = :role_name
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":role_name", $this->role_name);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
 }
 
 ?>

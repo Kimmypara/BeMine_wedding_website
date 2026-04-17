@@ -12,6 +12,13 @@ include_once("../../includes/initialize.php");
 // This allows us to use its structure and function
 $role = new Role($db);
 
+// validate role_id from query string
+if(empty($_GET["role_id"])){
+    http_response_code(400);
+    echo json_encode(array("message" => "Missing role_id."));
+    exit();
+}
+
 //call new function parameter
 $role->role_id =  isset($_GET["role_id"]) ? $_GET["role_id"]: die();
 
@@ -23,10 +30,14 @@ if($num > 0){
     'role_id'      =>$role->role_id,
     'role_name'       =>$role->role_name
    );
-   print_r(json_encode($role_info));
+
+    http_response_code(200);
+    echo json_encode($role_info);
 }
 else{
-    echo json_encode(array("message"=>"No roles found."));
+    http_response_code(404);
+    echo json_encode(array("message" => "No roles found."));
 }
+  
 
 ?>

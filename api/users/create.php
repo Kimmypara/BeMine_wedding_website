@@ -22,11 +22,33 @@ $users->password_hash = password_hash($data->password, PASSWORD_DEFAULT);
 $users->role_id = $data->role_id;
 $users->is_active = $data->is_active;
 
-if($users->create()){
+// validate
+if (
+    empty($users->email) ||
+    empty($users->first_name) ||
+    empty($users->last_name) ||
+    empty($data->password) ||
+    empty($users->role_id)
+){
+    http_response_code(400);
+    echo json_encode(array("message" => "User not created. Missing or invalid input."));
+}
+elseif($users->invalidEmail($users->email)){
+    http_response_code(400);
+    echo json_encode(array("message" => "Invalid email format."));
+}
+elseif($users->emailExists()){
+    http_response_code(409);
+    echo json_encode(array("message" => "User not created. E-mail already exists."));
+}
+elseif($users->create()){
+    http_response_code(201);
     echo json_encode(array("message" => "User created."));
 }
 else{
-echo json_encode(array("message" => "User not created."));
-    }
+    http_response_code(500);
+    echo json_encode(array("message" => "Server error."));
+}
 
 ?>
+

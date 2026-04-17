@@ -23,6 +23,7 @@ public $is_active;
         $this->conn = $db;
     }
 
+
     public function read(){
         $query = "SELECT * 
             FROM {$this->table} AS {$this->alias}
@@ -59,6 +60,23 @@ public $is_active;
 
         return $stmt;
     }
+
+public function emailExists(){
+    $query = "SELECT user_id
+              FROM {$this->table}
+              WHERE email = :email
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":email", $this->email);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+function invalidEmail($email){
+    return !filter_var($email, FILTER_VALIDATE_EMAIL);
+}
 
     // create a new user record
 public function create(){

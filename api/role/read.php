@@ -30,11 +30,12 @@ if($num > 0){
 
         array_push($roles_list['data'], $role_item);
     }
-
+     http_response_code(200);
     echo json_encode($roles_list);
 }
 else{
-    echo json_encode(array("message"=>"No role found."));
+    http_response_code(404);
+    echo json_encode(array("message" => "Roles not found."));
 }
 
 ?>

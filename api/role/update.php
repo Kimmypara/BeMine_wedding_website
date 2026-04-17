@@ -1,10 +1,10 @@
 <?php
 
 //Only for testing
-//session_start();
+session_start();
 
-//$_SESSION['user_id'] = 1;
-//$_SESSION['role_id'] = 1;
+$_SESSION['user_id'] = 1;
+$_SESSION['role_id'] = 1;
 // Only for testing
 
 
@@ -54,11 +54,25 @@ $role->role_id  = $data->role_id;
 $role->role_name  = $data->role_name;
 
 
-if($role->update()){
+ // validate
+if (
+    empty($role->role_name) 
+){
+    http_response_code(400);
+    echo json_encode(array("message" => "Role not updated. Missing or invalid input."));
+}
+elseif($role->roleExists()){
+    http_response_code(409);
+    echo json_encode(array("message" => "Role not updated. Role already exists."));
+}
+elseif($role->update()){
+    http_response_code(201);
     echo json_encode(array("message" => "Role updated."));
 }
+
 else{
-echo json_encode(array("message" => "Role not updated."));
-    }
+    http_response_code(500);
+    echo json_encode(array("message" => "Server error."));
+}
 
 ?>

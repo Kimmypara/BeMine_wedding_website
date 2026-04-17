@@ -18,11 +18,25 @@ $data = json_decode(file_get_contents("php://input"));
 $role->role_name = $data->role_name;
 
 
-if($role->create()){
+
+    // validate
+if (
+    empty($role->role_name) 
+){
+    http_response_code(400);
+    echo json_encode(array("message" => "Role not created. Missing or invalid input."));
+}
+elseif($role->roleExists()){
+    http_response_code(409);
+    echo json_encode(array("message" => "Role not created. Role already exists."));
+}
+elseif($role->create()){
+    http_response_code(201);
     echo json_encode(array("message" => "Role created."));
 }
-else{
-echo json_encode(array("message" => "Role not created."));
-    }
 
+else{
+    http_response_code(500);
+    echo json_encode(array("message" => "Server error."));
+}
 ?>

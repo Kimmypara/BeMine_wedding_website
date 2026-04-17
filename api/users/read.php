@@ -12,6 +12,8 @@ include_once("../../includes/initialize.php");
 // This allows us to use its structure and function
 $users = new Users($db);
 
+
+
 $result = $users->read();
 $num = $result->rowCount();
 
@@ -36,10 +38,12 @@ if($num > 0){
         array_push($users_list['data'], $user_item);
     }
 
+     http_response_code(200);
     echo json_encode($users_list);
 }
 else{
-    echo json_encode(array("message"=>"No users found."));
+    http_response_code(404);
+    echo json_encode(array("message" => "Users not found."));
 }
 
 ?>
