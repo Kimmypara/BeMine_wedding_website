@@ -8,9 +8,6 @@ $_SESSION['role_id'] = 1;
 // Only for testing
 
 
-
-
-
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: PUT");

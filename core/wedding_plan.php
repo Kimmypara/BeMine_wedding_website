@@ -106,13 +106,14 @@ public function update(){
             SET user_nickname = :user_nickname,
                 partner_nickname = :partner_nickname,
                 wedding_date = :wedding_date,
-                guest_count = :guest_count
+                guest_count = :guest_count,
                 budget = :budget
                 WHERE wedding_plan_id = :wedding_plan_id;";
 
                 $stmt = $this->conn->prepare($query);
 
     // clean up data sent by user
+    $this->wedding_plan_id = htmlspecialchars(strip_tags($this->wedding_plan_id));
     $this->wedding_plan_id = htmlspecialchars(strip_tags($this->wedding_plan_id));
     $this->user_nickname = htmlspecialchars(strip_tags($this->user_nickname));
     $this->partner_nickname = htmlspecialchars(strip_tags($this->partner_nickname));
@@ -293,6 +294,20 @@ public function userIdExists(){
 
     $stmt = $this->conn->prepare($query);
     $stmt->bindParam(":user_id", $this->user_id );
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+
+public function weddingPlanExists(){
+    $query = "SELECT wedding_plan_id  
+              FROM wedding_plan 
+              WHERE wedding_plan_id  = :wedding_plan_id  
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":wedding_plan_id", $this->wedding_plan_id );
     $stmt->execute();
 
     return $stmt->rowCount() > 0;

@@ -110,6 +110,43 @@ public function categoryNameExists(){
 
     return $stmt->rowCount() > 0;
 }
+
+
+
+public function categoryIdExists(){
+    $query = "SELECT category_id 
+              FROM category 
+              WHERE category_id = :category_id 
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":category_id", $this->category_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+//Delete a category record
+public function delete(){
+    $query = "DELETE FROM {$this->table}
+                WHERE category_id = :category_id;";
+
+                $stmt = $this->conn->prepare($query);
+
+    // clean up data sent by category
+    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+
+    // bind parameters to sql statement
+    $stmt->bindParam(":category_id", $this->category_id);
+
+    if($stmt->execute()){
+        return true;
+    }
+   
+    printf("Error %s. \n", $stmt->error);
+    
+    return false;
+}
 }
 
 ?>

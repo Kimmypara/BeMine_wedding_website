@@ -1,18 +1,24 @@
 <?php
 
 //Only for testing
-//session_start();
+session_start();
 
-//$_SESSION['user_id'] = 1;
-//$_SESSION['role_id'] = 1;
+$_SESSION['user_id'] = 1;
+$_SESSION['role_id'] = 1;
 // Only for testing
-
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: PATCH");
+header("Access-Control-Allow-Methods: DELETE");
 
 header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With");
+
+if($_SERVER["REQUEST_METHOD"] !="DELETE"){
+    http_response_code(405);
+    echo json_encode(array("message" => "Incorrect Request Method used."));
+    die();
+}
+
 
 include_once("../../includes/initialize.php");
 
@@ -40,40 +46,32 @@ function requireAdmin(){
 
 requireAdmin();
 
-// create a new instance of the Task class
+// creat a new instance of the Category class
 // This allows us to use its structure and function
-$task = new Task($db);
+$category = new Category($db);
 //read submitted json data from request body
 $data = json_decode(file_get_contents("php://input"));
 
-// fill in user instance properties with decoded values from request
-$task->task_id  = $data->task_id ;
-$task->category_id = $data->category_id;
-$task->task_name = $data->task_name;
 
-    
+// check if ID is provided in query string
+if(empty($_GET["category_id"])){
+    http_response_code(400);
+    echo json_encode(array("message" => "Category ID was not provided."));
+    exit();
+}
 
-    // validate
-if (
-    empty($task->category_id) ||
-    empty($task->task_name) 
-){
-    http_response_code(400);
-    echo json_encode(array("message" => "Task not updated. Missing or invalid input."));
+$category->category_id = $_GET["category_id"];
+
+if(!$category->categoryIdExists()){
+    http_response_code(404);
+    echo json_encode(array("message" => "Category not deleted. Category does not exist."));
+    exit();
 }
-elseif(!$task->categoryIdExists()){
-    http_response_code(400);
-    echo json_encode(array("message" => "Invalid category_id. Category does not exist."));
-}
-elseif($task->taskExists()){
-    http_response_code(409);
-    echo json_encode(array("message" => "Task not updated. Task already exists."));
-}
-elseif($task->update()){
+
+if($category->delete()){
     http_response_code(200);
-    echo json_encode(array("message" => "Task updated."));
+    echo json_encode(array("message" => "Category deleted."));
 }
-
 else{
     http_response_code(500);
     echo json_encode(array("message" => "Server error."));
