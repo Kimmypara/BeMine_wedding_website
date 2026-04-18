@@ -13,6 +13,7 @@ public $task_id;
 public $is_selected;
 public $completed_at;
 public $is_completed;
+public $category_id;
 
 
     //constructor with db connection
@@ -44,13 +45,14 @@ public $is_completed;
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row > 0){
+        if ($row){
            
             $this->wedding_plan_id = $row["wedding_plan_id"];
             $this->task_id = $row["task_id"];
             $this->is_selected = $row["is_selected"];
             $this->completed_at = $row["completed_at"];
             $this->is_completed = $row["is_completed"];
+            $this->category_id = $row["category_id"];
         }
 
         return $stmt;
@@ -59,8 +61,8 @@ public $is_completed;
     // create a new user record
 public function create(){
     $query = "INSERT INTO {$this->table}
-    (wedding_plan_id, task_id, is_selected,completed_at, is_completed)
-    VALUES (:wedding_plan_id, :task_id, :is_selected, :completed_at, :is_completed);";
+    (wedding_plan_id, task_id, is_selected,completed_at, is_completed, category_id)
+    VALUES (:wedding_plan_id, :task_id, :is_selected, :completed_at, :is_completed, :category_id);";
 
     $stmt = $this->conn->prepare($query);
 
@@ -71,6 +73,7 @@ public function create(){
     $this->is_selected = htmlspecialchars(strip_tags($this->is_selected));
     $this->completed_at = date('Y-m-d H:i:s');
     $this->is_completed = htmlspecialchars(strip_tags($this->is_completed));
+    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
     // bind parameters to sql statement
 
@@ -79,6 +82,7 @@ public function create(){
     $stmt->bindParam(":is_selected", $this->is_selected);
     $stmt->bindParam(":completed_at", $this->completed_at);
     $stmt->bindParam(":is_completed", $this->is_completed);
+    $stmt->bindParam(":category_id", $this->category_id);
 
     
     if($stmt->execute()){
@@ -96,7 +100,8 @@ public function update(){
             SET wedding_plan_id = :wedding_plan_id,
                 task_id = :task_id,
                 is_selected = :is_selected,
-                is_completed = :is_completed
+                is_completed = :is_completed,
+                category_id = :category_id
                 WHERE wedding_plan_task_id = :wedding_plan_task_id;";
 
                 $stmt = $this->conn->prepare($query);
@@ -107,6 +112,7 @@ public function update(){
     $this->task_id = htmlspecialchars(strip_tags($this->task_id));
     $this->is_selected = htmlspecialchars(strip_tags($this->is_selected));
     $this->is_completed = htmlspecialchars(strip_tags($this->is_completed));
+    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
 
     // bind parameters to sql statement
@@ -115,6 +121,7 @@ public function update(){
     $stmt->bindParam(":task_id", $this->task_id);
     $stmt->bindParam(":is_selected", $this->is_selected);
     $stmt->bindParam(":is_completed", $this->is_completed);
+    $stmt->bindParam(":category_id", $this->category_id);
 
 
 
@@ -197,6 +204,62 @@ public function delete(){
     printf("Error %s. \n", $stmt->error);
     
     return false;
+}
+
+public function WeddingPlanIdExists(){
+    $query = "SELECT wedding_plan_id
+              FROM wedding_plan
+              WHERE wedding_plan_id = :wedding_plan_id
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":wedding_plan_id", $this->wedding_plan_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+public function taskIdExists(){
+    $query = "SELECT task_id
+              FROM task
+              WHERE task_id = :task_id
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":task_id", $this->task_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+public function categoryIdExists(){
+    $query = "SELECT category_id
+              FROM category
+              WHERE category_id = :category_id
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":category_id", $this->category_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+public function weddingPlanTaskExists(){
+    $query = "SELECT wedding_plan_task_id
+              FROM {$this->table}
+              WHERE wedding_plan_id = :wedding_plan_id
+              AND category_id = :category_id
+              AND task_id = :task_id
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":wedding_plan_id", $this->wedding_plan_id);
+    $stmt->bindParam(":category_id", $this->category_id);
+    $stmt->bindParam(":task_id", $this->task_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
 }
 }
 

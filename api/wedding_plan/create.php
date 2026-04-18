@@ -22,11 +22,32 @@ $wedding_plan->wedding_date = $data->wedding_date;
 $wedding_plan->guest_count = $data->guest_count;
 $wedding_plan->budget = $data->budget;
 
-if($wedding_plan->create()){
+// validate
+if (
+    empty($wedding_plan->user_id) ||
+    empty($wedding_plan->user_nickname) ||
+    empty($wedding_plan->partner_nickname) ||
+    empty($wedding_plan->wedding_date) ||
+    empty($wedding_plan->guest_count) ||
+    empty($wedding_plan->budget)
+){
+    http_response_code(400);
+    echo json_encode(array("message" => "Wedding Plan not created. Missing or invalid input."));
+}
+elseif($wedding_plan->userIdExists()){
+    http_response_code(409);
+    echo json_encode(array("message" => "Wedding Plan not created. Wedding Plan already exists."));
+}
+elseif($wedding_plan->create()){
+    http_response_code(201);
     echo json_encode(array("message" => "Wedding Plan created."));
 }
+
 else{
-echo json_encode(array("message" => "Wedding Plan not created."));
-    }
+    http_response_code(500);
+    echo json_encode(array("message" => "Server error."));
+}
+
+
 
 ?>

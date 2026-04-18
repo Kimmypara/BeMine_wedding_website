@@ -97,6 +97,19 @@ public function update(){
     
     return false;
 }
+
+public function categoryNameExists(){
+    $query = "SELECT category_name 
+              FROM category 
+              WHERE category_name = :category_name 
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":category_name", $this->category_name);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
 }
 
 ?>

@@ -32,10 +32,12 @@ if($num > 0){
         array_push($tasks_list['data'], $task_item);
     }
 
+     http_response_code(200);
     echo json_encode($tasks_list);
 }
 else{
-    echo json_encode(array("message"=>"No task found."));
+    http_response_code(404);
+    echo json_encode(array("message" => "Tasks not found."));
 }
 
 ?>

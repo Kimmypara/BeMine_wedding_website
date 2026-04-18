@@ -104,6 +104,34 @@ public function update(){
     
     return false;
 }
+
+
+public function taskExists(){
+    $query = "SELECT task_id
+              FROM {$this->table}
+              WHERE task_name = :task_name
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":task_name", $this->task_name);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+public function categoryIdExists(){
+    $query = "SELECT category_id 
+              FROM category 
+              WHERE category_id = :category_id 
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":category_id", $this->category_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
 }
 
 ?>

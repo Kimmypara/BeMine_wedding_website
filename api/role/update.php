@@ -66,7 +66,7 @@ elseif($role->roleExists()){
     echo json_encode(array("message" => "Role not updated. Role already exists."));
 }
 elseif($role->update()){
-    http_response_code(201);
+    http_response_code(200);
     echo json_encode(array("message" => "Role updated."));
 }
 

@@ -23,21 +23,28 @@ if(empty($_GET["role_id"])){
 $role->role_id =  isset($_GET["role_id"]) ? $_GET["role_id"]: die();
 
 $result = $role->readSingle();
-$num = $result->rowCount();
 
-if($num > 0){
-   $role_info = array(
-    'role_id'      =>$role->role_id,
-    'role_name'       =>$role->role_name
-   );
 
-    http_response_code(200);
-    echo json_encode($role_info);
+if($result){
+    $num = $result->rowCount();
+
+    if($num > 0){
+        $role_info = array(
+            "role_id" => $role->role_id,
+            "role_name" => $role->role_name
+        );
+
+        http_response_code(200);
+        echo json_encode($role_info);
+    }
+    else{
+        http_response_code(404);
+        echo json_encode(array("message" => "No roles found."));
+    }
 }
 else{
-    http_response_code(404);
-    echo json_encode(array("message" => "No roles found."));
+    http_response_code(500);
+    echo json_encode(array("message" => "Server error."));
 }
-  
 
 ?>

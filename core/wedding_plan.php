@@ -285,6 +285,18 @@ public function delete(){
     
     return false;
 }
+public function userIdExists(){
+    $query = "SELECT user_id  
+              FROM wedding_plan 
+              WHERE user_id  = :user_id  
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":user_id", $this->user_id );
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
 }
 
 ?>

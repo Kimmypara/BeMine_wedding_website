@@ -17,12 +17,27 @@ $data = json_decode(file_get_contents("php://input"));
 // fill in Category instance properties with decoded values from request
 $category->category_name = $data->category_name;
 
-
-if($category->create()){
+// validate
+if (
+    empty($category->category_name) 
+){
+    http_response_code(400);
+    echo json_encode(array("message" => "Category not created. Missing or invalid input."));
+}
+elseif($category->categoryNameExists()){
+    http_response_code(409);
+    echo json_encode(array("message" => "Category not created. Category already exists."));
+}
+elseif($category->create()){
+    http_response_code(201);
     echo json_encode(array("message" => "Category created."));
 }
+
 else{
-echo json_encode(array("message" => "Category not created."));
-    }
+    http_response_code(500);
+    echo json_encode(array("message" => "Server error."));
+}
+
+
 
 ?>
