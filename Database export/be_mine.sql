@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2026 at 12:48 PM
+-- Generation Time: Apr 19, 2026 at 11:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,7 +64,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
-(1, 'Photography');
+(1, 'florists'),
+(4, 'invitations');
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,8 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`task_id`, `category_id`, `task_name`) VALUES
-(3, 1, 'quotation');
+(3, 1, 'booking'),
+(4, 1, 'quotation');
 
 -- --------------------------------------------------------
 
@@ -217,8 +219,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_name`, `created_at`, `role_id`, `is_active`) VALUES
-(2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$U33z/1A0soexRv0vNgFXO.OFyrPC1rCQ3GklOmlN.icfa2DqkFEYa', 'Kimberly', 'Para', NULL, 1, 1),
-(3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 2, 1);
+(2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$vS4m85IGOB.mTUMdNZ7nEO0QcSbN3BW1ZLLpFq90vo7M4GXA1PO0O', 'Kimberly', 'Para', NULL, 1, 1),
+(3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 2, 1),
+(11, 'kimberlymcast.edu.mt', '$2y$10$MldM9tvVlPUZ8D4ZVshT2O29da3TuG.tNG/NP7lhQsBEdDgLYl5CS', 'Kim', 'Para', '2026-04-17 18:22:16', 2, 1),
+(12, 'kimb@mcast.edu.mt', '$2y$10$nzNCClj1PDUbiUhit7bsbu2Gpw2Jn.5tLyAR7wrYy/RATc3gKhN7e', 'Kim', 'Para', '2026-04-17 18:41:39', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -255,8 +259,8 @@ CREATE TABLE `wedding_plan` (
 --
 
 INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `partner_nickname`, `wedding_date`, `guest_count`, `budget`, `created_at`) VALUES
-(4, 2, 'Kim', 'Para', '2026-01-02', 200, 10000, '2026-04-02 15:02:40'),
-(5, 2, 'Kim', 'Para', '2026-01-02', 200, 10000, '2026-04-10 11:16:11');
+(4, 2, 'Kitty', 'Mouse', '2028-01-03', 300, 100000, '2026-04-02 15:02:40'),
+(6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000, '2026-04-18 13:50:29');
 
 -- --------------------------------------------------------
 
@@ -270,16 +274,18 @@ CREATE TABLE `wedding_plan_task` (
   `task_id` int(11) DEFAULT NULL,
   `is_selected` tinyint(1) DEFAULT NULL,
   `completed_at` datetime DEFAULT NULL,
-  `is_completed` tinyint(1) DEFAULT NULL
+  `is_completed` tinyint(1) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `wedding_plan_task`
 --
 
-INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`) VALUES
-(1, 4, 3, 1, '2026-04-10 11:13:36', 0),
-(2, 4, 3, 1, '2026-04-10 11:15:50', 0);
+INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`, `category_id`) VALUES
+(13, 4, 3, 1, '2026-04-18 14:44:06', 0, 1),
+(17, 6, 3, 1, '2026-04-18 14:59:10', 0, 1),
+(19, 6, 4, 1, '2026-04-18 15:01:21', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -400,8 +406,11 @@ ALTER TABLE `wedding_plan`
 --
 ALTER TABLE `wedding_plan_task`
   ADD PRIMARY KEY (`wedding_plan_task_id`),
+  ADD UNIQUE KEY `unique_wpt` (`wedding_plan_id`,`category_id`,`task_id`),
+  ADD UNIQUE KEY `unique_wpt_category_task` (`wedding_plan_id`,`category_id`,`task_id`),
   ADD KEY `wedding_plan_id` (`wedding_plan_id`),
-  ADD KEY `task_id` (`task_id`);
+  ADD KEY `task_id` (`task_id`),
+  ADD KEY `fk_wpt_category` (`category_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -423,7 +432,7 @@ ALTER TABLE `booking_status`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -465,7 +474,7 @@ ALTER TABLE `reset_password`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `settings_theme`
@@ -477,7 +486,7 @@ ALTER TABLE `settings_theme`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -495,13 +504,13 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -583,6 +592,7 @@ ALTER TABLE `wedding_plan`
 -- Constraints for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
+  ADD CONSTRAINT `fk_wpt_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`),
   ADD CONSTRAINT `wedding_plan_task_ibfk_1` FOREIGN KEY (`wedding_plan_id`) REFERENCES `wedding_plan` (`wedding_plan_id`),
   ADD CONSTRAINT `wedding_plan_task_ibfk_2` FOREIGN KEY (`task_id`) REFERENCES `task` (`task_id`);
 COMMIT;

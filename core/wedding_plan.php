@@ -215,6 +215,8 @@ public function updateWeddingDate(){
     return false;
 }
 
+
+
 //update guest_count
 public function updateGuestCount(){
     $query = "UPDATE {$this->table}
@@ -239,6 +241,12 @@ public function updateGuestCount(){
     
     return false;
 }
+
+public function guestCountInvalid(){
+    return !filter_var($this->guest_count, FILTER_VALIDATE_INT) || $this->guest_count <= 0;
+}
+
+
 
 //update budget
 public function updateBudget(){
@@ -311,6 +319,11 @@ public function weddingPlanExists(){
     $stmt->execute();
 
     return $stmt->rowCount() > 0;
+}
+
+public function weddingDateInvalid($wedding_date){
+    $d = DateTime::createFromFormat('Y-m-d', $wedding_date);
+    return !($d && $d->format('Y-m-d') === $wedding_date);
 }
 }
 
