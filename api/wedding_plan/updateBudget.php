@@ -16,20 +16,9 @@ $data = json_decode(file_get_contents("php://input"));
 
 // fill in users instance properties with decoded values from request
 $wedding_plan->wedding_plan_id = $data->wedding_plan_id;
-$wedding_plan->user_id = $data->user_id;
-$wedding_plan->user_nickname = $data->user_nickname;
-$wedding_plan->partner_nickname = $data->partner_nickname;
-$wedding_plan->wedding_date = $data->wedding_date;
-$wedding_plan->guest_count = $data->guest_count;
 $wedding_plan->budget = $data->budget;
 
-// validate
 if (  empty($wedding_plan->wedding_plan_id) ||
- empty($wedding_plan->user_id) ||
- empty($wedding_plan->user_nickname) ||
-  empty($wedding_plan->partner_nickname) ||
-  empty($wedding_plan->wedding_date) ||
-  empty($wedding_plan->guest_count) ||
      empty($wedding_plan->budget) 
 ){
     http_response_code(400);
@@ -37,30 +26,16 @@ if (  empty($wedding_plan->wedding_plan_id) ||
 }
 elseif(!$wedding_plan->weddingPlanExists()){
     http_response_code(404);
-    echo json_encode(array("message" => "Wedding Plan not found."));
-    exit();
-}
-elseif(!$wedding_plan->userIdExists()){
-    http_response_code(404);
-    echo json_encode(array("message" => "User Id not found."));
-    exit();
-}
-elseif($wedding_plan->weddingDateInvalid($wedding_plan->wedding_date)){
-    http_response_code(400);
-    echo json_encode(array("message" => "Invalid wedding date format. Use YYYY-MM-DD."));
+    echo json_encode(array("message" => "Wedding plan Id does not exist."));
 }
 elseif($wedding_plan->budgetInvalid()){
     http_response_code(400);
     echo json_encode(array("message" => "Invalid Budget format."));
 }
-elseif($wedding_plan->guestCountInvalid()){
-    http_response_code(400);
-    echo json_encode(array("message" => "Invalid guest count."));
-}
 
-elseif($wedding_plan->update()){
+elseif($wedding_plan->updateBudget()){
     http_response_code(200);
-    echo json_encode(array("message" => "Wedding Plan updated."));
+    echo json_encode(array("message" => "Budget from Wedding Plan updated."));
 }
 else{
     http_response_code(500);

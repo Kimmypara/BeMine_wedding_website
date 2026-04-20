@@ -273,6 +273,11 @@ public function updateBudget(){
     return false;
 }
 
+public function budgetInvalid(){
+     return !is_numeric($this->budget) || $this->budget <= 0;
+}
+
+
 //Delete a user record
 public function delete(){
     $query = "DELETE FROM {$this->table}

@@ -261,6 +261,20 @@ public function weddingPlanTaskExists(){
 
     return $stmt->rowCount() > 0;
 }
+
+public function weddingPlanTaskIdExists(){
+    $query = "SELECT wedding_plan_task_id
+              FROM {$this->table}
+              WHERE wedding_plan_task_id = :wedding_plan_task_id
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":wedding_plan_task_id", $this->wedding_plan_task_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
 }
 
 ?>
