@@ -159,6 +159,10 @@ public function updateIsSelected(){
     return false;
 }
 
+public function isSelectedInvalid(){
+    return !in_array((string)$this->is_selected, ['0', '1'], true);
+}
+
 //update is_completed
 public function updateIsCompleted(){
     $query = "UPDATE {$this->table}
@@ -182,6 +186,11 @@ public function updateIsCompleted(){
     printf("Error %s. \n", $stmt->error);
     
     return false;
+}
+
+
+public function isCompletedInvalid(){
+    return !in_array((string)$this->is_completed, ['0', '1'], true);
 }
 
 //Delete a wedding_plan_task record
