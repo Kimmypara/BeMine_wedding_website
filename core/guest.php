@@ -60,7 +60,20 @@ public $rsvp_status;
         return $stmt;
     }
 
+public function readByWeddingPlan(){
+    $query = "SELECT *
+              FROM {$this->table}
+              WHERE wedding_plan_id = :wedding_plan_id
+              ORDER BY guest_name ASC;";
 
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(":wedding_plan_id", $this->wedding_plan_id);
+
+    $stmt->execute();
+
+    return $stmt;
+}
 
     // create a new guest record
 public function create(){
@@ -102,6 +115,19 @@ public function WeddingPlanIdExists(){
 
     $stmt = $this->conn->prepare($query);
     $stmt->bindParam(":wedding_plan_id", $this->wedding_plan_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+public function GuestIdExists(){
+    $query = "SELECT guest_id
+              FROM guest
+              WHERE guest_id = :guest_id
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":guest_id", $this->guest_id);
     $stmt->execute();
 
     return $stmt->rowCount() > 0;
@@ -189,6 +215,21 @@ public function guestEmailExists(){
 
     $stmt = $this->conn->prepare($query);
     $stmt->bindParam(":guest_email", $this->guest_email);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+public function rsvpStatusSame(){
+    $query = "SELECT guest_id
+              FROM {$this->table}
+               WHERE guest_id = :guest_id
+              AND rsvp_status = :rsvp_status
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":guest_id", $this->guest_id);
+    $stmt->bindParam(":rsvp_status", $this->rsvp_status);
     $stmt->execute();
 
     return $stmt->rowCount() > 0;
