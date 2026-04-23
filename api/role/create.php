@@ -46,7 +46,7 @@ $role = new Role($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // fill in role instance properties with decoded values from request
-$role->role_name = $data->role_name;
+$role->role_name = $data->role_name ?? "";
 
 
 
