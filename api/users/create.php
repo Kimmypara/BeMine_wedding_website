@@ -19,7 +19,7 @@ $users->email = $data->email;
 $users->first_name = $data->first_name;
 $users->last_name = $data->last_name;
 $users->password_hash = password_hash($data->password, PASSWORD_DEFAULT);
-$users->role_id = $data->role_id;
+$users->role_id = 2;
 $users->is_active = $data->is_active;
 
 // validate
@@ -27,12 +27,12 @@ if (
     empty($users->email) ||
     empty($users->first_name) ||
     empty($users->last_name) ||
-    empty($data->password) ||
-    empty($users->role_id)
+    empty($data->password) 
 ){
     http_response_code(400);
     echo json_encode(array("message" => "User not created. Missing or invalid input."));
 }
+
 elseif($users->invalidEmail($users->email)){
     http_response_code(400);
     echo json_encode(array("message" => "Invalid email format."));
@@ -41,6 +41,20 @@ elseif($users->emailExists()){
     http_response_code(409);
     echo json_encode(array("message" => "User not created. E-mail already exists."));
 }
+elseif($users->firstNameInvalid()){
+    http_response_code(400);
+    echo json_encode(["message" => "Invalid guest name."]);
+}
+
+elseif($users->lastNameInvalid()){
+    http_response_code(400);
+    echo json_encode(["message" => "Invalid guest surname."]);
+}
+elseif($users->isActiveInvalid()){
+    http_response_code(400);
+    echo json_encode(array("message" => "Invalid Is Selected value. Use 0 or 1 only."));
+}
+
 elseif($users->create()){
     http_response_code(201);
     echo json_encode(array("message" => "User created."));

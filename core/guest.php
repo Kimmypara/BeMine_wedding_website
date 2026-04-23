@@ -94,6 +94,33 @@ public function create(){
     return false;
 }
 
+public function WeddingPlanIdExists(){
+    $query = "SELECT wedding_plan_id
+              FROM wedding_plan
+              WHERE wedding_plan_id = :wedding_plan_id
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":wedding_plan_id", $this->wedding_plan_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
+}
+
+public function guestNameInvalid(){
+    return empty(trim($this->guest_name)) ||
+           !preg_match("/^[a-zA-Z\s'-]+$/", $this->guest_name);
+}
+
+public function guestSurnameInvalid(){
+    return empty(trim($this->guest_surname)) ||
+           !preg_match("/^[a-zA-Z\s'-]+$/", $this->guest_surname);
+}
+
+public function rsvpStatusInvalid(){
+    return !in_array($this->rsvp_status, ['pending', 'accepted', 'declined'], true);
+}
+
 //update a guest record 
 public function update(){
     $query = "UPDATE {$this->table}

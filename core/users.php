@@ -117,6 +117,22 @@ public function create(){
     return false;
 }
 
+public function firstNameInvalid(){
+    return empty(trim($this->first_name)) ||
+           !preg_match("/^[a-zA-Z\s'-]+$/", $this->first_name);
+}
+
+public function lastNameInvalid(){
+    return empty(trim($this->last_name)) ||
+           !preg_match("/^[a-zA-Z\s'-]+$/", $this->last_name);
+}
+
+public function isActiveInvalid(){
+    return !in_array((string)$this->is_active, ['0', '1'], true);
+}
+
+
+
 //update a user record (PATCH because role_is and created_at cannot be updated)
 public function update(){
     $query = "UPDATE {$this->table}
