@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2026 at 11:37 AM
+-- Generation Time: Apr 25, 2026 at 11:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -114,11 +114,20 @@ CREATE TABLE `chat_message` (
 CREATE TABLE `guest` (
   `guest_id` int(11) NOT NULL,
   `wedding_plan_id` int(11) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `guest_email` varchar(255) DEFAULT NULL,
   `guest_name` varchar(255) DEFAULT NULL,
   `guest_surname` varchar(255) DEFAULT NULL,
-  `rsvp_status` varchar(100) DEFAULT NULL
+  `rsvp_status` enum('pending','accepted','declined') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `guest`
+--
+
+INSERT INTO `guest` (`guest_id`, `wedding_plan_id`, `guest_email`, `guest_name`, `guest_surname`, `rsvp_status`) VALUES
+(1, 4, 'kimberly@gmail.com', 'Kim', 'Borg', 'accepted'),
+(2, 4, 'kimpara@gmail.com', 'Char', 'Borg', 'accepted'),
+(3, 6, 'kim@gmail.com', 'Kevin', 'Hili', 'pending');
 
 -- --------------------------------------------------------
 
@@ -250,7 +259,7 @@ CREATE TABLE `wedding_plan` (
   `partner_nickname` varchar(100) DEFAULT NULL,
   `wedding_date` date DEFAULT NULL,
   `guest_count` int(11) DEFAULT NULL,
-  `budget` decimal(10,0) DEFAULT NULL,
+  `budget` decimal(10,2) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -259,8 +268,8 @@ CREATE TABLE `wedding_plan` (
 --
 
 INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `partner_nickname`, `wedding_date`, `guest_count`, `budget`, `created_at`) VALUES
-(4, 2, 'Kitty', 'Mouse', '2028-01-03', 300, 100000, '2026-04-02 15:02:40'),
-(6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000, '2026-04-18 13:50:29');
+(4, 2, 'Kitty', 'Mike', '2028-01-03', 300, 100000.50, '2026-04-02 15:02:40'),
+(6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000.00, '2026-04-18 13:50:29');
 
 -- --------------------------------------------------------
 
@@ -276,14 +285,14 @@ CREATE TABLE `wedding_plan_task` (
   `completed_at` datetime DEFAULT NULL,
   `is_completed` tinyint(1) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Dumping data for table `wedding_plan_task`
 --
 
 INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`, `category_id`) VALUES
-(13, 4, 3, 1, '2026-04-18 14:44:06', 0, 1),
+(13, 6, 3, 1, '2026-04-18 14:44:06', 1, 4),
 (17, 6, 3, 1, '2026-04-18 14:59:10', 0, 1),
 (19, 6, 4, 1, '2026-04-18 15:01:21', 0, 1);
 
@@ -456,7 +465,7 @@ ALTER TABLE `chat_message`
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `our_wedding`
@@ -510,7 +519,7 @@ ALTER TABLE `wedding_plan`
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
