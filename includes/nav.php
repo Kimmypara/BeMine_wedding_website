@@ -43,6 +43,17 @@ $currentPage = basename($_SERVER['PHP_SELF']);
    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+
+
+  <nav class="navbar mt-0">
+
+    <div class="nav-banner" >
+      <picture>
+    <source media="(max-width: 1000px)" srcset="assets/images/topNav_small.png">
+    <img src="assets/images/topNav.png" class="banner" alt="Banner">
+</picture>
+    </div>
   <!-- Hamburger button (small screens) -->
 <button class="btn btn-light d-md-none menu-btn" 
         type="button" 
@@ -52,15 +63,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
     </svg>
 </button>
-
-
-  <nav class="navbar mt-0">
-
-    <div class="nav-banner" >
-        
-        <img class="banner d-flex" src="assets/images/topNav.png" alt="">
-    </div>
-
     <div class="nav-container" id="Menu">
        <div class="offcanvas-header d-md-none">
     </div>
@@ -117,6 +119,27 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
    
 </nav>
+<div class="icon-nav">
+    <a href="index.php">
+        <img src="assets/images/home-icon.png" alt="">
+        <span>Home</span>
+    </a>
+
+    <a href="mail.php">
+        <img src="assets/images/mail-icon.png" alt="">
+        <span>Mail</span>
+    </a>
+
+    <a href="#">
+        <img src="assets/images/accessibility-icon.png" alt="">
+        <span>Accessibility</span>
+    </a>
+
+    <a href="#">
+        <img src="assets/images/menu-icon.png" alt="">
+        <span>Menu</span>
+    </a>
+</div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
