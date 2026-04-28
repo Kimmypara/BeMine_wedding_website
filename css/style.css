@@ -89,7 +89,8 @@ html, body {
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 2
+    rem;
 }
 .icon-nav {
     display: none; /* hidden on desktop */
@@ -99,6 +100,10 @@ html, body {
     text-decoration: none;
     color: var(--base-color);
     font-size: 1.1rem;
+}
+.nav-menu {
+    display: flex;
+    gap: 2rem;
 }
 
 .nav-menu a:hover {
@@ -119,6 +124,8 @@ html, body {
    color: var(--hover-button);
   
 }
+
+
 /* DROPDOWN CONTAINER */
 .dropdown {
     position: relative;
@@ -128,13 +135,13 @@ html, body {
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: -2rem;
 
     background: var(--base-variant);
     list-style: none;
 
     padding: 3px 0;
-    min-width: 180px;
+    min-width: 160px;
 
     display: none;
     border-radius: 8px;
@@ -143,6 +150,7 @@ html, body {
 /* ITEMS */
 .dropdown-menu li {
     padding: 3px 10px;
+    
 }
 
 /* LINKS */
@@ -189,10 +197,12 @@ outline: none !important;
 
 .dropdown-menu {
     display: none;
+   
 }
 
 .dropdown-menu.show {
     display: block;
+     width: 8rem;
 }
 /* show normal desktop menu */
 .menu-btn {
@@ -286,7 +296,8 @@ outline: none !important;
 }
 
 .nav-banner {
-    background: url('../assets/images/topNav_small.png') no-repeat center;
+    position: relative;
+    z-index: 1;
     background-size: cover;
     height: 18rem; /* adjust based on image */
     

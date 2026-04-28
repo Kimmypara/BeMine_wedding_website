@@ -71,6 +71,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <ul class="nav-menu nav-left">
             <li><a href="index.php" class="nav-link <?php if ($currentPage == 'index.php') echo 'active'; ?>">Home</a></li>
             <li><a href="mail.php" class="nav-link <?php if ($currentPage == 'mail.php') echo 'active'; ?>">Mail</a></li>
+            
             <li class="dropdown">
     <a href="#" class="dropdown-toggle"  aria-expanded="false"
             aria-haspopup="true">Our Wedding</a>
@@ -79,6 +80,19 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <li><a href="planning.php" role="menuitem">Planning</a></li>
         <li><a href="our_wedding.php" role="menuitem">View Our Wedding</a></li>
        
+    </ul>
+</li>
+
+ <li class="dropdown">
+    <a href="#" class="dropdown-toggle"  aria-expanded="false"
+            aria-haspopup="true">Planning Tools</a>
+
+    <ul class="dropdown-menu">
+        <li><a href="RSVP.php" role="menuitem">RSVP Website</a></li>
+        <li><a href="dinner_tables.php" role="menuitem">Dinner Table Planner</a></li>
+         <li><a href="legal_docs.php" role="menuitem">Legal Documents</a></li>
+        <li><a href="testimonials.php" role="menuitem">Testimonials</a></li>
+        <li><a href="guest_list.php" role="menuitem">Guest List</a></li>
     </ul>
 </li>
            
@@ -95,22 +109,25 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             aria-haspopup="true">Vendors</a>
 
     <ul class="dropdown-menu">
-        <li><a href="planning.php" role="menuitem">Ceremony Venues</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Reception Venues</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Videographers</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Photographers</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Invitations</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Florists</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Fireworks</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Bridal & Groom Wear</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Caterers & Beverages</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Music</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Wedding Rings</a></li>
-        <li><a href="our_wedding.php" role="menuitem">Beauty Services</a></li>
+        <li><a href="ceremony_venues.php" role="menuitem">Ceremony Venues</a></li>
+        <li><a href="reception_venues.php" role="menuitem">Reception Venues</a></li>
+        <li><a href="videographers.php" role="menuitem">Videographers</a></li>
+        <li><a href="photographers.php" role="menuitem">Photographers</a></li>
+        <li><a href="invitations.php" role="menuitem">Invitations</a></li>
+        <li><a href="florists.php" role="menuitem">Florists</a></li>
+        <li><a href="fireworks.php" role="menuitem">Fireworks</a></li>
+        <li><a href="clothes.php" role="menuitem">Bridal & Groom Wear</a></li>
+        <li><a href="caterers.php" role="menuitem">Caterers & Beverages</a></li>
+        <li><a href="music.php" role="menuitem">Music</a></li>
+        <li><a href="wedding_rings.php" role="menuitem">Wedding Rings</a></li>
+        <li><a href="beauty.php" role="menuitem">Beauty Services</a></li>
         
        
     </ul>
 </li>
+
+  <li><a href="honeymoon.php" class="nav-link <?php if ($currentPage == 'honeymoon.php') echo 'active'; ?>">Honeymoon</a></li>
+
             <li><a href="contact_us.php" class="nav-link <?php if ($currentPage == 'contact_us.php') echo 'active'; ?>">Contact Us</a></li>
             <li><a href="login.php" class="nav-link <?php if ($currentPage == 'login.php') echo 'active'; ?>">Login</a></li>
         </ul>
