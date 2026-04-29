@@ -29,10 +29,20 @@ html {
     
 }
 
+html, body {
+    height: 100%;
+}
+
+.main-content {
+    flex: 1;
+}
+
 body{
      padding-top: 190px;
       margin: 0;
        background-color: var(--base-color);
+       display: flex;
+    flex-direction: column;
 }
 
 .banner{
@@ -270,8 +280,46 @@ outline: none !important;
     display: none;
 }
 
+.site-footer {
+    background: var(--base-variant);
+    color: var(--text-color);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: 3rem;
+}
 
+/* company name */
+.footer-brand {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
 
+/* icons container */
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.social-icon {
+    width: 26px;
+    height: 26px;
+    fill: var(--text-color);
+    transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.15);
+    fill: var(--secondary-text);
+}
+
+/* copyright */
+.footer-copy {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
 @media (min-width: 1201px) {
 
     .nav-container {

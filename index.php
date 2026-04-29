@@ -18,6 +18,7 @@ include "includes/curl.php";
     <title>Document</title>
 </head>
 <body>
+    <main class="main-content">
     <div class="container">
 
 <h1 class="title">About Us</h1>
@@ -74,6 +75,8 @@ So why choose Be Mine Forever? Because it is more than just a planning tool. It 
 
 </div>
 </div>
-
+</main>
 </body>
 </html>
+
+<?php include "includes/footer.php"; ?>

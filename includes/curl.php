@@ -123,3 +123,42 @@
     curl_close($curl);
    //echo $weddingPlanTaskReadResult;
     $weddingPlanTaskReadResult = json_decode($weddingPlanTaskReadResult, true);
+
+
+
+     //User create (POST)
+if (isset($_POST['submit'])) {
+
+    $data = [
+        "first_name" => $_POST['first_name'],
+        "last_name"  => $_POST['last_name'],
+        "email"      => $_POST['email'],
+        "password"   => $_POST['password'],
+        "role_id"    => (int)$_POST['role_id'],
+        "is_active"  => 1
+    ];
+
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, "http://localhost/BeMine_wedding_website/api/users/create.php");
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "Content-Type: application/json"
+    ]);
+
+    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+
+    $response = curl_exec($curl);
+
+    if ($response === false) {
+        $userCreateResult = ["message" => curl_error($curl)];
+    } else {
+        $userCreateResult = json_decode($response, true);
+    }
+
+    curl_close($curl);
+}
+
+?>

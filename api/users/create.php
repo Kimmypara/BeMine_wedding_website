@@ -19,7 +19,7 @@ $users->email = $data->email;
 $users->first_name = $data->first_name;
 $users->last_name = $data->last_name;
 $users->password_hash = password_hash($data->password, PASSWORD_DEFAULT);
-$users->role_id = 2;
+$users->role_id = $data->role_id ?? 2;
 $users->is_active = $data->is_active;
 
 // validate
