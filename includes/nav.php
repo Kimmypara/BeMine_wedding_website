@@ -48,24 +48,32 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
   <nav class="navbar mt-0">
 
-    <div class="nav-banner" >
+    <div class="nav-banner .bg-drop" >
       <picture>
-    <source media="(max-width: 1000px)" srcset="assets/images/topNav_small.png">
+    <source media="(max-width: 1200px)" srcset="assets/images/topNav_small.png">
     <img src="assets/images/topNav.png" class="banner" alt="Banner">
 </picture>
+
+ <div class="nav-logo py-0 px-0">
+           <img class="logo" src="assets/images/logo.png" alt="Be Mine Logo">
+        </div>
     </div>
   <!-- Hamburger button (small screens) -->
-<button class="btn btn-light d-md-none menu-btn" 
-        type="button" 
-        data-bs-toggle="offcanvas" 
-        data-bs-target="#Menu">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-    </svg>
+<button class="menu-btn" id="openMenuBtn" type="button" aria-label="Open menu">
+    ☰
 </button>
     <div class="nav-container" id="Menu">
+
+
+        <div class="mobile-menu-header">
+    <h2>Menu</h2>
+    <button type="button" id="closeMenuBtn" class="close-menu-btn">×</button>
+</div>
+
        <div class="offcanvas-header d-md-none">
     </div>
+
+
 
        <!-- LEFT MENU -->
         <ul class="nav-menu nav-left">
@@ -98,9 +106,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
            
         </ul>
 
-         <div class="nav-logo py-0 px-0">
-           <img class="logo" src="assets/images/logo.png" alt="Be Mine Logo">
-        </div>
+        
 
          <!-- RIGHT MENU -->
         <ul class="nav-menu nav-right">
@@ -136,26 +142,25 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
    
 </nav>
-<div class="icon-nav">
+<div class="icon-nav ">
     <a href="index.php">
-        <img src="assets/images/home-icon.png" alt="">
-        <span>Home</span>
+        <img src="assets/images/home_icon.png" alt="">
+        
     </a>
 
     <a href="mail.php">
-        <img src="assets/images/mail-icon.png" alt="">
-        <span>Mail</span>
+        <img src="assets/images/mail.png" alt="">
+        
     </a>
 
     <a href="#">
-        <img src="assets/images/accessibility-icon.png" alt="">
-        <span>Accessibility</span>
+        <img src="assets/images/accessibility.png" alt="">
+       
     </a>
 
-    <a href="#">
-        <img src="assets/images/menu-icon.png" alt="">
-        <span>Menu</span>
-    </a>
+   <a href="#" id="bottomMenuBtn" aria-label="Open menu">
+    <img src="assets/images/menu.png" alt="Menu">
+</a>
 </div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
@@ -208,6 +213,47 @@ function closeAllDropdowns() {
     document.querySelectorAll(".dropdown-menu").forEach(m => m.classList.remove("show"));
     document.querySelectorAll(".dropdown-toggle").forEach(b => b.setAttribute("aria-expanded", "false"));
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menu = document.getElementById("Menu");
+    const openBtn = document.getElementById("openMenuBtn");
+    const bottomMenuBtn = document.getElementById("bottomMenuBtn");
+    const closeBtn = document.getElementById("closeMenuBtn");
+
+    if (openBtn) {
+        openBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            menu.classList.add("open");
+        });
+    }
+
+    if (bottomMenuBtn) {
+        bottomMenuBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            menu.classList.add("open");
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+            menu.classList.remove("open");
+        });
+    }
+
+    document.addEventListener("click", function (e) {
+        if (
+            menu.classList.contains("open") &&
+            !menu.contains(e.target) &&
+            !openBtn.contains(e.target) &&
+            !bottomMenuBtn.contains(e.target)
+        ) {
+            menu.classList.remove("open");
+        }
+    });
+
+});
 </script>
 </html>
 
