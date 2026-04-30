@@ -1,9 +1,4 @@
-<?php
-
-include "includes/nav.php";
-include "includes/curl.php";
-
-?>
+<?php include "includes/nav.php"; ?>
 
 
 <style>

@@ -43,16 +43,16 @@ elseif($users->emailExists()){
 }
 elseif($users->firstNameInvalid()){
     http_response_code(400);
-    echo json_encode(["message" => "Invalid guest name."]);
+    echo json_encode(["message" => "Invalid user name."]);
 }
 
 elseif($users->lastNameInvalid()){
     http_response_code(400);
-    echo json_encode(["message" => "Invalid guest surname."]);
+    echo json_encode(["message" => "Invalid user surname."]);
 }
 elseif($users->isActiveInvalid()){
     http_response_code(400);
-    echo json_encode(array("message" => "Invalid Is Selected value. Use 0 or 1 only."));
+    echo json_encode(array("message" => "Invalid Is Active value. Use 0 or 1 only."));
 }
 
 elseif($users->create()){

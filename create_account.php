@@ -19,38 +19,48 @@ include "includes/curl.php";
 </head>
 <body>
     <main class="main-content">
+<div class="container">
+<h2 class="title">Create Account</h2>
 
-<h2>Create Account</h2>
+<form  method="POST">
 
-<?php if (isset($userCreateResult)): ?>
-    <p>
-        <?php echo htmlspecialchars($userCreateResult["message"] ?? "Done"); ?>
-    </p>
-    <pre>
-<?php print_r($userCreateResult ?? 'No response yet'); ?>
-</pre>
-<?php endif; ?>
+    <input class="form" type="text" name="first_name" placeholder="First Name" required><br>
 
-<form method="POST">
+    <input class="form" type="text" name="last_name" placeholder="Last Name" required><br>
 
-    <input type="text" name="first_name" placeholder="First Name" required><br><br>
+    <input class="form" type="email" name="email" placeholder="Email" required><br>
 
-    <input type="text" name="last_name" placeholder="Last Name" required><br><br>
+    <input class="form" type="password" name="password" placeholder="Password" required><br>
 
-    <input type="email" name="email" placeholder="Email" required><br><br>
-
-    <input type="password" name="password" placeholder="Password" required><br><br>
-
-    <select name="role_id" required>
+    <select class="form" name="role_id" required>
         <option value="">Select Role</option>
         <option value="2">Couple</option>
         <option value="3">Vendor</option>
-    </select><br><br>
+    </select><br>
+<?php 
+if (isset($userCreateResult["message"])) {
 
-    <button type="submit" name="submit">Create Account</button>
+    $message = $userCreateResult["message"];
+
+    if (stripos($message, "Is Active") === false) {
+
+      
+        if ($message === "User created.") {
+            $type = "success";
+        } else {
+            $type = "error";
+        }
+
+        echo "<div class='alert-message $type'>";
+        echo htmlspecialchars($message);
+        echo "</div>";
+    }
+}
+?>
+    <button class="button" type="submit" name="submit">Create Account</button>
 
 </form>
-
+</div>
 </main>
 </body>
 </html>

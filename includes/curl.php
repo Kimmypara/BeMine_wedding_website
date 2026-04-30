@@ -129,13 +129,12 @@
      //User create (POST)
 if (isset($_POST['submit'])) {
 
-    $data = [
-        "first_name" => $_POST['first_name'],
-        "last_name"  => $_POST['last_name'],
-        "email"      => $_POST['email'],
-        "password"   => $_POST['password'],
-        "role_id"    => (int)$_POST['role_id'],
-        "is_active"  => 1
+     $data = [
+        "first_name" => $_POST['first_name'] ?? "",
+        "last_name"  => $_POST['last_name'] ?? "",
+        "email"      => $_POST['email'] ?? "",
+        "password"   => $_POST['password'] ?? "",
+        "role_id"    => isset($_POST['role_id']) ? (int)$_POST['role_id'] : 0
     ];
 
     $curl = curl_init();
@@ -160,5 +159,7 @@ if (isset($_POST['submit'])) {
 
     curl_close($curl);
 }
+
+
 
 ?>

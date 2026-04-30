@@ -1,8 +1,9 @@
-
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 
 include_once(__DIR__ . "/initialize.php");
 
@@ -48,7 +49,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
   <nav class="navbar mt-0">
 
-    <div class="nav-banner .bg-drop" >
+    <div class="nav-banner bg-drop" >
       <picture>
     <source media="(max-width: 1200px)" srcset="assets/images/topNav_small.png">
     <img src="assets/images/topNav.png" class="banner" alt="Banner">
@@ -77,7 +78,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
        <!-- LEFT MENU -->
         <ul class="nav-menu nav-left">
-            <li><a href="index.php" class="nav-link <?php if ($currentPage == 'index.php') echo 'active'; ?>">Home</a></li>
+            <li>
+    <a href="<?php echo $homeUrl; ?>" class="nav-link <?php if ($currentPage == $homeUrl) echo 'active'; ?>">
+        Home
+    </a>
+</li>
             <li><a href="mail.php" class="nav-link <?php if ($currentPage == 'mail.php') echo 'active'; ?>">Mail</a></li>
             
             <li class="dropdown">
@@ -135,7 +140,25 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <li><a href="honeymoon.php" class="nav-link <?php if ($currentPage == 'honeymoon.php') echo 'active'; ?>">Honeymoon</a></li>
 
             <li><a href="contact_us.php" class="nav-link <?php if ($currentPage == 'contact_us.php') echo 'active'; ?>">Contact Us</a></li>
-            <li><a href="login.php" class="nav-link <?php if ($currentPage == 'login.php') echo 'active'; ?>">Login</a></li>
+           <?php if (isset($_SESSION['user_id'])): ?>
+
+    
+
+    <li>
+        <a href="logout.php" class="nav-link <?php if ($currentPage == 'logout.php') echo 'active'; ?>">
+            Logout
+        </a>
+    </li>
+
+<?php else: ?>
+
+    <li>
+        <a href="login.php" class="nav-link <?php if ($currentPage == 'login.php') echo 'active'; ?>">
+            Login/Sign up
+        </a>
+    </li>
+
+<?php endif; ?>
         </ul>
 
     </div>
