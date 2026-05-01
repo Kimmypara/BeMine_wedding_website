@@ -1,6 +1,6 @@
 
 <?php
-include "includes/curl_login.php";
+include "includes/curl.php";
 include "includes/nav.php";
 ?>
 
@@ -52,6 +52,7 @@ if (isset($loginResult["message"])) {
     <button class="button" type="submit" name="login">Login</button>
 
 </form>
+<img class="ringsLogin" src="assets/images/rings_login.png" alt="Wedding rings">
 </div>
 </main>
 </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2026 at 11:05 AM
+-- Generation Time: May 01, 2026 at 10:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -172,7 +172,8 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`role_id`, `role_name`) VALUES
 (1, 'Admin'),
 (2, 'Couple'),
-(3, 'Vendor');
+(3, 'Vendor'),
+(17, 'Wedding Planner');
 
 -- --------------------------------------------------------
 
@@ -231,7 +232,13 @@ INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_na
 (2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$vS4m85IGOB.mTUMdNZ7nEO0QcSbN3BW1ZLLpFq90vo7M4GXA1PO0O', 'Kimberly', 'Para', NULL, 1, 1),
 (3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 2, 1),
 (11, 'kimberlymcast.edu.mt', '$2y$10$MldM9tvVlPUZ8D4ZVshT2O29da3TuG.tNG/NP7lhQsBEdDgLYl5CS', 'Kim', 'Para', '2026-04-17 18:22:16', 2, 1),
-(12, 'kimb@mcast.edu.mt', '$2y$10$nzNCClj1PDUbiUhit7bsbu2Gpw2Jn.5tLyAR7wrYy/RATc3gKhN7e', 'Kim', 'Para', '2026-04-17 18:41:39', 2, 1);
+(12, 'kimb@mcast.edu.mt', '$2y$10$nzNCClj1PDUbiUhit7bsbu2Gpw2Jn.5tLyAR7wrYy/RATc3gKhN7e', 'Kim', 'Para', '2026-04-17 18:41:39', 2, 1),
+(13, 'cparahili@gmail.com', '$2y$10$XbaAi8fxOOi3HI1PqiCenuPx1GePbRyIsgw5uMWowMOmi068KUJJ6', 'Kimberly', 'Parascandalo', '2026-04-29 20:19:37', 2, 1),
+(14, 'mayborg@gmail.com', '$2y$10$cnZQBamhu4i9eMkl4jEY6ePpSyaL0ujeDfd3X8b/4jfF7ddAdL50q', 'Mary', 'Borg', '2026-04-30 14:53:41', 2, 1),
+(15, 'kparascanytrdalo@gmail.com', '$2y$10$1tj/g4BwVcYbgPg45b9U4OPBUy0qTnoASO3dTh3.t38.fmgJOSOYu', 'Kim', 'Parascandalo', '2026-04-30 15:02:54', 2, 1),
+(16, 'kparascandalo@gmail.com', '$2y$10$VzLjZFXMMq5P3Rr7I5XuKuc6.sV2qAgpWstjuRRIeP/loSJzTIHwi', 'Kimberly', 'Parascandalo', '2026-04-30 15:04:47', 2, 1),
+(17, 'kparascawerndalo@gmail.com', '$2y$10$4qwg4txqWPDYS6j9C67yW.pl620tGNJZjWxIhmy.N58s5YM/91XPG', 'Kimberly', 'Parascandalo', '2026-04-30 15:07:34', 2, 1),
+(18, 'lolo@mcast.edu.mt', '$2y$10$JSgy80I8TtqlSz4gg59eYu2AbNRj0b3Yk6bCUNRbCkAB/H/a4XPi6', 'Kim', 'Para', '2026-05-01 10:27:27', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -483,7 +490,7 @@ ALTER TABLE `reset_password`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `settings_theme`
