@@ -270,6 +270,72 @@ outline: none !important;
     font-size: 1.8rem;
 }
 
+.subtitle2{
+    width: 90%;
+   margin: auto;
+   display: flex;
+     text-align: center;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.checkbox-item {
+    width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px auto;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none !important;
+}
+
+/* hide default checkbox */
+.checkbox-item input {
+  display: none;
+}
+
+/* custom box */
+.checkbox-item span::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: var(--hover-button);
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  transition: 0.2s;
+}
+
+/* checked state */
+.checkbox-item input:checked + span::before {
+  background-color: #394356;
+  border-color: #394356;
+}
+
+/* optional checkmark */
+.checkbox-item input:checked + span::after {
+  content: "✔";
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 2px;
+  font-size: 12px;
+  color: white;
+}
+
+.checkbox-item {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.checkbox-item input:checked + span {
+  color: #1a5b71;
+  font-weight: 500;
+}
+
 .carousel{
     text-align: center;
 }
@@ -391,6 +457,41 @@ a:hover .social-icon {
    outline: none !important;
    background-color: var( --base-variant);
 }
+
+.form2{
+    text-align: left;
+    width: 90% ;
+    height: 3rem;
+    color: var(--text-color) !important;
+    margin: auto;
+    display: flex;
+  border-radius: .5rem;
+ padding-left: 1rem;
+ outline: none !important;
+  border: none;
+}
+
+.form2:hover:hover{
+ padding-left: 1rem;
+ padding-right: 1rem;
+  box-shadow: 0 0 3px var(--text-color);
+   color: var(--text-color);
+    border-radius: .5rem;
+   outline: none !important;
+   background-color: var( --base-variant);
+}
+
+.form2:focus{
+ padding-left: 1rem;
+ padding-right: 1rem;
+  box-shadow: 0 0 3px var(--text-color);
+   color: var(--text-color);
+    border-radius: .5rem;
+   outline: none !important;
+   background-color: var( --base-variant);
+}
+
+
 
 .account{
     margin-left: 2rem;
@@ -624,6 +725,17 @@ a:hover .social-icon {
     border-radius: .5rem;
    outline: none !important;
    background-color: var( --base-variant);
+}
+
+.checkbox-item {
+    width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px auto;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none !important;
 }
 
 .button{
@@ -952,6 +1064,41 @@ a:hover .social-icon {
    background-color: var( --base-variant);
 }
 
+.form2{
+    text-align: left;
+    width: 90% ;
+    height: 3rem;
+    color: var(--text-color) !important;
+    margin: auto;
+    display: flex;
+  border-radius: .5rem;
+ padding-left: 1rem;
+ outline: none !important;
+  border: none;
+}
+
+.form2:hover:hover{
+ padding-left: 1rem;
+ padding-right: 1rem;
+  box-shadow: 0 0 3px var(--text-color);
+   color: var(--text-color);
+    border-radius: .5rem;
+   outline: none !important;
+   background-color: var( --base-variant);
+}
+
+.form2:focus{
+ padding-left: 1rem;
+ padding-right: 1rem;
+  box-shadow: 0 0 3px var(--text-color);
+   color: var(--text-color);
+    border-radius: .5rem;
+   outline: none !important;
+   background-color: var( --base-variant);
+}
+
+
+
 .button{
     width: 60%;
     background: var(--base-variant) !important;
@@ -1108,6 +1255,39 @@ a:hover .social-icon {
     border-radius: .5rem;
    outline: none !important;
    background-color: var( --base-variant);
+}
+
+.form2{
+    text-align: left;
+    width: 100% ;
+    height: 3rem;
+    color: var(--text-color) !important;
+    margin: auto;
+    display: flex;
+  border-radius: .5rem;
+ padding-left: 1rem;
+ outline: none !important;
+  border: none;
+}
+
+.subtitle2{
+    width: 100%;
+   margin: auto;
+   display: flex;
+     text-align: left;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.checkbox-item {
+    width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto 0 auto;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none !important;
 }
 
 .button{
