@@ -29,7 +29,7 @@ include "includes/nav.php";
 
 <h1 class="title">Planning</h1>
 
-<img class="d-block w-100 mb-4" src="assets/images/planning_img.png" alt="Couple silhouette under stars">
+<img class="photo d-block w-100 mb-4" src="assets/images/planning_img.png" alt="Couple silhouette under stars">
 
 <form action="" method="POST">
 
@@ -103,12 +103,20 @@ include "includes/nav.php";
   <input type="checkbox" name="categories[]" value="14">
   <span>Beauty Services</span>
 </label>
-
-
         </div>
     </div>
 
+<div class="form-group-inline">
+  <label>How many Guests?</label>
+  <input class="form3" type="text" name="guest_count" required>
+</div>
 
+<div class="form-group-inline">
+  <label>Your Budget (€)</label>
+  <input class="form3" type="text" name="budget" required>
+</div>
+
+<button class="button" type="submit" name="submit" value="save">Save</button>
 </form>
 
 </div>
