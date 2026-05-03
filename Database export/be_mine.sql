@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2026 at 01:50 PM
+-- Generation Time: May 03, 2026 at 07:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -239,7 +239,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_name`, `created_at`, `role_id`, `is_active`) VALUES
-(2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$vS4m85IGOB.mTUMdNZ7nEO0QcSbN3BW1ZLLpFq90vo7M4GXA1PO0O', 'Kimberly', 'Para', NULL, 1, 1),
+(2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$vS4m85IGOB.mTUMdNZ7nEO0QcSbN3BW1ZLLpFq90vo7M4GXA1PO0O', 'Kimberly', 'Para', NULL, 3, 1),
 (3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 2, 1),
 (11, 'kimberlymcast.edu.mt', '$2y$10$MldM9tvVlPUZ8D4ZVshT2O29da3TuG.tNG/NP7lhQsBEdDgLYl5CS', 'Kim', 'Para', '2026-04-17 18:22:16', 2, 1),
 (12, 'kimb@mcast.edu.mt', '$2y$10$nzNCClj1PDUbiUhit7bsbu2Gpw2Jn.5tLyAR7wrYy/RATc3gKhN7e', 'Kim', 'Para', '2026-04-17 18:41:39', 2, 1),
@@ -263,6 +263,25 @@ CREATE TABLE `vendor` (
   `vendor_name` varchar(500) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vendor`
+--
+
+INSERT INTO `vendor` (`vendor_id`, `vendor_name`, `category_id`, `user_id`) VALUES
+(2, 'Andrew Gerardi Photography', 8, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_image`
+--
+
+CREATE TABLE `vendor_image` (
+  `vendor_image_id` int(11) NOT NULL,
+  `vendor_id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -448,6 +467,12 @@ ALTER TABLE `vendor`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `vendor_image`
+--
+ALTER TABLE `vendor_image`
+  ADD PRIMARY KEY (`vendor_image_id`);
+
+--
 -- Indexes for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
@@ -559,7 +584,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `vendor_image`
+--
+ALTER TABLE `vendor_image`
+  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan`
