@@ -40,11 +40,7 @@ elseif(!$wedding_plan->weddingPlanExists()){
     echo json_encode(array("message" => "Wedding Plan not found."));
     exit();
 }
-elseif(!$wedding_plan->userIdExists()){
-    http_response_code(404);
-    echo json_encode(array("message" => "User Id not found."));
-    exit();
-}
+
 elseif($wedding_plan->weddingDateInvalid($wedding_plan->wedding_date)){
     http_response_code(400);
     echo json_encode(array("message" => "Invalid wedding date format. Use YYYY-MM-DD."));
@@ -59,6 +55,29 @@ elseif($wedding_plan->guestCountInvalid()){
 }
 
 elseif($wedding_plan->update()){
+
+    // delete old selected categories
+    $deleteQuery = "DELETE FROM wedding_plan_category WHERE wedding_plan_id = ?";
+    $deleteStmt = $db->prepare($deleteQuery);
+    $deleteStmt->bindParam(1, $wedding_plan->wedding_plan_id);
+    $deleteStmt->execute();
+
+    // insert new selected categories
+    if (!empty($data->categories)) {
+
+        foreach ($data->categories as $category_id) {
+
+            $query = "INSERT INTO wedding_plan_category 
+                      (wedding_plan_id, category_id)
+                      VALUES (?, ?)";
+
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(1, $wedding_plan->wedding_plan_id);
+            $stmt->bindParam(2, $category_id);
+            $stmt->execute();
+        }
+    }
+
     http_response_code(200);
     echo json_encode(array("message" => "Wedding Plan updated."));
 }

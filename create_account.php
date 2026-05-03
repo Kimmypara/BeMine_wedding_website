@@ -1,7 +1,7 @@
 <?php
-
-include "includes/nav.php";
 include "includes/curl.php";
+include "includes/nav.php";
+
 ?>
 
 
@@ -32,11 +32,7 @@ include "includes/curl.php";
 
     <input class="form" type="password" name="password" placeholder="Password" required><br>
 
-    <select class="form" name="role_id" required>
-        <option value="">Select Role</option>
-        <option value="2">Couple</option>
-        <option value="3">Vendor</option>
-    </select><br>
+    
 <?php 
 if (isset($userCreateResult["message"])) {
 
@@ -57,24 +53,14 @@ if (isset($userCreateResult["message"])) {
     }
 }
 ?>
-    <button class="button" type="submit" name="submit">Create Account</button>
+    <button class="button" type="submit" name="create_user">Create Account</button>
 
 </form>
+
 </div>
 </main>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php include "includes/footer.php"; ?>

@@ -22,9 +22,7 @@ include "includes/nav.php";
     <main class="main-content">
 <div class="container">
 <h2 class="title">Login</h2>
-<pre>
-<?php print_r($loginResult); ?>
-</pre>
+
 <form  method="POST" action="login.php">
 
     <input class="form" type="email" name="email" placeholder="Email" required><br>

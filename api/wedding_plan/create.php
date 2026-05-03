@@ -39,8 +39,20 @@ elseif($wedding_plan->userIdExists()){
     echo json_encode(array("message" => "Wedding Plan not created. Wedding Plan already exists."));
 }
 elseif($wedding_plan->create()){
+
+    if (!empty($data->categories)) {
+        foreach ($data->categories as $category_id) {
+            $query = "INSERT INTO wedding_plan_category (wedding_plan_id, category_id)
+                      VALUES (?, ?)";
+
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(1, $wedding_plan->wedding_plan_id);
+            $stmt->bindParam(2, $category_id);
+            $stmt->execute();
+        }
+    }
     http_response_code(201);
-    echo json_encode(array("message" => "Wedding Plan created."));
+    echo json_encode(["message" => "Wedding Plan created."]);
 }
 
 else{

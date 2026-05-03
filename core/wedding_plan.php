@@ -35,6 +35,9 @@ public $created_at;
             return $stmt;
     }
 
+
+    
+
     // read a single user record by Id
     public function readSingle(){
         $query = "SELECT *
@@ -78,6 +81,7 @@ public function create(){
     $this->guest_count = htmlspecialchars(strip_tags($this->guest_count));
     $this->budget = htmlspecialchars(strip_tags($this->budget));
     $this->created_at = date('Y-m-d H:i:s');
+   
 
     // bind parameters to sql statement
 
@@ -92,6 +96,7 @@ public function create(){
 
     
     if($stmt->execute()){
+         $this->wedding_plan_id = $this->conn->lastInsertId();
         return true;
     }
    

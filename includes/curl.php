@@ -127,37 +127,42 @@
 
 
      //User create (POST)
-if (isset($_POST['submit'])) {
+$userCreateResult = null;
 
-     $data = [
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['create_user'])) {
+
+    $data = [
         "first_name" => $_POST['first_name'] ?? "",
         "last_name"  => $_POST['last_name'] ?? "",
         "email"      => $_POST['email'] ?? "",
         "password"   => $_POST['password'] ?? "",
-        "role_id"    => isset($_POST['role_id']) ? (int)$_POST['role_id'] : 0
+        "role_id"    => 2,
+        "is_active"  => 1
     ];
 
     $curl = curl_init();
 
     curl_setopt($curl, CURLOPT_URL, "http://localhost/BeMine_wedding_website/api/users/create.php");
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_HTTPHEADER, [
         "Accept: application/json",
         "Content-Type: application/json"
     ]);
-
     curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
 
-    $response = curl_exec($curl);
+   $response = curl_exec($curl);
 
-    if ($response === false) {
-        $userCreateResult = ["message" => curl_error($curl)];
-    } else {
-        $userCreateResult = json_decode($response, true);
+if ($response === false) {
+    $userCreateResult = ["message" => curl_error($curl)];
+} else {
+    $userCreateResult = json_decode($response, true);
+
+    if (isset($userCreateResult["message"]) && $userCreateResult["message"] === "User created.") {
+        header("Location: login.php");
+        exit;
     }
-
-    curl_close($curl);
+}
 }
 
 
@@ -225,6 +230,86 @@ if (isset($_POST['login'])) {
             exit;
         }
     }
+}
+
+
+
+//Wedding Plan Read By User Id(GET)
+$weddingPlanCreateResult = null;
+$existingPlan = null;
+$planExists = false;
+
+$user_id = $_SESSION['user_id'] ?? "";
+$selectedCategories = [];
+
+/* READ EXISTING PLAN */
+if (!empty($user_id)) {
+
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, "http://localhost/BeMine_wedding_website/api/wedding_plan/readByUserId.php?user_id=" . $user_id);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "Content-Type: application/json"
+    ]);
+  
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    $readResult = json_decode($response, true);
+
+    if (isset($readResult["exists"]) && $readResult["exists"] === true) {
+        $planExists = true;
+        $existingPlan = $readResult["data"];
+        $selectedCategories = $existingPlan["categories"] ?? [];
+    }
+}
+
+/* Wedding Plan CREATE OR UPDATE */
+if (isset($_POST['save_plan'])) {
+
+    $data = [
+        "wedding_plan_id" => $existingPlan["wedding_plan_id"] ?? "",
+        "user_id" => $user_id,
+        "user_nickname" => $_POST['user_nickname'] ?? "",
+        "partner_nickname" => $_POST['partner_nickname'] ?? "",
+        "wedding_date" => $_POST['wedding_date'] ?? "",
+        "guest_count" => $_POST['guest_count'] ?? "",
+         "categories" => $_POST['categories'] ?? [],
+        "budget" => $_POST['budget'] ?? ""
+    ];
+
+    $curl = curl_init();
+
+    if ($planExists) {
+        $url = "http://localhost/BeMine_wedding_website/api/wedding_plan/update.php";
+        $method = "PATCH";
+    } else {
+        $url = "http://localhost/BeMine_wedding_website/api/wedding_plan/create.php";
+        $method = "POST";
+    }
+
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "Content-Type: application/json"
+    ]);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+
+    $response = curl_exec($curl);
+
+    if ($response === false) {
+        $weddingPlanCreateResult = ["message" => curl_error($curl)];
+    } else {
+        $weddingPlanCreateResult = json_decode($response, true);
+    }
+
+    curl_close($curl);
 }
 
 ?>

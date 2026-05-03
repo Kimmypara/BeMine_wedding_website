@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2026 at 10:35 AM
+-- Generation Time: May 03, 2026 at 01:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,7 +65,17 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`category_id`, `category_name`) VALUES
 (1, 'florists'),
-(4, 'invitations');
+(4, 'invitations'),
+(5, 'ceremony Venue'),
+(6, 'videograpers'),
+(7, 'reception venue'),
+(8, 'photographers'),
+(9, 'bridal and groom wear'),
+(10, 'caterers and beverages'),
+(11, 'fireworks'),
+(12, 'music'),
+(13, 'wedding rings'),
+(14, 'beauty services');
 
 -- --------------------------------------------------------
 
@@ -222,7 +232,7 @@ CREATE TABLE `users` (
   `created_at` datetime DEFAULT current_timestamp(),
   `role_id` int(11) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -236,9 +246,11 @@ INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_na
 (13, 'cparahili@gmail.com', '$2y$10$XbaAi8fxOOi3HI1PqiCenuPx1GePbRyIsgw5uMWowMOmi068KUJJ6', 'Kimberly', 'Parascandalo', '2026-04-29 20:19:37', 2, 1),
 (14, 'mayborg@gmail.com', '$2y$10$cnZQBamhu4i9eMkl4jEY6ePpSyaL0ujeDfd3X8b/4jfF7ddAdL50q', 'Mary', 'Borg', '2026-04-30 14:53:41', 2, 1),
 (15, 'kparascanytrdalo@gmail.com', '$2y$10$1tj/g4BwVcYbgPg45b9U4OPBUy0qTnoASO3dTh3.t38.fmgJOSOYu', 'Kim', 'Parascandalo', '2026-04-30 15:02:54', 2, 1),
-(16, 'kparascandalo@gmail.com', '$2y$10$VzLjZFXMMq5P3Rr7I5XuKuc6.sV2qAgpWstjuRRIeP/loSJzTIHwi', 'Kimberly', 'Parascandalo', '2026-04-30 15:04:47', 2, 1),
+(16, 'kparaschnjklandalo@gmail.com', '$2y$10$VzLjZFXMMq5P3Rr7I5XuKuc6.sV2qAgpWstjuRRIeP/loSJzTIHwi', 'Kimberly', 'Parascandalo', '2026-04-30 15:04:47', 2, 1),
 (17, 'kparascawerndalo@gmail.com', '$2y$10$4qwg4txqWPDYS6j9C67yW.pl620tGNJZjWxIhmy.N58s5YM/91XPG', 'Kimberly', 'Parascandalo', '2026-04-30 15:07:34', 2, 1),
-(18, 'lolo@mcast.edu.mt', '$2y$10$JSgy80I8TtqlSz4gg59eYu2AbNRj0b3Yk6bCUNRbCkAB/H/a4XPi6', 'Kim', 'Para', '2026-05-01 10:27:27', 2, 1);
+(18, 'lolo@mcast.edu.mt', '$2y$10$JSgy80I8TtqlSz4gg59eYu2AbNRj0b3Yk6bCUNRbCkAB/H/a4XPi6', 'Kim', 'Para', '2026-05-01 10:27:27', 2, 1),
+(19, 'kparascandalo@gmail.com', '$2y$10$.41UsG06EOAp3WGJIiaO3eDwV6TByqAuu4N6hsJhrkGjIxpFdyK.G', 'Kimberly', 'Parascandalo', '2026-05-03 13:39:20', 2, 1),
+(20, 'kevinpara@gmail.com', '$2y$10$tzOnxMAV7bSanI0iTHeBBOTlB8qQUepnkd1k4/PUKxcU/Txx56lP6', 'Kevin', 'Parascandalo', '2026-05-03 13:43:49', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -276,7 +288,41 @@ CREATE TABLE `wedding_plan` (
 
 INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `partner_nickname`, `wedding_date`, `guest_count`, `budget`, `created_at`) VALUES
 (4, 2, 'Kitty', 'Mike', '2028-01-03', 300, 100000.50, '2026-04-02 15:02:40'),
-(6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000.00, '2026-04-18 13:50:29');
+(6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000.00, '2026-04-18 13:50:29'),
+(7, 14, 'MayFlower', 'Kitten', '2028-02-13', 200, 35000.00, '2026-05-03 10:28:57'),
+(8, 19, 'Kimmy', 'Puppy', '2030-08-30', 200, 37000.00, '2026-05-03 13:45:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wedding_plan_category`
+--
+
+CREATE TABLE `wedding_plan_category` (
+  `wedding_plan_category_id` int(11) NOT NULL,
+  `wedding_plan_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wedding_plan_category`
+--
+
+INSERT INTO `wedding_plan_category` (`wedding_plan_category_id`, `wedding_plan_id`, `category_id`) VALUES
+(50, 7, 1),
+(51, 7, 4),
+(47, 7, 5),
+(52, 7, 6),
+(48, 7, 7),
+(49, 7, 9),
+(53, 7, 12),
+(64, 8, 1),
+(61, 8, 5),
+(62, 8, 7),
+(63, 8, 9),
+(65, 8, 10),
+(66, 8, 11),
+(67, 8, 12);
 
 -- --------------------------------------------------------
 
@@ -292,16 +338,7 @@ CREATE TABLE `wedding_plan_task` (
   `completed_at` datetime DEFAULT NULL,
   `is_completed` tinyint(1) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL
-) ;
-
---
--- Dumping data for table `wedding_plan_task`
---
-
-INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`, `category_id`) VALUES
-(13, 6, 3, 1, '2026-04-18 14:44:06', 1, 4),
-(17, 6, 3, 1, '2026-04-18 14:59:10', 0, 1),
-(19, 6, 4, 1, '2026-04-18 15:01:21', 0, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -415,7 +452,15 @@ ALTER TABLE `vendor`
 --
 ALTER TABLE `wedding_plan`
   ADD PRIMARY KEY (`wedding_plan_id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `wedding_plan_category`
+--
+ALTER TABLE `wedding_plan_category`
+  ADD PRIMARY KEY (`wedding_plan_category_id`),
+  ADD UNIQUE KEY `wedding_plan_id` (`wedding_plan_id`,`category_id`);
 
 --
 -- Indexes for table `wedding_plan_task`
@@ -448,7 +493,7 @@ ALTER TABLE `booking_status`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -508,7 +553,7 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -520,13 +565,19 @@ ALTER TABLE `vendor`
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `wedding_plan_category`
+--
+ALTER TABLE `wedding_plan_category`
+  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
