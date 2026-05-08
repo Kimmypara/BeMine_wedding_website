@@ -33,6 +33,9 @@
     curl_close($curl);
    //echo $categoryReadResult;
     $categoryReadResult = json_decode($categoryReadResult, true);
+
+
+    
   
       
 // Guest read

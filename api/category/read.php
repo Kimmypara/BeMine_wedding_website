@@ -24,7 +24,8 @@ if($num > 0){
         extract($row);
         $category_item = array(
             "category_id"    => $category_id,
-            "category_name"  => $category_name
+            "category_name"  => $category_name,
+            "slug"  => $slug
             
         );
 

@@ -50,11 +50,13 @@ $data = json_decode(file_get_contents("php://input"));
 // fill in user instance properties with decoded values from request
 $category->category_id  = $data->category_id;
 $category->category_name  = $data->category_name;
+$category->slug  = $data->slug;
 
 
  // validate
 if (
-    empty($category->category_name) 
+    empty($category->category_name) ||
+    empty($category->slug) 
 ){
     http_response_code(400);
     echo json_encode(array("message" => "Category not updated. Missing or invalid input."));

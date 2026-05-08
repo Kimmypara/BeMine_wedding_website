@@ -9,6 +9,7 @@ private $alias = "c";
     // table fields
 public $category_id;
 public $category_name;
+public $slug;
 
     //constructor with db connection
     // a function that is triggered automatically when an instance of the class is created
@@ -43,6 +44,7 @@ public $category_name;
         if ($row > 0){
            
             $this->category_name = $row["category_name"];
+            $this->slug = $row["slug"];
            
         }
 
@@ -52,17 +54,19 @@ public $category_name;
     // create a new category record
 public function create(){
     $query = "INSERT INTO {$this->table}
-    (category_name)
-    VALUES (:category_name);";
+    (category_name, slug)
+    VALUES (:category_name, :slug);";
 
     $stmt = $this->conn->prepare($query);
 
     // clean up data sent by user
   
      $this->category_name = htmlspecialchars(strip_tags($this->category_name));
+     $this->slug = htmlspecialchars(strip_tags($this->slug));
     // bind parameters to sql statement
 
      $stmt->bindParam(":category_name", $this->category_name);
+     $stmt->bindParam(":slug", $this->slug);
 
     if($stmt->execute()){
         return true;
@@ -76,7 +80,8 @@ public function create(){
 //update category_name of a user record
 public function update(){
     $query = "UPDATE {$this->table}
-            SET category_name = :category_name
+            SET category_name = :category_name,
+            slug= :slug
                 WHERE category_id = :category_id;";
 
                 $stmt = $this->conn->prepare($query);
@@ -84,10 +89,12 @@ public function update(){
     // clean up data sent by user
     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
     $this->category_name = htmlspecialchars(strip_tags($this->category_name));
+    $this->slug = htmlspecialchars(strip_tags($this->slug));
 
     // bind parameters to sql statement
     $stmt->bindParam(":category_id", $this->category_id);
     $stmt->bindParam(":category_name", $this->category_name);
+    $stmt->bindParam(":slug", $this->slug);
 
     if($stmt->execute()){
         return true;

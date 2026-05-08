@@ -8,8 +8,43 @@ if (!isset($_SESSION['user_id']) || (int)$_SESSION['role_id'] !== 2) {
     exit;
 }
 
-$category_id = 1; // Florists category id
-include "includes/curl.php";
+$slug = $_GET['category'] ?? '';
+
+include "includes/curl.php"; // reads categories
+
+$category_id = 0;
+$currentCategoryName = "Vendors";
+$vendorCategoryReadResult = null;
+
+if (!empty($categoryReadResult['data'])) {
+    foreach ($categoryReadResult['data'] as $category) {
+
+        if (isset($category['slug']) && $category['slug'] === $slug) {
+            $category_id = $category['category_id'];
+            $currentCategoryName = $category['category_name'];
+            break;
+        }
+    }
+}
+
+if ($category_id > 0) {
+
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, "http://localhost/BeMine_wedding_website/api/vendor/readByCategoryId.php?category_id=" . $category_id);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "Content-Type: application/json"
+    ]);
+
+    $vendorResponse = curl_exec($curl);
+    curl_close($curl);
+
+    $vendorCategoryReadResult = json_decode($vendorResponse, true);
+}
+
 include "includes/nav.php";
 ?>
 
@@ -28,7 +63,9 @@ include "includes/nav.php";
 <body>
     <main class="main-content">
 <div class="container">
-<h1 class="title">Florists</h1>
+
+
+<h1 class="title"> <?php echo htmlspecialchars($currentCategoryName); ?></h1>
 
 <div class="row align-items-stretch">
 

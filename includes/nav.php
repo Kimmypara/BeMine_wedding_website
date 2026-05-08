@@ -28,6 +28,23 @@ $last_name  = $_SESSION['last_name'] ?? '';
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 
+if (!isset($categoryReadResult)) {
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, "http://localhost/BeMine_wedding_website/api/category/read.php");
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "Content-Type: application/json"
+    ]);
+
+    $categoryResponse = curl_exec($curl);
+    curl_close($curl);
+
+    $categoryReadResult = json_decode($categoryResponse, true);
+}
+
 ?>
 
 
@@ -114,53 +131,87 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         
 
          <!-- RIGHT MENU -->
-        <ul class="nav-menu nav-right">
-             <li class="dropdown">
-    <a href="#" class="dropdown-toggle"  aria-expanded="false"
-            aria-haspopup="true">Vendors</a>
+    <!-- RIGHT MENU -->
+<ul class="nav-menu nav-right">
 
-    <ul class="dropdown-menu">
-        <li><a href="ceremony_venues.php" role="menuitem">Ceremony Venues</a></li>
-        <li><a href="reception_venues.php" role="menuitem">Reception Venues</a></li>
-        <li><a href="videographers.php" role="menuitem">Videographers</a></li>
-        <li><a href="photographers.php" role="menuitem">Photographers</a></li>
-        <li><a href="invitations.php" role="menuitem">Invitations</a></li>
-        <li><a href="florists.php" role="menuitem">Florists</a></li>
-        <li><a href="fireworks.php" role="menuitem">Fireworks</a></li>
-        <li><a href="clothes.php" role="menuitem">Bridal & Groom Wear</a></li>
-        <li><a href="caterers.php" role="menuitem">Caterers & Beverages</a></li>
-        <li><a href="music.php" role="menuitem">Music</a></li>
-        <li><a href="wedding_rings.php" role="menuitem">Wedding Rings</a></li>
-        <li><a href="beauty.php" role="menuitem">Beauty Services</a></li>
-        
-       
-    </ul>
-</li>
+    <li class="dropdown ">
 
-  <li><a href="honeymoon.php" class="nav-link <?php if ($currentPage == 'honeymoon.php') echo 'active'; ?>">Honeymoon</a></li>
+        <a href="#"
+           class="dropdown-toggle "
+           aria-expanded="false"
+           aria-haspopup="true">
 
-            <li><a href="contact_us.php" class="nav-link <?php if ($currentPage == 'contact_us.php') echo 'active'; ?>">Contact Us</a></li>
-           <?php if (isset($_SESSION['user_id'])): ?>
+           Vendors
 
-    
-
-    <li>
-        <a href="logout.php" class="nav-link <?php if ($currentPage == 'logout.php') echo 'active'; ?>">
-            Logout
         </a>
-    </li>
 
-<?php else: ?>
+        <ul class="dropdown-menu vendors_list">
 
-    <li>
-        <a href="login.php" class="nav-link <?php if ($currentPage == 'login.php') echo 'active'; ?>">
-            Login/Sign up
-        </a>
-    </li>
+            <?php if (!empty($categoryReadResult['data'])): ?>
 
-<?php endif; ?>
+                <?php foreach($categoryReadResult['data'] as $category): ?>
+
+                    <li>
+
+                        <a href="vendors.php?category=<?php echo urlencode($category['slug']); ?>">
+
+                            <?php echo htmlspecialchars($category['category_name']); ?>
+
+                        </a>
+
+                    </li>
+
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+
         </ul>
 
+    </li>
+
+    <li>
+        <a href="honeymoon.php"
+           class="nav-link <?php if ($currentPage == 'honeymoon.php') echo 'active'; ?>">
+
+           Honeymoon
+
+        </a>
+    </li>
+
+    <li>
+        <a href="contact_us.php"
+           class="nav-link <?php if ($currentPage == 'contact_us.php') echo 'active'; ?>">
+
+           Contact Us
+
+        </a>
+    </li>
+
+    <?php if (isset($_SESSION['user_id'])): ?>
+
+        <li>
+            <a href="logout.php"
+               class="nav-link <?php if ($currentPage == 'logout.php') echo 'active'; ?>">
+
+               Logout
+
+            </a>
+        </li>
+
+    <?php else: ?>
+
+        <li>
+            <a href="login.php"
+               class="nav-link <?php if ($currentPage == 'login.php') echo 'active'; ?>">
+
+               Login/Sign up
+
+            </a>
+        </li>
+
+    <?php endif; ?>
+
+</ul>
     </div>
 
    

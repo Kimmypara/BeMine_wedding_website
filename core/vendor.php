@@ -173,11 +173,10 @@ public function vendorNameExists(){
 public function update(){
     $query = "UPDATE {$this->table}
             SET vendor_name = :vendor_name,
-                category_id = :category_id,
-                user_id = :user_id,               
+                category_id = :category_id,             
                 locations = :locations,               
                 basic_info = :basic_info,               
-                min_price = :min_price,               
+                min_price = :min_price               
                 WHERE vendor_id = :vendor_id;";
 
                 $stmt = $this->conn->prepare($query);
@@ -186,7 +185,6 @@ public function update(){
     $this->vendor_id = htmlspecialchars(strip_tags($this->vendor_id));
     $this->vendor_name = htmlspecialchars(strip_tags($this->vendor_name));
     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-    $this->user_id = htmlspecialchars(strip_tags($this->user_id));
     $this->locations = htmlspecialchars(strip_tags($this->locations));
     $this->basic_info = htmlspecialchars(strip_tags($this->basic_info));
     $this->min_price = htmlspecialchars(strip_tags($this->min_price));
@@ -196,18 +194,28 @@ public function update(){
     $stmt->bindParam(":vendor_id", $this->vendor_id);
     $stmt->bindParam(":vendor_name", $this->vendor_name);
     $stmt->bindParam(":category_id", $this->category_id);
-    $stmt->bindParam(":user_id", $this->user_id);
     $stmt->bindParam(":locations", $this->locations);
     $stmt->bindParam(":basic_info", $this->basic_info);
     $stmt->bindParam(":min_price", $this->min_price);
  
-     if($stmt->execute()){
-        if($stmt->rowCount() > 0){
-            return true;
-        }
+    if($stmt->execute()){
+        return true;
     }
 
     return false;
+}
+
+public function vendorIdExists(){
+    $query = "SELECT vendor_id 
+              FROM vendor 
+              WHERE vendor_id = :vendor_id 
+              LIMIT 1;";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":vendor_id", $this->vendor_id);
+    $stmt->execute();
+
+    return $stmt->rowCount() > 0;
 }
 
 

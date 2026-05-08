@@ -1,0 +1,125 @@
+{
+  "info": {
+    "_postman_id": "d4141779-a535-47d3-a8ee-3f15aa4f0dba",
+    "name": "role",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52229786",
+    "_collection_link": "https://go.postman.co/collection/52229786-d4141779-a535-47d3-a8ee-3f15aa4f0dba?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create role",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"role_name\": \"Wedding Planner\"\r\n   \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/role/create.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "role",
+            "create.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update role",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"role_id\": \"1\",\r\n    \"role_name\": \"Administrator\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/role/update.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "role",
+            "update.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read role",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/role/read.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "role",
+            "read.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read Single role",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/role/readSingle.php?role_id=9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "role",
+            "readSingle.php"
+          ],
+          "query": [
+            {
+              "key": "role_id",
+              "value": "9"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

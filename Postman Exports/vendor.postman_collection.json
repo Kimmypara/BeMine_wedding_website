@@ -1,0 +1,215 @@
+{
+  "info": {
+    "_postman_id": "7821a9a7-995c-43d4-b4f5-71cd83464ee5",
+    "name": "vendor",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52229786",
+    "_collection_link": "https://go.postman.co/collection/52229786-7821a9a7-995c-43d4-b4f5-71cd83464ee5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create vendor",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"vendor_name\":\"Romano Borg\",\r\n    \"category_id\":\"1\",\r\n    \"user_id\":\"2\",\r\n     \"images\": [\r\n    \"assets/vendor_images/romano_cassar1.jpg\",\r\n    \"assets/vendor_images/romano_cassar2.jpg\",\r\n    \"assets/vendor_images/romano_cassar3.jpg\"\r\n   \r\n  ],\r\n     \"locations\":\"Zebbug\",\r\n    \"basic_info\":\"Now that the date is set, it’s time to talk flowers. We create and deliver innovative wedding floral designs and bridal bouquets inspired by you. Using only the finest and freshest flowers available, we provide you with stunning arrangements that match your personality. From bridal bouquets, bridesmaids’ flowers and buttonholes to garlands, table centrepieces, romantic archways, and floral installations – everything you need for your wedding look.\",\r\n    \"min_price\":\"900\"\r\n   \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/vendor/create.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "vendor",
+            "create.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read vendors",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"category_name\":\"invitations\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/vendor/read.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "vendor",
+            "read.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read Single vendor",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"category_name\":\"invitations\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/vendor/readSingle.php?vendor_id=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "vendor",
+            "readSingle.php"
+          ],
+          "query": [
+            {
+              "key": "vendor_id",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read vendors by Category",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/vendor/readByCategoryId.php?category_id=1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "vendor",
+            "readByCategoryId.php"
+          ],
+          "query": [
+            {
+              "key": "category_id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update vendor",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"vendor_id\": \"8\",\r\n    \"vendor_name\":\"Romano Cassar\",\r\n    \"category_id\":\"1\",\r\n     \"images\": [\r\n    \"assets/vendor_images/romano_cassar1.jpg\",\r\n    \"assets/vendor_images/romano_cassar2.jpg\",\r\n    \"assets/vendor_images/romano_cassar3.jpg\"\r\n     ],\r\n    \"locations\":\"Qormi\",\r\n    \"basic_info\":\"Now that the date is set, it’s time to talk flowers. We create and deliver innovative wedding floral designs and bridal bouquets inspired by you. Using only the finest and freshest flowers available, we provide you with stunning arrangements that match your personality. From bridal bouquets, bridesmaids’ flowers and buttonholes to garlands, table centrepieces, romantic archways, and floral installations – everything you need for your wedding look.\",\r\n    \"min_price\":\"900\"\r\n   \r\n   \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/vendor/update.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "vendor",
+            "update.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete vendor",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/vendor/delete.php?vendor_id=9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "vendor",
+            "delete.php"
+          ],
+          "query": [
+            {
+              "key": "vendor_id",
+              "value": "9"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2026 at 09:50 AM
+-- Generation Time: May 08, 2026 at 03:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,26 +56,42 @@ CREATE TABLE `booking_status` (
 
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
-  `category_name` varchar(255) DEFAULT NULL
+  `category_name` varchar(255) DEFAULT NULL,
+  `slug` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`category_id`, `category_name`) VALUES
-(1, 'florists'),
-(4, 'invitations'),
-(5, 'ceremony Venue'),
-(6, 'videograpers'),
-(7, 'reception venue'),
-(8, 'photographers'),
-(9, 'bridal and groom wear'),
-(10, 'caterers and beverages'),
-(11, 'fireworks'),
-(12, 'music'),
-(13, 'wedding rings'),
-(14, 'beauty services');
+INSERT INTO `category` (`category_id`, `category_name`, `slug`) VALUES
+(1, 'Florists', 'florists'),
+(4, 'Invitations', 'invitations'),
+(5, 'Ceremony Venue', 'ceremony_venue'),
+(6, 'Videograpers', 'videograpers'),
+(7, 'Reception Venue', 'reception_venue'),
+(8, 'Photographers', 'photographers'),
+(9, 'Bridal Wear', 'bridal_wear'),
+(10, 'Caterers', 'caterers'),
+(11, 'Fireworks', 'fireworks'),
+(12, 'Live Bands', 'live_bands'),
+(13, 'Wedding Rings', 'wedding_rings'),
+(14, 'Makeup Artists', 'makeup_artists'),
+(15, 'Nail Artists', 'nail_artists'),
+(16, 'Hair Stylists', 'hair_stylists'),
+(17, 'Groom Wear', 'groom_wear'),
+(18, 'Bridesmaid Dresses', 'bridesmaid_dresses'),
+(19, 'Beverage Services', 'beverage_services'),
+(20, 'Cocktail Bars', 'cocktail_bars'),
+(21, 'Wedding Cars', 'wedding_cars'),
+(22, 'Horse Carriages', 'horse_carriages'),
+(23, '360 Video Booths', '360_video_booths'),
+(24, 'Children’s Entertainment', 'children_entertainment'),
+(25, 'Singers', 'singers'),
+(26, 'DJs', 'DJs'),
+(27, 'Balloon Decorations', 'balloon_decorations'),
+(28, 'Lighting Effects', 'lighting_effects'),
+(31, 'Drone Videography', 'drone_videography');
 
 -- --------------------------------------------------------
 
@@ -275,7 +291,7 @@ CREATE TABLE `vendor` (
 INSERT INTO `vendor` (`vendor_id`, `vendor_name`, `category_id`, `user_id`, `locations`, `basic_info`, `min_price`) VALUES
 (4, 'Andrew Gerardi Photography', 8, 2, 'Mobile', 'By 2017, some of my work was being noticed and I had a number of assignments. This necessitated serious investment in my gear to satisfy the range of work I was doing. In 2022, I switched all my camera bodies and lenses to a mirrorless system as I believe that, although yes, the photographer needs to be artist, technology is always improving and good tools help you achieve a better result. I am lucky enough to have had the opportunity of shooting different scenarios and subjects including weddin', 1200.00),
 (5, 'Flower Land', 1, 3, 'Qormi', 'The company specializes in seasonal gifts and decorations, with a wide selection for Christmas and Valentine’s amongst the many special yearly occasions. Flower Land provides the best quality service on the island to some of Malta’s leading hotels and restaurants, high profile conferences and meetings, weddings, private occasions, funerals, hospitals.', 800.00),
-(8, 'Romano Cassar', 1, 3, 'Qormi', 'Now that the date is set, it’s time to talk flowers. We create and deliver innovative wedding floral designs and bridal bouquets inspired by you. Using only the finest and freshest flowers available, we provide you with stunning arrangements that match your personality. From bridal bouquets, bridesmaids’ flowers and buttonholes to garlands, table centrepieces, romantic archways, and floral installations – everything you need for your wedding look.', 750.00);
+(8, 'Romano Cassar', 1, 3, 'Qormi', 'Now that the date is set, it’s time to talk flowers. We create and deliver innovative wedding floral designs and bridal bouquets inspired by you. Using only the finest and freshest flowers available, we provide you with stunning arrangements that match your personality. From bridal bouquets, bridesmaids’ flowers and buttonholes to garlands, table centrepieces, romantic archways, and floral installations – everything you need for your wedding look.', 900.00);
 
 -- --------------------------------------------------------
 
@@ -300,9 +316,15 @@ INSERT INTO `vendor_image` (`vendor_image_id`, `vendor_id`, `image_path`) VALUES
 (7, 5, 'assets/vendor_images/flower_land1.jpg'),
 (8, 5, 'assets/vendor_images/flower_land2.jpg'),
 (9, 5, 'assets/vendor_images/flower_land3.jpg'),
-(13, 8, 'assets/vendor_images/romano_cassar1.jpg'),
-(14, 8, 'assets/vendor_images/romano_cassar2.jpg'),
-(15, 8, 'assets/vendor_images/romano_cassar3.jpg');
+(25, 1, 'assets/vendor_images/romano_cassar1.jpg'),
+(26, 1, 'assets/vendor_images/romano_cassar2.jpg'),
+(27, 1, 'assets/vendor_images/romano_cassar3.jpg'),
+(37, 8, 'assets/vendor_images/romano_cassar1.jpg'),
+(38, 8, 'assets/vendor_images/romano_cassar2.jpg'),
+(39, 8, 'assets/vendor_images/romano_cassar3.jpg'),
+(40, 10, 'assets/vendor_images/romano_cassar1.jpg'),
+(41, 10, 'assets/vendor_images/romano_cassar2.jpg'),
+(42, 10, 'assets/vendor_images/romano_cassar3.jpg');
 
 -- --------------------------------------------------------
 
@@ -328,7 +350,7 @@ CREATE TABLE `wedding_plan` (
 INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `partner_nickname`, `wedding_date`, `guest_count`, `budget`, `created_at`) VALUES
 (4, 2, 'Kitty', 'Mike', '2028-01-03', 300, 100000.50, '2026-04-02 15:02:40'),
 (6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000.00, '2026-04-18 13:50:29'),
-(7, 14, 'MayFlower', 'Kitten', '2028-02-13', 200, 35000.00, '2026-05-03 10:28:57'),
+(7, 14, 'MayFlower', 'Kitten', '2028-02-13', 300, 35000.00, '2026-05-03 10:28:57'),
 (8, 19, 'Kimmy', 'Puppy', '2030-08-30', 200, 37000.00, '2026-05-03 13:45:16');
 
 -- --------------------------------------------------------
@@ -348,13 +370,16 @@ CREATE TABLE `wedding_plan_category` (
 --
 
 INSERT INTO `wedding_plan_category` (`wedding_plan_category_id`, `wedding_plan_id`, `category_id`) VALUES
-(50, 7, 1),
-(51, 7, 4),
-(47, 7, 5),
-(52, 7, 6),
-(48, 7, 7),
-(49, 7, 9),
-(53, 7, 12),
+(191, 7, 1),
+(192, 7, 4),
+(188, 7, 5),
+(194, 7, 6),
+(189, 7, 7),
+(190, 7, 9),
+(193, 7, 10),
+(195, 7, 11),
+(196, 7, 12),
+(197, 7, 13),
 (64, 8, 1),
 (61, 8, 5),
 (62, 8, 7),
@@ -538,7 +563,7 @@ ALTER TABLE `booking_status`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -604,13 +629,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `vendor_image`
 --
 ALTER TABLE `vendor_image`
-  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan`
@@ -622,7 +647,7 @@ ALTER TABLE `wedding_plan`
 -- AUTO_INCREMENT for table `wedding_plan_category`
 --
 ALTER TABLE `wedding_plan_category`
-  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`

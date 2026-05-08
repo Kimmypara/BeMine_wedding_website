@@ -31,7 +31,8 @@ if($result){
     if($num > 0){
         $category_info = array(
             "category_id" => $category->category_id,
-            "category_name" => $category->category_name
+            "category_name" => $category->category_name,
+            "slug" => $category->slug
         );
 
         http_response_code(200);

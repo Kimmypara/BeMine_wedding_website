@@ -1,0 +1,299 @@
+{
+  "info": {
+    "_postman_id": "4c3ada96-b6ca-4ff5-bf83-3470d75fa6fe",
+    "name": "wedding plan",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52229786",
+    "_collection_link": "https://go.postman.co/collection/52229786-4c3ada96-b6ca-4ff5-bf83-3470d75fa6fe?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create wedding plan",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"user_id\": \"3\",\r\n    \"user_nickname\":\"\",\r\n    \"partner_nickname\": \"Borg\",\r\n    \"wedding_date\": \"2026/01/02\",\r\n    \"guest_count\": \"400\",\r\n    \"budget\":\"70000\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/create.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "create.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read Wedding Plan",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/read.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "read.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read Single Wedding Plan",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/readSingle.php?wedding_plan_id=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "readSingle.php"
+          ],
+          "query": [
+            {
+              "key": "wedding_plan_id",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Wedding Plan",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wedding_plan_id\":\"4\",\r\n    \"user_id\":\"2\",\r\n    \"user_nickname\":\"Kitty\",\r\n    \"partner_nickname\":\"Mike\",\r\n    \"wedding_date\":\"2028-01-03\",\r\n    \"guest_count\":\"300\",\r\n    \"budget\":\"100000.50\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/update.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "update.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update User Nickname",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wedding_plan_id\":\"4\",\r\n    \r\n    \"user_nickname\":\"Kitty\"\r\n  \r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/updateUserNickname.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "updateUserNickname.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update partner nickname",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wedding_plan_id\":\"4\",\r\n    \r\n    \"partner_nickname\":\"Kirk\"\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/updatePartnerNickname.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "updatePartnerNickname.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update wedding date",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wedding_plan_id\":\"9\",\r\n    \r\n    \"wedding_date\":\"2028-09-30\"\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/updateWeddingDate.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "updateWeddingDate.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Guest Count",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wedding_plan_id\":\"4\",\r\n    \r\n    \"guest_count\":\"300\"\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/updateGuestCount.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "updateGuestCount.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update budget",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wedding_plan_id\":\"4\",\r\n    \r\n    \"budget\":\"60000\"\r\n  \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/updateBudget.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "updateBudget.php"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

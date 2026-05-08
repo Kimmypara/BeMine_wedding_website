@@ -9,9 +9,16 @@ $_SESSION['role_id'] = 1;
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: DELETE");
 
 header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With");
+
+if($_SERVER["REQUEST_METHOD"] !="DELETE"){
+    http_response_code(405);
+    echo json_encode(array("message" => "Incorrect Request Method used."));
+    die();
+}
+
 
 include_once("../../includes/initialize.php");
 
@@ -39,38 +46,35 @@ function requireAdmin(){
 
 requireAdmin();
 
-// creat a new instance of the Category class
+// creat a new instance of the Vendor class
 // This allows us to use its structure and function
-$category = new Category($db);
-
+$vendor = new Vendor($db);
+//read submitted json data from request body
 $data = json_decode(file_get_contents("php://input"));
 
-// fill in Category instance properties with decoded values from request
-$category->category_name = $data->category_name;
-$category->slug = $data->slug;
 
-// validate
-if (
-    empty($category->category_name) ||
-    empty($category->slug) 
-){
+// check if ID is provided in query string
+if(empty($_GET["vendor_id"])){
     http_response_code(400);
-    echo json_encode(array("message" => "Category not created. Missing or invalid input."));
-}
-elseif($category->categoryNameExists()){
-    http_response_code(409);
-    echo json_encode(array("message" => "Category not created. Category already exists."));
-}
-elseif($category->create()){
-    http_response_code(201);
-    echo json_encode(array("message" => "Category created."));
+    echo json_encode(array("message" => "Vendor ID was not provided."));
+    exit();
 }
 
+$vendor->vendor_id = $_GET["vendor_id"];
+
+if(!$vendor->vendorIdExists()){
+    http_response_code(404);
+    echo json_encode(array("message" => "Vendor not deleted. Vendor does not exist."));
+    exit();
+}
+
+if($vendor->delete()){
+    http_response_code(200);
+    echo json_encode(array("message" => "Vendor deleted."));
+}
 else{
     http_response_code(500);
     echo json_encode(array("message" => "Server error."));
 }
-
-
 
 ?>
