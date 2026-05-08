@@ -279,6 +279,12 @@ outline: none !important;
     font-size: 1.1rem;
 }
 
+.subtitle3{
+     text-align: left;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
 .checkbox-item {
     width: 90%;
   display: flex;
@@ -643,6 +649,34 @@ a:hover .social-icon {
      justify-content: center;
      padding: .5rem;
 }
+
+.basic_info{
+    width: 90%;
+}
+
+.card{
+    background: var(--base-variant);
+    outline: none;
+    border: none;
+}
+
+.read-toggle{
+    
+    color: var(--secondary-text);
+}
+.read-toggle:hover{
+    
+    color: var(--secondary-hover);
+}
+
+.read-toggle:focus{
+    border: none;
+    outline: none;
+    color: var(--secondary-hover);
+}
+
+
+
 @media (min-width: 1201px) {
 
     .nav-container {
@@ -670,7 +704,7 @@ a:hover .social-icon {
 }
 
 /* switch to burger menu at 1000px */
-@media (max-width: 1200px) {
+@media (max-width: 1100px) {
 
     
   /* HIDE your current menu */
@@ -865,6 +899,8 @@ a:hover .social-icon {
      justify-content: center;
      padding: .5rem;
 }
+
+
 
 .icon-nav img{
     margin-top: 5rem;

@@ -125,6 +125,33 @@
     $weddingPlanTaskReadResult = json_decode($weddingPlanTaskReadResult, true);
 
 
+    
+
+
+    //Vendors Read by category id
+  if (isset($category_id)) {
+
+    // Vendors Read by category id
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL,
+        "http://localhost/BeMine_wedding_website/api/vendor/readByCategoryId.php?category_id=" . $category_id
+    );
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, [
+    "Accept: application/json",
+    "Content-Type: application/json"
+]);
+
+    $vendorCategoryReadResult = curl_exec($curl);
+
+    curl_close($curl);
+   //echo $vendorCategoryReadResult;
+    $vendorCategoryReadResult = json_decode($vendorCategoryReadResult, true);
+  }
+
+
 
      //User create (POST)
 $userCreateResult = null;

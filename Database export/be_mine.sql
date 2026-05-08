@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2026 at 07:47 PM
+-- Generation Time: May 08, 2026 at 09:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -262,15 +262,20 @@ CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `vendor_name` varchar(500) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `locations` varchar(255) DEFAULT NULL,
+  `basic_info` varchar(500) DEFAULT NULL,
+  `min_price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vendor`
 --
 
-INSERT INTO `vendor` (`vendor_id`, `vendor_name`, `category_id`, `user_id`) VALUES
-(2, 'Andrew Gerardi Photography', 8, 2);
+INSERT INTO `vendor` (`vendor_id`, `vendor_name`, `category_id`, `user_id`, `locations`, `basic_info`, `min_price`) VALUES
+(4, 'Andrew Gerardi Photography', 8, 2, 'Mobile', 'By 2017, some of my work was being noticed and I had a number of assignments. This necessitated serious investment in my gear to satisfy the range of work I was doing. In 2022, I switched all my camera bodies and lenses to a mirrorless system as I believe that, although yes, the photographer needs to be artist, technology is always improving and good tools help you achieve a better result. I am lucky enough to have had the opportunity of shooting different scenarios and subjects including weddin', 1200.00),
+(5, 'Flower Land', 1, 3, 'Qormi', 'The company specializes in seasonal gifts and decorations, with a wide selection for Christmas and Valentine’s amongst the many special yearly occasions. Flower Land provides the best quality service on the island to some of Malta’s leading hotels and restaurants, high profile conferences and meetings, weddings, private occasions, funerals, hospitals.', 800.00),
+(8, 'Romano Cassar', 1, 3, 'Qormi', 'Now that the date is set, it’s time to talk flowers. We create and deliver innovative wedding floral designs and bridal bouquets inspired by you. Using only the finest and freshest flowers available, we provide you with stunning arrangements that match your personality. From bridal bouquets, bridesmaids’ flowers and buttonholes to garlands, table centrepieces, romantic archways, and floral installations – everything you need for your wedding look.', 750.00);
 
 -- --------------------------------------------------------
 
@@ -283,6 +288,21 @@ CREATE TABLE `vendor_image` (
   `vendor_id` int(11) NOT NULL,
   `image_path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vendor_image`
+--
+
+INSERT INTO `vendor_image` (`vendor_image_id`, `vendor_id`, `image_path`) VALUES
+(4, 4, 'assets/vendor_images/andrew_gerardi1.jpg'),
+(5, 4, 'assets/vendor_images/andrew_gerardi2.jpg'),
+(6, 4, 'assets/vendor_images/andrew_gerardi3.jpg'),
+(7, 5, 'assets/vendor_images/flower_land1.jpg'),
+(8, 5, 'assets/vendor_images/flower_land2.jpg'),
+(9, 5, 'assets/vendor_images/flower_land3.jpg'),
+(13, 8, 'assets/vendor_images/romano_cassar1.jpg'),
+(14, 8, 'assets/vendor_images/romano_cassar2.jpg'),
+(15, 8, 'assets/vendor_images/romano_cassar3.jpg');
 
 -- --------------------------------------------------------
 
@@ -584,13 +604,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `vendor_image`
 --
 ALTER TABLE `vendor_image`
-  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan`

@@ -11,6 +11,9 @@ public $vendor_id;
 public $vendor_name;
 public $category_id;
 public $user_id;
+public $locations;
+public $basic_info;
+public $min_price;
 
     //constructor with db connection
     // a function that is triggered automatically when an instance of the class is created
@@ -19,20 +22,47 @@ public $user_id;
     }
 
     public function read(){
-        $query = "SELECT * 
-            FROM {$this->table} AS {$this->alias}
-            ORDER BY {$this->alias}.vendor_name ASC;";
 
-            $stmt = $this->conn->prepare($query);
+    $query = "SELECT 
+                v.vendor_id,
+                v.vendor_name,
+                v.category_id,
+                v.user_id,
+                  v.locations,
+                v.basic_info,
+                v.min_price,
+                vi.image_path
+              FROM vendor AS v
 
-            $stmt->execute();
+              LEFT JOIN vendor_image AS vi
+              ON v.vendor_id = vi.vendor_id
 
-            return $stmt;
-    }
+              ORDER BY v.vendor_name ASC";
+
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->execute();
+
+    return $stmt;
+}
+
+    public function readWithImages(){
+
+    $query = "SELECT vendor_id, vendor_name, category_id, user_id, locations, basic_info, min_price
+              FROM vendor
+              WHERE vendor_id = ?
+              LIMIT 1";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1, $this->vendor_id);
+    $stmt->execute();
+
+    return $stmt;
+}
 
     // read a single user record by Id
     public function readSingle(){
-        $query = "SELECT vendor_id, vendor_name, category_id, user_id
+        $query = "SELECT vendor_id, vendor_name, category_id, user_id, locations, basic_info, min_price
         FROM {$this->table} AS {$this->alias}
         WHERE {$this->alias}.vendor_id = ?
         LIMIT 1;";
@@ -47,30 +77,51 @@ public $user_id;
             $this->vendor_name = $row["vendor_name"];
             $this->category_id = $row["category_id"];
             $this->user_id = $row["user_id"];
+            $this->locations = $row["locations"];
+            $this->basic_info = $row["basic_info"];
+            $this->min_price = $row["min_price"];
         }
 
         return $stmt;
     }
 
         // Read all vendors records created by a category_id
-    Public function readByCategoryId(){
-$query = "SELECT *
-        FROM {$this->table} AS {$this->alias}
-        WHERE {$this->alias}.category_id = ?;";
+public function readByCategoryId(){
 
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->category_id);
-        $stmt->execute();
+    $query = "SELECT 
+                v.vendor_id,
+                v.vendor_name,
+                v.category_id,
+                v.user_id,
+                v.locations,
+                v.basic_info,
+                v.min_price,
+                vi.image_path
 
-        return $stmt;
-    }
+              FROM vendor AS v
+
+              LEFT JOIN vendor_image AS vi
+              ON v.vendor_id = vi.vendor_id
+
+              WHERE v.category_id = ?
+
+              ORDER BY v.vendor_name ASC";
+
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(1, $this->category_id);
+
+    $stmt->execute();
+
+    return $stmt;
+}
 
 
     // create a new user record
 public function create(){
     $query = "INSERT INTO {$this->table}
-    (vendor_id, vendor_name, category_id,user_id)
-    VALUES (:vendor_id, :vendor_name, :category_id, :user_id);";
+    (vendor_id, vendor_name, category_id,user_id, locations, basic_info, min_price )
+    VALUES (:vendor_id, :vendor_name, :category_id, :user_id, :locations, :basic_info, :min_price);";
 
     $stmt = $this->conn->prepare($query);
 
@@ -80,6 +131,9 @@ public function create(){
     $this->vendor_name = htmlspecialchars(strip_tags($this->vendor_name));
     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
     $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+    $this->locations = htmlspecialchars(strip_tags($this->locations));
+    $this->basic_info = htmlspecialchars(strip_tags($this->basic_info));
+    $this->min_price = htmlspecialchars(strip_tags($this->min_price));
   
     // bind parameters to sql statement
 
@@ -87,8 +141,12 @@ public function create(){
     $stmt->bindParam(":vendor_name", $this->vendor_name);
     $stmt->bindParam(":category_id", $this->category_id);
     $stmt->bindParam(":user_id", $this->user_id);
+    $stmt->bindParam(":locations", $this->locations);
+    $stmt->bindParam(":basic_info", $this->basic_info);
+    $stmt->bindParam(":min_price", $this->min_price);
     
     if($stmt->execute()){
+         $this->vendor_id = $this->conn->lastInsertId();
         return true;
     }
    
@@ -116,7 +174,10 @@ public function update(){
     $query = "UPDATE {$this->table}
             SET vendor_name = :vendor_name,
                 category_id = :category_id,
-                user_id = :user_id
+                user_id = :user_id,               
+                locations = :locations,               
+                basic_info = :basic_info,               
+                min_price = :min_price,               
                 WHERE vendor_id = :vendor_id;";
 
                 $stmt = $this->conn->prepare($query);
@@ -126,6 +187,9 @@ public function update(){
     $this->vendor_name = htmlspecialchars(strip_tags($this->vendor_name));
     $this->category_id = htmlspecialchars(strip_tags($this->category_id));
     $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+    $this->locations = htmlspecialchars(strip_tags($this->locations));
+    $this->basic_info = htmlspecialchars(strip_tags($this->basic_info));
+    $this->min_price = htmlspecialchars(strip_tags($this->min_price));
 
 
     // bind parameters to sql statement
@@ -133,6 +197,9 @@ public function update(){
     $stmt->bindParam(":vendor_name", $this->vendor_name);
     $stmt->bindParam(":category_id", $this->category_id);
     $stmt->bindParam(":user_id", $this->user_id);
+    $stmt->bindParam(":locations", $this->locations);
+    $stmt->bindParam(":basic_info", $this->basic_info);
+    $stmt->bindParam(":min_price", $this->min_price);
  
      if($stmt->execute()){
         if($stmt->rowCount() > 0){

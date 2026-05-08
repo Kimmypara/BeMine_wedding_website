@@ -51,7 +51,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     <div class="nav-banner bg-drop" >
       <picture>
-    <source media="(max-width: 1200px)" srcset="assets/images/topNav_small.png">
+    <source media="(max-width: 1100px)" srcset="assets/images/topNav_small.png">
     <img src="assets/images/topNav.png" class="banner" alt="Banner">
 </picture>
 
