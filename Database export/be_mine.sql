@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2026 at 03:46 PM
+-- Generation Time: May 11, 2026 at 08:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -165,6 +165,21 @@ CREATE TABLE `our_wedding` (
   `our_wedding_id` int(11) NOT NULL,
   `profile_image` varchar(500) DEFAULT NULL,
   `wedding_plan_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quotation_request`
+--
+
+CREATE TABLE `quotation_request` (
+  `quotation_request_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `vendor_id` int(11) NOT NULL,
+  `estimated_price` decimal(10,2) NOT NULL,
+  `status` varchar(50) DEFAULT 'requested',
+  `requested_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -370,16 +385,21 @@ CREATE TABLE `wedding_plan_category` (
 --
 
 INSERT INTO `wedding_plan_category` (`wedding_plan_category_id`, `wedding_plan_id`, `category_id`) VALUES
-(191, 7, 1),
-(192, 7, 4),
-(188, 7, 5),
-(194, 7, 6),
-(189, 7, 7),
-(190, 7, 9),
-(193, 7, 10),
-(195, 7, 11),
-(196, 7, 12),
-(197, 7, 13),
+(360, 7, 1),
+(362, 7, 4),
+(355, 7, 5),
+(365, 7, 6),
+(364, 7, 7),
+(353, 7, 9),
+(354, 7, 10),
+(359, 7, 11),
+(363, 7, 12),
+(366, 7, 13),
+(361, 7, 17),
+(357, 7, 20),
+(356, 7, 24),
+(358, 7, 26),
+(352, 7, 27),
 (64, 8, 1),
 (61, 8, 5),
 (62, 8, 7),
@@ -403,6 +423,27 @@ CREATE TABLE `wedding_plan_task` (
   `is_completed` tinyint(1) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wedding_plan_task`
+--
+
+INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`, `category_id`) VALUES
+(49, 7, NULL, 1, NULL, 0, 27),
+(50, 7, NULL, 1, NULL, 0, 9),
+(51, 7, NULL, 1, NULL, 0, 10),
+(52, 7, NULL, 1, NULL, 0, 5),
+(53, 7, NULL, 1, NULL, 0, 24),
+(54, 7, NULL, 1, NULL, 0, 20),
+(55, 7, NULL, 1, NULL, 0, 26),
+(56, 7, NULL, 1, NULL, 0, 11),
+(57, 7, NULL, 1, NULL, 0, 1),
+(58, 7, NULL, 1, NULL, 0, 17),
+(59, 7, NULL, 1, NULL, 0, 4),
+(60, 7, NULL, 1, NULL, 0, 12),
+(61, 7, NULL, 1, NULL, 0, 7),
+(62, 7, NULL, 1, NULL, 0, 6),
+(63, 7, NULL, 1, NULL, 0, 13);
 
 --
 -- Indexes for dumped tables
@@ -465,6 +506,12 @@ ALTER TABLE `guest`
 ALTER TABLE `our_wedding`
   ADD PRIMARY KEY (`our_wedding_id`),
   ADD KEY `wedding_plan_id` (`wedding_plan_id`);
+
+--
+-- Indexes for table `quotation_request`
+--
+ALTER TABLE `quotation_request`
+  ADD PRIMARY KEY (`quotation_request_id`);
 
 --
 -- Indexes for table `reset_password`
@@ -596,6 +643,12 @@ ALTER TABLE `our_wedding`
   MODIFY `our_wedding_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `quotation_request`
+--
+ALTER TABLE `quotation_request`
+  MODIFY `quotation_request_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `reset_password`
 --
 ALTER TABLE `reset_password`
@@ -641,19 +694,19 @@ ALTER TABLE `vendor_image`
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_category`
 --
 ALTER TABLE `wedding_plan_category`
-  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- Constraints for dumped tables
