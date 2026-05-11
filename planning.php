@@ -8,7 +8,51 @@ if (!isset($_SESSION['user_id']) || (int)$_SESSION['role_id'] !== 2) {
     exit;
 }
 
+
 include "includes/curl.php";
+
+if (isset($_POST['save_plan'])) {
+
+    echo "<pre>";
+
+    $wedding_plan_id = $existingPlan['wedding_plan_id'] ?? null;
+
+    echo "Wedding plan id: ";
+    var_dump($wedding_plan_id);
+
+    $data = [
+        "wedding_plan_id" => $wedding_plan_id,
+        "categories" => $_POST['categories'] ?? []
+    ];
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL => "http://localhost/BeMine_wedding_website/api/wedding_plan_task/createSelected.php",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => [
+            "Accept: application/json",
+            "Content-Type: application/json"
+        ]
+    ]);
+
+    $response = curl_exec($curl);
+
+    if (curl_errno($curl)) {
+        echo "cURL Error: " . curl_error($curl);
+    }
+
+    curl_close($curl);
+
+    echo "API response: ";
+    print_r($response);
+
+    echo "</pre>";
+}
+
+
 include "includes/nav.php";
 
 ?>

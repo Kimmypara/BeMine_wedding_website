@@ -338,8 +338,37 @@ if (isset($_POST['save_plan'])) {
     } else {
         $weddingPlanCreateResult = json_decode($response, true);
     }
+    
 
     curl_close($curl);
 }
+
+
+
+
+// Read selected wedding plan tasks
+if (!empty($existingPlan['wedding_plan_id'])) {
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL => "http://localhost/BeMine_wedding_website/api/wedding_plan_task/readByWeddingPlanId.php?wedding_plan_id=" . $existingPlan['wedding_plan_id'],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => [
+            "Accept: application/json",
+            "Content-Type: application/json"
+        ]
+    ]);
+
+    $taskReadResult = curl_exec($curl);
+    curl_close($curl);
+
+    $taskReadResult = json_decode($taskReadResult, true);
+
+} else {
+    $taskReadResult = ["data" => []];
+}
+
 
 ?>
