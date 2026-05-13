@@ -22,10 +22,16 @@ if (!$wedding_plan_id) {
 REMOVE ONLY UNTICKED CATEGORIES
 */
 
+if (empty($categories)) {
+    echo json_encode(["message" => "No categories sent. Nothing deleted."]);
+    exit;
+}
+
 $query = "DELETE FROM wedding_plan_task
           WHERE wedding_plan_id = :wedding_plan_id
-          AND category_id NOT IN (" . implode(',', array_map('intval', $categories)) . ")";
+          AND category_id NOT IN (" . implode(',', $categories) . ")";
 
+          
 $stmt = $db->prepare($query);
 $stmt->bindParam(":wedding_plan_id", $wedding_plan_id);
 $stmt->execute();

@@ -294,6 +294,33 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Read by users Id wedding plan",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan/readByUserId.php?user_id=2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan",
+            "readByUserId.php"
+          ],
+          "query": [
+            {
+              "key": "user_id",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }

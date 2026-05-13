@@ -14,7 +14,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"wedding_plan_id\": \"6\",\r\n    \"category_id\": \"1\",\r\n    \"task_id\":\"4\",\r\n    \"is_selected\": \"1\",\r\n    \"is_completed\": \"0\"\r\n  \r\n}",
+          "raw": "{\r\n    \"wedding_plan_id\": \"19\",\r\n    \"category_id\": \"1\",\r\n    \"task_id\":\"4\",\r\n    \"is_selected\": \"1\",\r\n    \"is_completed\": \"0\"\r\n  \r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -147,7 +147,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"wedding_plan_task_id\": \"13\",\r\n    \r\n    \"is_selected\": \"1\"\r\n   \r\n}"
+          "raw": "{\r\n    \"wedding_plan_task_id\": \"64\",\r\n    \r\n    \"is_selected\": \"1\"\r\n   \r\n}"
         },
         "url": {
           "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan_task/updateIsSelected.php",
@@ -172,7 +172,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"wedding_plan_task_id\": \"13\",\r\n    \r\n    \"is_completed\": \"1\"\r\n   \r\n}",
+          "raw": "{\r\n    \"wedding_plan_task_id\": \"65\",\r\n    \r\n    \"is_completed\": \"1\",\r\n   \"completed_at\": \"NULL\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -190,6 +190,77 @@
             "api",
             "wedding_plan_task",
             "updateIsCompleted.php"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Read by wedding plan Id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"wedding_plan_task_id\": \"13\",\r\n    \r\n    \"is_selected\": \"1\"\r\n   \r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan_task/readByWeddingPlanId.php?wedding_plan_id=7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan_task",
+            "readByWeddingPlanId.php"
+          ],
+          "query": [
+            {
+              "key": "wedding_plan_id",
+              "value": "7"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create is selected wedding plan task",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"wedding_plan_id\": \"19\",\r\n  \"categories\": [\"26\", \"9\", \"10\"]\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost/BeMine_wedding_website/api/wedding_plan_task/createSelected.php",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "path": [
+            "BeMine_wedding_website",
+            "api",
+            "wedding_plan_task",
+            "createSelected.php"
           ]
         }
       },

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2026 at 02:32 PM
+-- Generation Time: May 13, 2026 at 07:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -310,7 +310,8 @@ INSERT INTO `vendor` (`vendor_id`, `vendor_name`, `category_id`, `user_id`, `loc
 (11, 'Pearl Ink Designs', 4, 2, 'Rabat', 'We are a family business and we run different businesses/projects that complement each other in providing excellent customer service in every area that we operate in. Each project is focused on a particular service that we can provide to our customers. Stampatur.com is a design and printing service focused on delivering rapid design and printing services professionally at an affordable price. We take pride in our ability to understand our customers and come up with the right solutions.', 400.00),
 (12, 'Golden Olive Catering', 10, 2, 'Paola', 'Founded in 1969, Neriku Catering has garnered 50 years of experience in the catering industry, providing top quality service at affordable prices. Everything we do is done with passion and utmost dedication.', 12000.00),
 (13, 'Dream Bouquet Co.', 1, 2, 'Fgura', 'Founded in 1969, Neriku Catering has garnered 50 years of experience in the catering industry, providing top quality service at affordable prices. Everything we do is done with passion and utmost dedication.', 11000.00),
-(14, 'EverAfter Dresses', 9, 11, 'Fgura', 'We believe every bride deserves to feel confident, beautiful, and unforgettable on her special day. Our bridal collection combines timeless elegance with modern design, offering carefully selected gowns for every wedding style.', 400.00);
+(14, 'EverAfter Dresses', 9, 11, 'Fgura', 'We believe every bride deserves to feel confident, beautiful, and unforgettable on her special day. Our bridal collection combines timeless elegance with modern design, offering carefully selected gowns for every wedding style.', 400.00),
+(15, 'Golden Horizon Venue', 7, 11, 'Mellieha', 'We believe every love story deserves a beautiful setting. Our venue offers romantic gardens, elegant spaces, and personalised service to help create unforgettable wedding memories.', 6000.00);
 
 -- --------------------------------------------------------
 
@@ -352,7 +353,10 @@ INSERT INTO `vendor_image` (`vendor_image_id`, `vendor_id`, `image_path`) VALUES
 (60, 8, 'assets/vendor_images/stampatur3.jpg'),
 (61, 14, 'assets/vendor_images/EverAfterDresses1.jpg'),
 (62, 14, 'assets/vendor_images/EverAfterDresses2.jpg'),
-(63, 14, 'assets/vendor_images/EverAfterDresses3.jpg');
+(63, 14, 'assets/vendor_images/EverAfterDresses3.jpg'),
+(67, 15, 'assets/vendor_images/GoldenHorizonVenue1.jpg'),
+(68, 15, 'assets/vendor_images/GoldenHorizonVenue2.jpg'),
+(69, 15, 'assets/vendor_images/GoldenHorizonVenue3.jpg');
 
 -- --------------------------------------------------------
 
@@ -380,7 +384,8 @@ INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `part
 (6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000.00, '2026-04-18 13:50:29'),
 (7, 14, 'MayFlower', 'Kitten', '2028-02-13', 300, 35000.00, '2026-05-03 10:28:57'),
 (8, 19, 'Kimmy', 'Puppy', '2030-08-30', 200, 37000.00, '2026-05-03 13:45:16'),
-(17, 21, 'Charm', 'Tommy', '2028-10-15', 300, 40000.00, '2026-05-12 15:40:37');
+(17, 21, 'Charm', 'Tommy', '2028-10-15', 300, 40000.00, '2026-05-12 15:40:37'),
+(19, 20, 'Kim', 'Tim', '2027-01-02', 300, 60000.00, '2026-05-13 18:31:00');
 
 -- --------------------------------------------------------
 
@@ -458,7 +463,20 @@ INSERT INTO `wedding_plan_category` (`wedding_plan_category_id`, `wedding_plan_i
 (618, 17, 24),
 (619, 17, 26),
 (612, 17, 27),
-(620, 17, 31);
+(620, 17, 31),
+(668, 19, 1),
+(670, 19, 4),
+(673, 19, 6),
+(671, 19, 7),
+(664, 19, 9),
+(665, 19, 10),
+(675, 19, 13),
+(669, 19, 16),
+(674, 19, 21),
+(672, 19, 23),
+(666, 19, 24),
+(667, 19, 26),
+(663, 19, 27);
 
 -- --------------------------------------------------------
 
@@ -481,42 +499,22 @@ CREATE TABLE `wedding_plan_task` (
 --
 
 INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`, `category_id`) VALUES
-(64, 7, NULL, 1, NULL, 0, 27),
-(65, 7, NULL, 1, NULL, 0, 19),
-(66, 7, NULL, 1, NULL, 0, 9),
-(67, 7, NULL, 1, NULL, 0, 10),
-(68, 7, NULL, 1, NULL, 0, 5),
-(69, 7, NULL, 1, NULL, 0, 24),
-(70, 7, NULL, 1, NULL, 0, 20),
-(71, 7, NULL, 1, NULL, 0, 26),
-(72, 7, NULL, 1, NULL, 0, 11),
-(73, 7, NULL, 1, NULL, 0, 1),
-(74, 7, NULL, 1, NULL, 0, 17),
-(75, 7, NULL, 1, NULL, 0, 4),
-(76, 7, NULL, 1, NULL, 0, 12),
-(77, 7, NULL, 1, NULL, 0, 7),
-(78, 7, NULL, 1, NULL, 0, 6),
-(79, 7, NULL, 1, NULL, 0, 13),
-(220, 17, NULL, 1, '2026-05-12 19:17:41', 1, 27),
-(221, 17, NULL, 1, '2026-05-12 19:17:41', 1, 19),
 (222, 17, NULL, 1, '2026-05-12 19:17:41', 1, 9),
-(223, 17, NULL, 1, '2026-05-12 19:17:41', 1, 18),
 (224, 17, NULL, 1, '2026-05-12 19:17:41', 1, 10),
-(225, 17, NULL, 1, '2026-05-12 19:17:41', 1, 5),
-(226, 17, NULL, 1, '2026-05-12 19:17:41', 1, 24),
 (227, 17, NULL, 1, NULL, 0, 26),
-(228, 17, NULL, 1, NULL, 0, 31),
-(229, 17, NULL, 1, NULL, 0, 11),
-(230, 17, NULL, 1, '2026-05-12 19:17:41', 1, 1),
-(231, 17, NULL, 1, NULL, 0, 16),
-(232, 17, NULL, 1, NULL, 0, 4),
-(233, 17, NULL, 1, NULL, 0, 12),
-(234, 17, NULL, 1, NULL, 0, 15),
-(235, 17, NULL, 1, NULL, 0, 8),
-(236, 17, NULL, 1, NULL, 0, 7),
-(237, 17, NULL, 1, NULL, 0, 21),
-(238, 17, NULL, 1, NULL, 0, 13),
-(239, 17, NULL, 1, NULL, 0, 17);
+(242, 19, NULL, 1, NULL, 0, 9),
+(243, 19, NULL, 1, '2026-05-13 18:55:58', 1, 10),
+(245, 19, NULL, 1, '2026-05-13 18:55:58', 1, 26),
+(254, 19, NULL, 1, NULL, 0, 27),
+(255, 19, NULL, 1, NULL, 0, 24),
+(256, 19, NULL, 1, NULL, 0, 1),
+(257, 19, NULL, 1, NULL, 0, 16),
+(258, 19, NULL, 1, NULL, 0, 4),
+(259, 19, NULL, 1, NULL, 0, 7),
+(260, 19, NULL, 1, NULL, 0, 23),
+(261, 19, NULL, 1, NULL, 0, 6),
+(262, 19, NULL, 1, NULL, 0, 21),
+(263, 19, NULL, 1, NULL, 0, 13);
 
 --
 -- Indexes for dumped tables
@@ -755,31 +753,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `vendor_image`
 --
 ALTER TABLE `vendor_image`
-  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_category`
 --
 ALTER TABLE `wedding_plan_category`
-  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=632;
+  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=676;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
 
 --
 -- Constraints for dumped tables
