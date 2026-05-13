@@ -724,14 +724,61 @@ a:hover .social-icon {
     color: var(--text-color);
     width: 2.5rem;
     height: 2.5rem;
-    display: flex;
+    
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
      border-radius: .8rem;
+      display:inline-block;
+    min-width:40px;
+    transition:0.3s;
 }
 
+.date{
+     text-align: center;
+    color: var(--text-color);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
 
+.sm_text{
+    font-size: .5rem;
+    margin-top: 0%;
+}
+
+.price_text{
+    margin-bottom: 0%;
+}
+
+.countdown-box{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+}
+
+.countdown-box div{
+    background:var(--hover-button);
+    color:var(--text-color);
+    padding:15px;
+    border-radius:16px;
+    min-width:80px;
+    text-align:center;
+}
+
+.countdown-box span{
+    display:block;
+    font-size:1.8rem;
+    font-weight:bold;
+    color: var(--text-color);
+}
+
+.countdown-box small{
+    font-size:0.9rem;
+}
 
 /* LARGE SCREENS */
 @media (min-width: 1100px){

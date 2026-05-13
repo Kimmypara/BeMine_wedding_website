@@ -164,27 +164,41 @@ public function isSelectedInvalid(){
 }
 
 //update is_completed
+// update is_completed
 public function updateIsCompleted(){
-    $query = "UPDATE {$this->table}
-            SET is_completed = :is_completed
-                WHERE wedding_plan_task_id = :wedding_plan_task_id;";
 
-                $stmt = $this->conn->prepare($query);
+    if($this->is_completed == 1){
+
+        $query = "UPDATE {$this->table}
+                SET is_completed = :is_completed,
+                    completed_at = NOW()
+                WHERE wedding_plan_task_id = :wedding_plan_task_id";
+
+    } else {
+
+        $query = "UPDATE {$this->table}
+                SET is_completed = :is_completed,
+                    completed_at = NULL
+                WHERE wedding_plan_task_id = :wedding_plan_task_id";
+
+    }
+
+    $stmt = $this->conn->prepare($query);
 
     // clean up data sent by user
     $this->wedding_plan_task_id = htmlspecialchars(strip_tags($this->wedding_plan_task_id));
     $this->is_completed = htmlspecialchars(strip_tags($this->is_completed));
 
-    // bind parameters to sql statement
+    // bind parameters
     $stmt->bindParam(":wedding_plan_task_id", $this->wedding_plan_task_id);
     $stmt->bindParam(":is_completed", $this->is_completed);
 
     if($stmt->execute()){
         return true;
     }
-   
+
     printf("Error %s. \n", $stmt->error);
-    
+
     return false;
 }
 

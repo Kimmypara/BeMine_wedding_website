@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2026 at 08:08 PM
+-- Generation Time: May 13, 2026 at 02:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -85,7 +85,7 @@ INSERT INTO `category` (`category_id`, `category_name`, `slug`) VALUES
 (20, 'Cocktail Bars', 'cocktail_bars'),
 (21, 'Wedding Cars', 'wedding_cars'),
 (22, 'Horse Carriages', 'horse_carriages'),
-(23, '360 Video Booths', '360_video_booths'),
+(23, 'Video Booths 360', '360_video_booths'),
 (24, 'Children’s Entertainment', 'children_entertainment'),
 (25, 'Singers', 'singers'),
 (26, 'DJs', 'DJs'),
@@ -271,17 +271,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_name`, `created_at`, `role_id`, `is_active`) VALUES
 (2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$vS4m85IGOB.mTUMdNZ7nEO0QcSbN3BW1ZLLpFq90vo7M4GXA1PO0O', 'Kimberly', 'Para', NULL, 3, 1),
-(3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 2, 1),
-(11, 'kimberlymcast.edu.mt', '$2y$10$MldM9tvVlPUZ8D4ZVshT2O29da3TuG.tNG/NP7lhQsBEdDgLYl5CS', 'Kim', 'Para', '2026-04-17 18:22:16', 2, 1),
+(3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 3, 1),
+(11, 'kimberlymcast.edu.mt', '$2y$10$MldM9tvVlPUZ8D4ZVshT2O29da3TuG.tNG/NP7lhQsBEdDgLYl5CS', 'Kim', 'Para', '2026-04-17 18:22:16', 3, 1),
 (12, 'kimb@mcast.edu.mt', '$2y$10$nzNCClj1PDUbiUhit7bsbu2Gpw2Jn.5tLyAR7wrYy/RATc3gKhN7e', 'Kim', 'Para', '2026-04-17 18:41:39', 2, 1),
-(13, 'cparahili@gmail.com', '$2y$10$XbaAi8fxOOi3HI1PqiCenuPx1GePbRyIsgw5uMWowMOmi068KUJJ6', 'Kimberly', 'Parascandalo', '2026-04-29 20:19:37', 2, 1),
+(13, 'chparahili@gmail.com', '', 'Kimberly', 'Parascandalo', '2026-04-29 20:19:37', 2, 1),
 (14, 'mayborg@gmail.com', '$2y$10$cnZQBamhu4i9eMkl4jEY6ePpSyaL0ujeDfd3X8b/4jfF7ddAdL50q', 'Mary', 'Borg', '2026-04-30 14:53:41', 2, 1),
 (15, 'kparascanytrdalo@gmail.com', '$2y$10$1tj/g4BwVcYbgPg45b9U4OPBUy0qTnoASO3dTh3.t38.fmgJOSOYu', 'Kim', 'Parascandalo', '2026-04-30 15:02:54', 2, 1),
 (16, 'kparaschnjklandalo@gmail.com', '$2y$10$VzLjZFXMMq5P3Rr7I5XuKuc6.sV2qAgpWstjuRRIeP/loSJzTIHwi', 'Kimberly', 'Parascandalo', '2026-04-30 15:04:47', 2, 1),
 (17, 'kparascawerndalo@gmail.com', '$2y$10$4qwg4txqWPDYS6j9C67yW.pl620tGNJZjWxIhmy.N58s5YM/91XPG', 'Kimberly', 'Parascandalo', '2026-04-30 15:07:34', 2, 1),
 (18, 'lolo@mcast.edu.mt', '$2y$10$JSgy80I8TtqlSz4gg59eYu2AbNRj0b3Yk6bCUNRbCkAB/H/a4XPi6', 'Kim', 'Para', '2026-05-01 10:27:27', 2, 1),
 (19, 'kparascandalo@gmail.com', '$2y$10$.41UsG06EOAp3WGJIiaO3eDwV6TByqAuu4N6hsJhrkGjIxpFdyK.G', 'Kimberly', 'Parascandalo', '2026-05-03 13:39:20', 2, 1),
-(20, 'kevinpara@gmail.com', '$2y$10$tzOnxMAV7bSanI0iTHeBBOTlB8qQUepnkd1k4/PUKxcU/Txx56lP6', 'Kevin', 'Parascandalo', '2026-05-03 13:43:49', 2, 1);
+(20, 'kevinpara@gmail.com', '$2y$10$tzOnxMAV7bSanI0iTHeBBOTlB8qQUepnkd1k4/PUKxcU/Txx56lP6', 'Kevin', 'Parascandalo', '2026-05-03 13:43:49', 2, 1),
+(21, 'cparahili@gmail.com', '$2y$10$krPx0e9lQfFQz/uvMlGIQOrwU7RRA/n6tHtMzNMELEnIKXWnjPuD6', 'Charmaine', 'Hili', '2026-05-12 15:35:12', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -304,9 +305,12 @@ CREATE TABLE `vendor` (
 --
 
 INSERT INTO `vendor` (`vendor_id`, `vendor_name`, `category_id`, `user_id`, `locations`, `basic_info`, `min_price`) VALUES
-(4, 'Andrew Gerardi Photography', 8, 2, 'Mobile', 'By 2017, some of my work was being noticed and I had a number of assignments. This necessitated serious investment in my gear to satisfy the range of work I was doing. In 2022, I switched all my camera bodies and lenses to a mirrorless system as I believe that, although yes, the photographer needs to be artist, technology is always improving and good tools help you achieve a better result. I am lucky enough to have had the opportunity of shooting different scenarios and subjects including weddin', 1200.00),
-(5, 'Flower Land', 1, 3, 'Qormi', 'The company specializes in seasonal gifts and decorations, with a wide selection for Christmas and Valentine’s amongst the many special yearly occasions. Flower Land provides the best quality service on the island to some of Malta’s leading hotels and restaurants, high profile conferences and meetings, weddings, private occasions, funerals, hospitals.', 800.00),
-(8, 'Romano Cassar', 1, 3, 'Qormi', 'Now that the date is set, it’s time to talk flowers. We create and deliver innovative wedding floral designs and bridal bouquets inspired by you. Using only the finest and freshest flowers available, we provide you with stunning arrangements that match your personality. From bridal bouquets, bridesmaids’ flowers and buttonholes to garlands, table centrepieces, romantic archways, and floral installations – everything you need for your wedding look.', 900.00);
+(4, 'Eternal Lens Co.', 8, 2, 'Mobile', 'By 2017, some of my work was being noticed and I had a number of assignments. This necessitated serious investment in my gear to satisfy the range of work I was doing. In 2022, I switched all my camera bodies and lenses to a mirrorless system as I believe that, although yes, the photographer needs to be artist, technology is always improving and good tools help you achieve a better result. I am lucky enough to have had the opportunity of shooting different scenarios and subjects including weddin', 1200.00),
+(5, 'Forever Flowers', 1, 3, 'Qormi', 'The company specializes in seasonal gifts and decorations, with a wide selection for Christmas and Valentine’s amongst the many special yearly occasions. Flower Land provides the best quality service on the island to some of Malta’s leading hotels and restaurants, high profile conferences and meetings, weddings, private occasions, funerals, hospitals.', 800.00),
+(11, 'Pearl Ink Designs', 4, 2, 'Rabat', 'We are a family business and we run different businesses/projects that complement each other in providing excellent customer service in every area that we operate in. Each project is focused on a particular service that we can provide to our customers. Stampatur.com is a design and printing service focused on delivering rapid design and printing services professionally at an affordable price. We take pride in our ability to understand our customers and come up with the right solutions.', 400.00),
+(12, 'Golden Olive Catering', 10, 2, 'Paola', 'Founded in 1969, Neriku Catering has garnered 50 years of experience in the catering industry, providing top quality service at affordable prices. Everything we do is done with passion and utmost dedication.', 12000.00),
+(13, 'Dream Bouquet Co.', 1, 2, 'Fgura', 'Founded in 1969, Neriku Catering has garnered 50 years of experience in the catering industry, providing top quality service at affordable prices. Everything we do is done with passion and utmost dedication.', 11000.00),
+(14, 'EverAfter Dresses', 9, 11, 'Fgura', 'We believe every bride deserves to feel confident, beautiful, and unforgettable on her special day. Our bridal collection combines timeless elegance with modern design, offering carefully selected gowns for every wedding style.', 400.00);
 
 -- --------------------------------------------------------
 
@@ -325,21 +329,30 @@ CREATE TABLE `vendor_image` (
 --
 
 INSERT INTO `vendor_image` (`vendor_image_id`, `vendor_id`, `image_path`) VALUES
-(4, 4, 'assets/vendor_images/andrew_gerardi1.jpg'),
-(5, 4, 'assets/vendor_images/andrew_gerardi2.jpg'),
-(6, 4, 'assets/vendor_images/andrew_gerardi3.jpg'),
-(7, 5, 'assets/vendor_images/flower_land1.jpg'),
-(8, 5, 'assets/vendor_images/flower_land2.jpg'),
-(9, 5, 'assets/vendor_images/flower_land3.jpg'),
-(25, 1, 'assets/vendor_images/romano_cassar1.jpg'),
-(26, 1, 'assets/vendor_images/romano_cassar2.jpg'),
-(27, 1, 'assets/vendor_images/romano_cassar3.jpg'),
-(37, 8, 'assets/vendor_images/romano_cassar1.jpg'),
-(38, 8, 'assets/vendor_images/romano_cassar2.jpg'),
-(39, 8, 'assets/vendor_images/romano_cassar3.jpg'),
-(40, 10, 'assets/vendor_images/romano_cassar1.jpg'),
-(41, 10, 'assets/vendor_images/romano_cassar2.jpg'),
-(42, 10, 'assets/vendor_images/romano_cassar3.jpg');
+(4, 4, 'assets/vendor_images/eternalLens1.jpg'),
+(5, 4, 'assets/vendor_images/eternalLens2.jpg'),
+(6, 4, 'assets/vendor_images/eternalLens3.jpg'),
+(7, 5, 'assets/vendor_images/foreverFlowers1.jpg'),
+(8, 5, 'assets/vendor_images/foreverFlowers2.jpg'),
+(9, 5, 'assets/vendor_images/foreverFlowers3.jpg'),
+(25, 1, 'assets/vendor_images/dreamBouquet1.jpg'),
+(26, 1, 'assets/vendor_images/dreamBouquet2.jpg'),
+(27, 1, 'assets/vendor_images/dreamBouquet3.jpg'),
+(43, 11, 'assets/vendor_images/pearlInk1.jpg'),
+(44, 11, 'assets/vendor_images/pearlInk2.jpg'),
+(45, 11, 'assets/vendor_images/pearlInk3.jpg'),
+(46, 12, 'assets/vendor_images/GoldenOlive1.jpg'),
+(47, 12, 'assets/vendor_images/GoldenOlive2.jpg'),
+(48, 12, 'assets/vendor_images/GoldenOlive3.jpg'),
+(52, 13, 'assets/vendor_images/dreamBouquet1.jpg'),
+(53, 13, 'assets/vendor_images/dreamBouquet2.jpg'),
+(54, 13, 'assets/vendor_images/dreamBouquet3.jpg'),
+(58, 8, 'assets/vendor_images/stampatur1.jpg'),
+(59, 8, 'assets/vendor_images/stampatur2.jpg'),
+(60, 8, 'assets/vendor_images/stampatur3.jpg'),
+(61, 14, 'assets/vendor_images/EverAfterDresses1.jpg'),
+(62, 14, 'assets/vendor_images/EverAfterDresses2.jpg'),
+(63, 14, 'assets/vendor_images/EverAfterDresses3.jpg');
 
 -- --------------------------------------------------------
 
@@ -366,7 +379,8 @@ INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `part
 (4, 2, 'Kitty', 'Mike', '2028-01-03', 300, 100000.50, '2026-04-02 15:02:40'),
 (6, 3, 'Kate', 'Borg', '2026-01-02', 400, 70000.00, '2026-04-18 13:50:29'),
 (7, 14, 'MayFlower', 'Kitten', '2028-02-13', 300, 35000.00, '2026-05-03 10:28:57'),
-(8, 19, 'Kimmy', 'Puppy', '2030-08-30', 200, 37000.00, '2026-05-03 13:45:16');
+(8, 19, 'Kimmy', 'Puppy', '2030-08-30', 200, 37000.00, '2026-05-03 13:45:16'),
+(17, 21, 'Charm', 'Tommy', '2028-10-15', 300, 40000.00, '2026-05-12 15:40:37');
 
 -- --------------------------------------------------------
 
@@ -385,28 +399,66 @@ CREATE TABLE `wedding_plan_category` (
 --
 
 INSERT INTO `wedding_plan_category` (`wedding_plan_category_id`, `wedding_plan_id`, `category_id`) VALUES
-(360, 7, 1),
-(362, 7, 4),
-(355, 7, 5),
-(365, 7, 6),
-(364, 7, 7),
-(353, 7, 9),
-(354, 7, 10),
-(359, 7, 11),
-(363, 7, 12),
-(366, 7, 13),
-(361, 7, 17),
-(357, 7, 20),
-(356, 7, 24),
-(358, 7, 26),
-(352, 7, 27),
+(376, 7, 1),
+(378, 7, 4),
+(371, 7, 5),
+(381, 7, 6),
+(380, 7, 7),
+(369, 7, 9),
+(370, 7, 10),
+(375, 7, 11),
+(379, 7, 12),
+(382, 7, 13),
+(377, 7, 17),
+(368, 7, 19),
+(373, 7, 20),
+(372, 7, 24),
+(374, 7, 26),
+(367, 7, 27),
 (64, 8, 1),
 (61, 8, 5),
 (62, 8, 7),
 (63, 8, 9),
 (65, 8, 10),
 (66, 8, 11),
-(67, 8, 12);
+(67, 8, 12),
+(390, 16, 1),
+(392, 16, 4),
+(387, 16, 5),
+(397, 16, 7),
+(396, 16, 8),
+(384, 16, 9),
+(386, 16, 10),
+(389, 16, 11),
+(393, 16, 12),
+(399, 16, 13),
+(394, 16, 14),
+(395, 16, 15),
+(391, 16, 16),
+(385, 16, 18),
+(383, 16, 19),
+(398, 16, 21),
+(388, 16, 31),
+(622, 17, 1),
+(625, 17, 4),
+(617, 17, 5),
+(629, 17, 7),
+(628, 17, 8),
+(614, 17, 9),
+(616, 17, 10),
+(621, 17, 11),
+(626, 17, 12),
+(631, 17, 13),
+(627, 17, 15),
+(624, 17, 16),
+(623, 17, 17),
+(615, 17, 18),
+(613, 17, 19),
+(630, 17, 21),
+(618, 17, 24),
+(619, 17, 26),
+(612, 17, 27),
+(620, 17, 31);
 
 -- --------------------------------------------------------
 
@@ -429,21 +481,42 @@ CREATE TABLE `wedding_plan_task` (
 --
 
 INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `task_id`, `is_selected`, `completed_at`, `is_completed`, `category_id`) VALUES
-(49, 7, NULL, 1, NULL, 0, 27),
-(50, 7, NULL, 1, NULL, 0, 9),
-(51, 7, NULL, 1, NULL, 0, 10),
-(52, 7, NULL, 1, NULL, 0, 5),
-(53, 7, NULL, 1, NULL, 0, 24),
-(54, 7, NULL, 1, NULL, 0, 20),
-(55, 7, NULL, 1, NULL, 0, 26),
-(56, 7, NULL, 1, NULL, 0, 11),
-(57, 7, NULL, 1, NULL, 0, 1),
-(58, 7, NULL, 1, NULL, 0, 17),
-(59, 7, NULL, 1, NULL, 0, 4),
-(60, 7, NULL, 1, NULL, 0, 12),
-(61, 7, NULL, 1, NULL, 0, 7),
-(62, 7, NULL, 1, NULL, 0, 6),
-(63, 7, NULL, 1, NULL, 0, 13);
+(64, 7, NULL, 1, NULL, 0, 27),
+(65, 7, NULL, 1, NULL, 0, 19),
+(66, 7, NULL, 1, NULL, 0, 9),
+(67, 7, NULL, 1, NULL, 0, 10),
+(68, 7, NULL, 1, NULL, 0, 5),
+(69, 7, NULL, 1, NULL, 0, 24),
+(70, 7, NULL, 1, NULL, 0, 20),
+(71, 7, NULL, 1, NULL, 0, 26),
+(72, 7, NULL, 1, NULL, 0, 11),
+(73, 7, NULL, 1, NULL, 0, 1),
+(74, 7, NULL, 1, NULL, 0, 17),
+(75, 7, NULL, 1, NULL, 0, 4),
+(76, 7, NULL, 1, NULL, 0, 12),
+(77, 7, NULL, 1, NULL, 0, 7),
+(78, 7, NULL, 1, NULL, 0, 6),
+(79, 7, NULL, 1, NULL, 0, 13),
+(220, 17, NULL, 1, '2026-05-12 19:17:41', 1, 27),
+(221, 17, NULL, 1, '2026-05-12 19:17:41', 1, 19),
+(222, 17, NULL, 1, '2026-05-12 19:17:41', 1, 9),
+(223, 17, NULL, 1, '2026-05-12 19:17:41', 1, 18),
+(224, 17, NULL, 1, '2026-05-12 19:17:41', 1, 10),
+(225, 17, NULL, 1, '2026-05-12 19:17:41', 1, 5),
+(226, 17, NULL, 1, '2026-05-12 19:17:41', 1, 24),
+(227, 17, NULL, 1, NULL, 0, 26),
+(228, 17, NULL, 1, NULL, 0, 31),
+(229, 17, NULL, 1, NULL, 0, 11),
+(230, 17, NULL, 1, '2026-05-12 19:17:41', 1, 1),
+(231, 17, NULL, 1, NULL, 0, 16),
+(232, 17, NULL, 1, NULL, 0, 4),
+(233, 17, NULL, 1, NULL, 0, 12),
+(234, 17, NULL, 1, NULL, 0, 15),
+(235, 17, NULL, 1, NULL, 0, 8),
+(236, 17, NULL, 1, NULL, 0, 7),
+(237, 17, NULL, 1, NULL, 0, 21),
+(238, 17, NULL, 1, NULL, 0, 13),
+(239, 17, NULL, 1, NULL, 0, 17);
 
 --
 -- Indexes for dumped tables
@@ -676,37 +749,37 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `vendor_image`
 --
 ALTER TABLE `vendor_image`
-  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `vendor_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_category`
 --
 ALTER TABLE `wedding_plan_category`
-  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
+  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=632;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
 
 --
 -- Constraints for dumped tables
@@ -775,6 +848,7 @@ ALTER TABLE `users`
 -- Constraints for table `vendor`
 --
 ALTER TABLE `vendor`
+  ADD CONSTRAINT `fk_vendor_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `vendor_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`),
   ADD CONSTRAINT `vendor_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 

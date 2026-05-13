@@ -8,17 +8,13 @@ if (!isset($_SESSION['user_id']) || (int)$_SESSION['role_id'] !== 2) {
     exit;
 }
 
-
-include "includes/curl.php";
-
+// SAVE FIRST
 if (isset($_POST['save_plan'])) {
 
-    echo "<pre>";
+    // include curl only if you need $existingPlan here
+    include "includes/curl.php";
 
     $wedding_plan_id = $existingPlan['wedding_plan_id'] ?? null;
-
-    echo "Wedding plan id: ";
-    var_dump($wedding_plan_id);
 
     $data = [
         "wedding_plan_id" => $wedding_plan_id,
@@ -39,22 +35,15 @@ if (isset($_POST['save_plan'])) {
     ]);
 
     $response = curl_exec($curl);
-
-    if (curl_errno($curl)) {
-        echo "cURL Error: " . curl_error($curl);
-    }
-
     curl_close($curl);
 
-    echo "API response: ";
-    print_r($response);
-
-    echo "</pre>";
+    header("Location: planning.php?saved=1");
+    exit;
 }
 
-
+// THEN READ FRESH DATA
+include "includes/curl.php";
 include "includes/nav.php";
-
 ?>
 
 <style>

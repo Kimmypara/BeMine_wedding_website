@@ -19,12 +19,14 @@ $data = json_decode(file_get_contents("php://input"));
 // fill in wedding_plan_task instance properties with decoded values from request
 $wedding_plan_task->wedding_plan_task_id = $data->wedding_plan_task_id;
 $wedding_plan_task->is_completed = $data->is_completed;
+$wedding_plan_task->completed_at = $data->completed_at;
 
 
 // validate
 if (
     empty($wedding_plan_task->wedding_plan_task_id) ||
     !isset($wedding_plan_task->is_completed) 
+  
 ){
     http_response_code(400);
     echo json_encode(array("message" => "Wedding Plan Task not updated. Missing or invalid input."));

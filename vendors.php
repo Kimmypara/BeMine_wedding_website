@@ -111,11 +111,12 @@ include "includes/nav.php";
                 <?php echo htmlspecialchars($vendor['locations']); ?>
             </p>
 
-            <p>
-                Price Range:&nbsp; &nbsp;
+            <p class="price_text">
+                Starting from:&nbsp; &nbsp;
                 €<?php echo htmlspecialchars($vendor['min_price']); ?>
                
             </p>
+            <p class="sm_text">Final pricing depends on services and wedding requirements.</p>
 
             <?php
 $shortText = substr($vendor['basic_info'], 0, 120);

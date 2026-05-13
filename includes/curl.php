@@ -371,4 +371,41 @@ if (!empty($existingPlan['wedding_plan_id'])) {
 }
 
 
+// Update selected wedding plan tasks when completed
+if (isset($_POST['save_task'])) {
+
+    $completedTasks = $_POST['completed_tasks'] ?? [];
+
+    foreach ($taskReadResult['data'] as $task) {
+
+        $isCompleted = in_array(
+            $task['wedding_plan_task_id'],
+            $completedTasks
+        ) ? 1 : 0;
+
+        $data = [
+            "wedding_plan_task_id" => $task['wedding_plan_task_id'],
+            "is_completed" => $isCompleted
+        ];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "http://localhost/BeMine_wedding_website/api/wedding_plan_task/updateIsCompleted.php",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => "PATCH",
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => [
+                "Accept: application/json",
+                "Content-Type: application/json"
+            ]
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+    }
+}
+
+
 ?>
