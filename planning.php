@@ -64,7 +64,7 @@ include "includes/nav.php";
 
 <h1 class="title">Planning</h1>
 
-<img class="photo d-block w-100 mb-4" src="assets/images/planning_img.png" alt="Couple silhouette under stars">
+<img class="photo d-block w-100 mb-4" src="assets/images/planning2.jpg" alt="Red Rose">
 
 <form action="planning.php" method="POST">
 
