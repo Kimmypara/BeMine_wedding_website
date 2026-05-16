@@ -1,0 +1,15 @@
+site_name: BeMine Wedding Website API Documentation
+
+nav:
+  - Home: index.md
+
+  - Users:
+      - Create User: users/create.md
+      - Login User: users/login.md
+      - Read Users: users/read.md
+      - Read Single User: users/readSingle.md
+      - Update User: users/update.md
+      - Update Password: users/updatePassword.md
+
+extra_css:
+  - style/style_doc.css

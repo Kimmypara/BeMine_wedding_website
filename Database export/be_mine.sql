@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2026 at 07:17 PM
+-- Generation Time: May 16, 2026 at 01:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -134,6 +134,22 @@ CREATE TABLE `chat_message` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact_message`
+--
+
+CREATE TABLE `contact_message` (
+  `contact_message_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `guest`
 --
 
@@ -143,6 +159,7 @@ CREATE TABLE `guest` (
   `guest_email` varchar(255) DEFAULT NULL,
   `guest_name` varchar(255) DEFAULT NULL,
   `guest_surname` varchar(255) DEFAULT NULL,
+  `guest_category` varchar(100) DEFAULT NULL,
   `rsvp_status` enum('pending','accepted','declined') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -150,10 +167,13 @@ CREATE TABLE `guest` (
 -- Dumping data for table `guest`
 --
 
-INSERT INTO `guest` (`guest_id`, `wedding_plan_id`, `guest_email`, `guest_name`, `guest_surname`, `rsvp_status`) VALUES
-(1, 4, 'kimberly@gmail.com', 'Kim', 'Borg', 'accepted'),
-(2, 4, 'kimpara@gmail.com', 'Char', 'Borg', 'accepted'),
-(3, 6, 'kim@gmail.com', 'Kevin', 'Hili', 'pending');
+INSERT INTO `guest` (`guest_id`, `wedding_plan_id`, `guest_email`, `guest_name`, `guest_surname`, `guest_category`, `rsvp_status`) VALUES
+(5, 17, 'mcassar@gmail.com', 'Mary', 'Cassar', 'Family of the Bride', 'pending'),
+(6, 17, 'shili@gmail.com', 'Sandra', 'Hili', 'Family of the Bride', 'pending'),
+(7, 17, 'kborg@gmail.com', 'Keith', 'Borg', 'Family of the Groom', 'pending'),
+(8, 17, 'tvella@gmail.com', 'Tom', 'Vella', 'Family of the Groom', 'pending'),
+(9, 17, 'kfarrugia@gmail.com', 'Kim', 'Farrugia', 'Friends', 'pending'),
+(10, 17, 'mvella@gmail.com', 'Martina', 'Vella', 'Work Friends', 'pending');
 
 -- --------------------------------------------------------
 
@@ -270,7 +290,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_name`, `created_at`, `role_id`, `is_active`) VALUES
-(2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$vS4m85IGOB.mTUMdNZ7nEO0QcSbN3BW1ZLLpFq90vo7M4GXA1PO0O', 'Kimberly', 'Para', NULL, 3, 1),
+(2, 'kimberly.parascandalo@rocketfin.co', '$2y$10$IliZeOUE2RFew5TYkxiNCOEr0RJgG4xg1VAGiq7wlLPlRND.a4U2C', 'Kimberly', 'Para', NULL, 3, 1),
 (3, 'kimberly@mcast.edu.mt', '$2y$10$eC4fCYBEt/laWYGzt8RKIOJap9v19yKmuMmNuTslx7CvjzmEAYlSC', 'Kim', 'Para', '2026-03-30 20:06:54', 3, 1),
 (11, 'kimberlymcast.edu.mt', '$2y$10$MldM9tvVlPUZ8D4ZVshT2O29da3TuG.tNG/NP7lhQsBEdDgLYl5CS', 'Kim', 'Para', '2026-04-17 18:22:16', 3, 1),
 (12, 'kimb@mcast.edu.mt', '$2y$10$nzNCClj1PDUbiUhit7bsbu2Gpw2Jn.5tLyAR7wrYy/RATc3gKhN7e', 'Kim', 'Para', '2026-04-17 18:41:39', 2, 1),
@@ -282,7 +302,9 @@ INSERT INTO `users` (`user_id`, `email`, `password_hash`, `first_name`, `last_na
 (18, 'lolo@mcast.edu.mt', '$2y$10$JSgy80I8TtqlSz4gg59eYu2AbNRj0b3Yk6bCUNRbCkAB/H/a4XPi6', 'Kim', 'Para', '2026-05-01 10:27:27', 2, 1),
 (19, 'kparascandalo@gmail.com', '$2y$10$.41UsG06EOAp3WGJIiaO3eDwV6TByqAuu4N6hsJhrkGjIxpFdyK.G', 'Kimberly', 'Parascandalo', '2026-05-03 13:39:20', 2, 1),
 (20, 'kevinpara@gmail.com', '$2y$10$tzOnxMAV7bSanI0iTHeBBOTlB8qQUepnkd1k4/PUKxcU/Txx56lP6', 'Kevin', 'Parascandalo', '2026-05-03 13:43:49', 2, 1),
-(21, 'cparahili@gmail.com', '$2y$10$krPx0e9lQfFQz/uvMlGIQOrwU7RRA/n6tHtMzNMELEnIKXWnjPuD6', 'Charmaine', 'Hili', '2026-05-12 15:35:12', 2, 1);
+(21, 'cparahili@gmail.com', '$2y$10$krPx0e9lQfFQz/uvMlGIQOrwU7RRA/n6tHtMzNMELEnIKXWnjPuD6', 'Charmaine', 'Hili', '2026-05-12 15:35:12', 2, 1),
+(22, 'kaparascandalo@gmail.com', '$2y$10$JEy.Th.m6YrITgN1Yq05aOfTF5HExDn5BydbtR/6oKJ55J1PU4g0K', 'Kimberly', 'Parascandalo', '2026-05-15 18:12:45', 2, 1),
+(23, 'luca@gmail.com', '$2y$10$5XU7RQy1/NJF5.zQ34IysOvzZvX8BTKQsKB6WM9pjKgukXqv3nKT6', 'Luca', 'Pace', '2026-05-16 12:54:59', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -385,7 +407,8 @@ INSERT INTO `wedding_plan` (`wedding_plan_id`, `user_id`, `user_nickname`, `part
 (7, 14, 'MayFlower', 'Kitten', '2028-02-13', 300, 35000.00, '2026-05-03 10:28:57'),
 (8, 19, 'Kimmy', 'Puppy', '2030-08-30', 200, 37000.00, '2026-05-03 13:45:16'),
 (17, 21, 'Charm', 'Tommy', '2028-10-15', 300, 40000.00, '2026-05-12 15:40:37'),
-(19, 20, 'Kim', 'Tim', '2027-01-02', 300, 60000.00, '2026-05-13 18:31:00');
+(19, 20, 'Kim', 'Tim', '2027-01-02', 300, 60000.00, '2026-05-13 18:31:00'),
+(20, 22, 'Kim', 'Tim', '2026-10-18', 100, 25000.00, '2026-05-15 18:32:31');
 
 -- --------------------------------------------------------
 
@@ -444,26 +467,27 @@ INSERT INTO `wedding_plan_category` (`wedding_plan_category_id`, `wedding_plan_i
 (383, 16, 19),
 (398, 16, 21),
 (388, 16, 31),
-(622, 17, 1),
-(625, 17, 4),
-(617, 17, 5),
-(629, 17, 7),
-(628, 17, 8),
-(614, 17, 9),
-(616, 17, 10),
-(621, 17, 11),
-(626, 17, 12),
-(631, 17, 13),
-(627, 17, 15),
-(624, 17, 16),
-(623, 17, 17),
-(615, 17, 18),
-(613, 17, 19),
-(630, 17, 21),
-(618, 17, 24),
-(619, 17, 26),
-(612, 17, 27),
-(620, 17, 31),
+(686, 17, 1),
+(689, 17, 4),
+(681, 17, 5),
+(693, 17, 7),
+(692, 17, 8),
+(678, 17, 9),
+(680, 17, 10),
+(685, 17, 11),
+(690, 17, 12),
+(696, 17, 13),
+(691, 17, 15),
+(688, 17, 16),
+(687, 17, 17),
+(679, 17, 18),
+(677, 17, 19),
+(695, 17, 21),
+(694, 17, 23),
+(682, 17, 24),
+(683, 17, 26),
+(676, 17, 27),
+(684, 17, 31),
 (668, 19, 1),
 (670, 19, 4),
 (673, 19, 6),
@@ -476,7 +500,18 @@ INSERT INTO `wedding_plan_category` (`wedding_plan_category_id`, `wedding_plan_i
 (672, 19, 23),
 (666, 19, 24),
 (667, 19, 26),
-(663, 19, 27);
+(663, 19, 27),
+(740, 20, 1),
+(742, 20, 4),
+(737, 20, 5),
+(743, 20, 8),
+(735, 20, 9),
+(736, 20, 10),
+(741, 20, 17),
+(734, 20, 19),
+(744, 20, 23),
+(738, 20, 26),
+(739, 20, 31);
 
 -- --------------------------------------------------------
 
@@ -514,7 +549,36 @@ INSERT INTO `wedding_plan_task` (`wedding_plan_task_id`, `wedding_plan_id`, `tas
 (260, 19, NULL, 1, NULL, 0, 23),
 (261, 19, NULL, 1, NULL, 0, 6),
 (262, 19, NULL, 1, NULL, 0, 21),
-(263, 19, NULL, 1, NULL, 0, 13);
+(263, 19, NULL, 1, NULL, 0, 13),
+(264, 17, NULL, 1, NULL, 0, 27),
+(265, 17, NULL, 1, NULL, 0, 19),
+(266, 17, NULL, 1, NULL, 0, 18),
+(267, 17, NULL, 1, NULL, 0, 5),
+(268, 17, NULL, 1, NULL, 0, 24),
+(269, 17, NULL, 1, NULL, 0, 31),
+(270, 17, NULL, 1, NULL, 0, 11),
+(271, 17, NULL, 1, NULL, 0, 1),
+(272, 17, NULL, 1, NULL, 0, 17),
+(273, 17, NULL, 1, NULL, 0, 16),
+(274, 17, NULL, 1, NULL, 0, 4),
+(275, 17, NULL, 1, NULL, 0, 12),
+(276, 17, NULL, 1, NULL, 0, 15),
+(277, 17, NULL, 1, NULL, 0, 8),
+(278, 17, NULL, 1, NULL, 0, 7),
+(279, 17, NULL, 1, NULL, 0, 23),
+(280, 17, NULL, 1, NULL, 0, 21),
+(281, 17, NULL, 1, NULL, 0, 13),
+(282, 20, NULL, 1, '2026-05-15 19:00:26', 1, 19),
+(283, 20, NULL, 1, NULL, 0, 9),
+(284, 20, NULL, 1, '2026-05-15 19:00:26', 1, 10),
+(285, 20, NULL, 1, NULL, 0, 5),
+(286, 20, NULL, 1, '2026-05-15 19:00:26', 1, 26),
+(287, 20, NULL, 1, '2026-05-15 19:00:26', 1, 1),
+(288, 20, NULL, 1, NULL, 0, 17),
+(289, 20, NULL, 1, NULL, 0, 4),
+(290, 20, NULL, 1, NULL, 0, 8),
+(291, 20, NULL, 1, '2026-05-15 19:00:26', 1, 31),
+(292, 20, NULL, 1, NULL, 0, 23);
 
 --
 -- Indexes for dumped tables
@@ -563,6 +627,12 @@ ALTER TABLE `chat_message`
   ADD PRIMARY KEY (`chat_message_id`),
   ADD KEY `chat_id` (`chat_id`),
   ADD KEY `sender_id` (`sender_id`);
+
+--
+-- Indexes for table `contact_message`
+--
+ALTER TABLE `contact_message`
+  ADD PRIMARY KEY (`contact_message_id`);
 
 --
 -- Indexes for table `guest`
@@ -702,10 +772,16 @@ ALTER TABLE `chat_message`
   MODIFY `chat_message_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `contact_message`
+--
+ALTER TABLE `contact_message`
+  MODIFY `contact_message_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `guest_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `our_wedding`
@@ -747,7 +823,7 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -765,19 +841,19 @@ ALTER TABLE `vendor_image`
 -- AUTO_INCREMENT for table `wedding_plan`
 --
 ALTER TABLE `wedding_plan`
-  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `wedding_plan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_category`
 --
 ALTER TABLE `wedding_plan_category`
-  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=676;
+  MODIFY `wedding_plan_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=745;
 
 --
 -- AUTO_INCREMENT for table `wedding_plan_task`
 --
 ALTER TABLE `wedding_plan_task`
-  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
+  MODIFY `wedding_plan_task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
 
 --
 -- Constraints for dumped tables

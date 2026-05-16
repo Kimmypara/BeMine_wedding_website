@@ -13,6 +13,7 @@ public $guest_email;
 public $guest_name;
 public $guest_surname;
 public $rsvp_status;
+public $guest_category;
 
 
 
@@ -37,7 +38,7 @@ public $rsvp_status;
 
     // read a single guest record by Id
     public function readSingle(){
-        $query = "SELECT guest_id, wedding_plan_id, guest_email, guest_name, guest_surname, rsvp_status
+        $query = "SELECT guest_id, wedding_plan_id, guest_email, guest_name, guest_surname, rsvp_status, guest_category
         FROM {$this->table} AS {$this->alias}
         WHERE {$this->alias}.guest_id = ?
         LIMIT 1;";
@@ -54,6 +55,7 @@ public $rsvp_status;
             $this->guest_name = $row["guest_name"];
             $this->guest_surname = $row["guest_surname"];
             $this->rsvp_status = $row["rsvp_status"];
+            $this->guest_category = $row["guest_category"];
             
         }
 
@@ -78,8 +80,8 @@ public function readByWeddingPlan(){
     // create a new guest record
 public function create(){
     $query = "INSERT INTO {$this->table}
-    (wedding_plan_id, guest_email, guest_name,guest_surname, rsvp_status)
-    VALUES (:wedding_plan_id, :guest_email, :guest_name, :guest_surname, :rsvp_status);";
+    (wedding_plan_id, guest_email, guest_name,guest_surname, rsvp_status, guest_category)
+    VALUES (:wedding_plan_id, :guest_email, :guest_name, :guest_surname, :rsvp_status, :guest_category);";
 
     $stmt = $this->conn->prepare($query);
 
@@ -88,6 +90,7 @@ public function create(){
     $this->guest_name = htmlspecialchars(strip_tags($this->guest_name));
     $this->guest_surname = htmlspecialchars(strip_tags($this->guest_surname));
     $this->rsvp_status = htmlspecialchars(strip_tags($this->rsvp_status));
+    $this->guest_category = htmlspecialchars(strip_tags($this->guest_category));
    
 
     // bind parameters to sql statement
@@ -97,6 +100,7 @@ public function create(){
     $stmt->bindParam(":guest_name", $this->guest_name);
     $stmt->bindParam(":guest_surname", $this->guest_surname);
     $stmt->bindParam(":rsvp_status", $this->rsvp_status);
+    $stmt->bindParam(":guest_category", $this->guest_category);
   
     if($stmt->execute()){
         return true;
@@ -153,7 +157,8 @@ public function update(){
             SET guest_email = :guest_email,
                 guest_name = :guest_name,
                 guest_surname = :guest_surname,
-                rsvp_status = :rsvp_status
+                rsvp_status = :rsvp_status,
+                guest_category = :guest_category
                 WHERE guest_id = :guest_id;";
 
                 $stmt = $this->conn->prepare($query);
@@ -164,6 +169,7 @@ public function update(){
     $this->guest_name = htmlspecialchars(strip_tags($this->guest_name));
     $this->guest_surname = htmlspecialchars(strip_tags($this->guest_surname));
     $this->rsvp_status = htmlspecialchars(strip_tags($this->rsvp_status));
+    $this->guest_category = htmlspecialchars(strip_tags($this->guest_category));
 
 
     // bind parameters to sql statement
@@ -172,6 +178,7 @@ public function update(){
     $stmt->bindParam(":guest_name", $this->guest_name);
     $stmt->bindParam(":guest_surname", $this->guest_surname);
     $stmt->bindParam(":rsvp_status", $this->rsvp_status);
+    $stmt->bindParam(":guest_category", $this->guest_category);
 
      if($stmt->execute()){
         if($stmt->rowCount() > 0){

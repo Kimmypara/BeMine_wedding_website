@@ -195,6 +195,86 @@ if ($response === false) {
 }
 }
 
+//Wedding Plan Read By User Id(GET)
+$weddingPlanCreateResult = null;
+$existingPlan = null;
+$planExists = false;
+
+$user_id = $_SESSION['user_id'] ?? "";
+$selectedCategories = [];
+
+/* READ EXISTING PLAN */
+if (!empty($user_id)) {
+
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, "http://localhost/BeMine_wedding_website/api/wedding_plan/readByUserId.php?user_id=" . $user_id);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "Content-Type: application/json"
+    ]);
+  
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+
+    $readResult = json_decode($response, true);
+
+ if (isset($readResult["exists"]) && $readResult["exists"] === true) {
+        $planExists = true;
+        $existingPlan = $readResult["data"];
+        $selectedCategories = $existingPlan["categories"] ?? [];
+    }
+}
+ 
+ // Guest create (POST)
+if (isset($_POST['save_guest'])) {
+
+    $wedding_plan_id = $existingPlan['wedding_plan_id'] ?? null;
+
+    if (!$wedding_plan_id) {
+        $guestCreateResult = ["message" => "Please create your wedding plan first."];
+    } else {
+
+        $data = [
+            "wedding_plan_id" => $wedding_plan_id,
+            "guest_email" => $_POST['guest_email'] ?? "",
+            "guest_name" => $_POST['guest_name'] ?? "",
+            "guest_surname" => $_POST['guest_surname'] ?? "",
+            "guest_category" => $_POST['guest_category'] ?? "",
+            "rsvp_status" => $_POST['rsvp_status'] ?? "pending"
+        ];
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "http://localhost/BeMine_wedding_website/api/guest/create.php",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => [
+                "Accept: application/json",
+                "Content-Type: application/json"
+            ]
+        ]);
+
+        $guestCreateResponse = curl_exec($curl);
+
+        
+        curl_close($curl);
+
+        $guestCreateResult = json_decode($guestCreateResponse, true);
+
+        if (isset($guestCreateResult["message"]) && $guestCreateResult["message"] === "Guest created.") {
+    header("Location: guest_list.php");
+    exit;
+}
+    }
+}
+
+
 
 //User login(POST)
 $loginResult = null;
@@ -262,41 +342,6 @@ if (isset($_POST['login'])) {
     }
 }
 
-
-
-//Wedding Plan Read By User Id(GET)
-$weddingPlanCreateResult = null;
-$existingPlan = null;
-$planExists = false;
-
-$user_id = $_SESSION['user_id'] ?? "";
-$selectedCategories = [];
-
-/* READ EXISTING PLAN */
-if (!empty($user_id)) {
-
-    $curl = curl_init();
-
-    curl_setopt($curl, CURLOPT_URL, "http://localhost/BeMine_wedding_website/api/wedding_plan/readByUserId.php?user_id=" . $user_id);
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, [
-        "Accept: application/json",
-        "Content-Type: application/json"
-    ]);
-  
-
-    $response = curl_exec($curl);
-    curl_close($curl);
-
-    $readResult = json_decode($response, true);
-
-    if (isset($readResult["exists"]) && $readResult["exists"] === true) {
-        $planExists = true;
-        $existingPlan = $readResult["data"];
-        $selectedCategories = $existingPlan["categories"] ?? [];
-    }
-}
 
 /* Wedding Plan CREATE OR UPDATE */
 if (isset($_POST['save_plan'])) {

@@ -33,7 +33,8 @@ if($num > 0){
     'guest_email'   =>$guest->guest_email,
     'guest_name'    =>$guest->guest_name,
     'guest_surname'    =>$guest->guest_surname,
-    'rsvp_status'       =>$guest->rsvp_status
+    'rsvp_status'       =>$guest->rsvp_status,
+    'guest_category'       =>$guest->guest_category
    );
     http_response_code(200);
     echo json_encode($guest_info);

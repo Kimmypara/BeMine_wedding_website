@@ -40,10 +40,16 @@ elseif($users->emailExists()){
     http_response_code(409);
     echo json_encode(array("message" => "User not updated. E-mail already exists."));
 }
+elseif($users->isActiveInvalid()){
+    http_response_code(400);
+    echo json_encode(array("message" => "Invalid Is Active value. Use 0 or 1 only."));
+}
 elseif($users->update()){
     http_response_code(200);
     echo json_encode(array("message" => "User updated."));
 }
+
+
 else{
     http_response_code(500);
     echo json_encode(array("message" => "Server error."));

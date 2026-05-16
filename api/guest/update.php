@@ -20,6 +20,7 @@ $guest->guest_email = $data->guest_email;
 $guest->guest_name = $data->guest_name;
 $guest->guest_surname = $data->guest_surname;
 $guest->rsvp_status = $data->rsvp_status;
+$guest->guest_category = $data->guest_category;
 
 // validate
 if (
@@ -28,7 +29,8 @@ if (
     empty($guest->guest_email) ||
     empty($guest->guest_name) ||
     empty($guest->guest_surname) ||
-    empty($guest->rsvp_status) 
+    empty($guest->rsvp_status) ||
+    empty($guest->guest_category) 
 ){
     http_response_code(400);
     echo json_encode(array("message" => "Guest not created. Missing or invalid input."));
