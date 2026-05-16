@@ -73,8 +73,20 @@ include "includes/nav.php";
     <input class="form2" type="text" name="partner_nickname" placeholder="Partner’s Name" required
      value="<?php echo htmlspecialchars($existingPlan['partner_nickname'] ?? ''); ?>"><br>
 
-    <input class="form2" type="date" name="wedding_date" placeholder="Wedding date" required
-    value="<?php echo htmlspecialchars($existingPlan['wedding_date'] ?? ''); ?>"><br>
+    <input 
+    class="form4 mt-1"
+    type="<?php echo !empty($existingPlan['wedding_date']) ? 'date' : 'text'; ?>"
+    name="wedding_date"
+
+    value="<?php echo htmlspecialchars($existingPlan['wedding_date'] ?? ''); ?>"
+
+    placeholder="Wedding Date"
+
+    onfocus="this.type='date'"
+    onblur="if(!this.value)this.type='text'"
+
+    required
+><br>
 
     <h3 class="subtitle2">Select what you need for your wedding</h3>
 
