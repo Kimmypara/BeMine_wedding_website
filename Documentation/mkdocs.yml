@@ -6,7 +6,7 @@ nav:
   - Users:
       - Create User: users/create.md
       - Login User: users/login.md
-      - Read Users: users/read.md
+      - Get Users: users/getUsers.md
       - Read Single User: users/readSingle.md
       - Update User: users/update.md
       - Update Password: users/updatePassword.md

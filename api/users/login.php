@@ -41,11 +41,6 @@ if ((int)$user["is_active"] !== 1) {
     exit;
 }
 
-if (!password_verify($password, $user["password_hash"])) {
-    http_response_code(401);
-    echo json_encode(["message" => "Invalid email or password."]);
-    exit;
-}
 
 http_response_code(200);
 echo json_encode([

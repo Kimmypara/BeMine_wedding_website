@@ -16,7 +16,7 @@ $users = new Users($db);
 // validate user_id from query string
 if(empty($_GET["user_id"])){
     http_response_code(400);
-    echo json_encode(array("message" => "Missing user_id."));
+    echo json_encode(array("message" => "Missing User Id."));
     exit();
 }
 

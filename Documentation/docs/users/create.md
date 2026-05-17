@@ -27,13 +27,13 @@ Create a new account for the user. Couple can have one shared account by using t
 
 Email address, for example "emailaddress@gmail.com". The e-mail must be unique.
 
-<span class="box">first name</span>
+<span class="box">first_name</span>
 <span class="endpoint-box">String</span>
 <span class="endpoint-box">Required</span>
 
 First name of user does not have to be unique. 
 
-<span class="box">last name</span>
+<span class="box">last_name</span>
 <span class="endpoint-box">String</span>
 <span class="endpoint-box">Required</span>
 
@@ -45,7 +45,7 @@ Last name of user does not have to be unique.
 
 Password of user does not have to be unique.
 
-<span class="box">is active</span>
+<span class="box">is_active</span>
 <span class="endpoint-box">boolean</span>
 <span class="endpoint-box">Required</span>
 
