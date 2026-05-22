@@ -34,32 +34,67 @@ if (
     http_response_code(400);
     echo json_encode(array("message" => "Wedding Plan not created. Missing or invalid input."));
 }
-elseif($wedding_plan->userIdExists()){
-    http_response_code(409);
-    echo json_encode(array("message" => "Wedding Plan not created. Wedding Plan already exists."));
+// guest count must be a whole number
+elseif (!filter_var($wedding_plan->guest_count, FILTER_VALIDATE_INT) || $wedding_plan->guest_count <= 0) {
+
+    http_response_code(400);
+
+    echo json_encode(array(
+        "message" => "Guest count must be a valid whole number."
+    ));
 }
+
+// budget can be decimal number
+elseif (!is_numeric($wedding_plan->budget) || $wedding_plan->budget < 0) {
+
+    http_response_code(400);
+
+    echo json_encode(array(
+        "message" => "Budget must be a valid number."
+    ));
+}
+
+elseif($wedding_plan->userIdExists()){
+
+    http_response_code(409);
+
+    echo json_encode(array(
+        "message" => "Wedding Plan not created. Wedding Plan already exists."
+    ));
+}
+
 elseif($wedding_plan->create()){
 
     if (!empty($data->categories)) {
+
         foreach ($data->categories as $category_id) {
+
             $query = "INSERT INTO wedding_plan_category (wedding_plan_id, category_id)
                       VALUES (?, ?)";
 
             $stmt = $db->prepare($query);
+
             $stmt->bindParam(1, $wedding_plan->wedding_plan_id);
             $stmt->bindParam(2, $category_id);
+
             $stmt->execute();
         }
     }
+
     http_response_code(201);
-    echo json_encode(["message" => "Wedding Plan created."]);
+
+    echo json_encode([
+        "message" => "Wedding Plan created."
+    ]);
 }
 
 else{
+
     http_response_code(500);
-    echo json_encode(array("message" => "Server error."));
+
+    echo json_encode(array(
+        "message" => "Server error."
+    ));
 }
-
-
 
 ?>

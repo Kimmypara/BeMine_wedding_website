@@ -26,7 +26,7 @@ if (  empty($data->password)
 
 elseif($users->updatePassword()){
     http_response_code(200);
-    echo json_encode(array("message" => "User updated."));
+    echo json_encode(array("message" => "User's password updated."));
 }
 else{
     http_response_code(500);

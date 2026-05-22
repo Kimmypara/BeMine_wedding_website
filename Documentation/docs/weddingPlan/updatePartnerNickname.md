@@ -1,45 +1,45 @@
-# Update Password 
+# Update Partner Nickname 
 
-Update password for the user.
+Update Partner Nickname.
 
 ## Request Body
 
 ```json
 {
-    "user_id":"2",
-    "password": "123456"
+    "wedding_plan_id":"4",
+    "partner_nickname":"Kirk"
 }
 ```
 
 ## Request 
 
 <span class="box1">PATCH</span>
-<span class="endpoint-box1">/users/updatePassword.php</span>
+<span class="endpoint-box1">/wedding_plan/updatePartnerNickname.php</span>
 
 ### Body <span class="json">application/json</span>
 
-<span class="box">user_id</span>
+<span class="box">wedding_plan_id</span>
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-The user_id must be existing.  
+The wedding_plan_id must be existing.  
 
-<span class="box">password</span>
+<span class="box">partner_nickname</span>
 <span class="endpoint-box">String</span>
 <span class="endpoint-box">Required</span>
 
-Password of user does not have to be unique.
+Partner Nickname does not have to be unique.
 
 
 ## Responses
 
 ### <span class="json">200 OK Updated</span>
 
-The request worked, so user password was updated.
+The request worked, so Partner Nickname was updated.
 
 ```json
 {
-    "message": "User's password updated."
+    "message": "Partner Nickname from Wedding Plan updated."
 }
 ```
 
@@ -51,20 +51,18 @@ The request has missing or invalid input.
 
 ```json
 {
-    "message": "User not updated. Missing or invalid input."
+    "message": "Wedding Plan not updated. Missing or invalid input."
 }
 ```
-
-Possible validation errors:
 
 
 ### <span class="json">404 Not Found</span>
 
-The user_id is not found.
+The wedding_plan_id is not found.
 
 ```json
 {
-    "message": "User ID does not exist."
+    "message": "Wedding plan Id does not exist."
 }
 ```
 

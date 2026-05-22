@@ -30,7 +30,7 @@ elseif(!$wedding_plan->weddingPlanExists()){
 }
 elseif($wedding_plan->budgetInvalid()){
     http_response_code(400);
-    echo json_encode(array("message" => "Invalid Budget format."));
+    echo json_encode(array("message" => "Budget must be a valid number."));
 }
 
 elseif($wedding_plan->updateBudget()){

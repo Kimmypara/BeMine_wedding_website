@@ -37,7 +37,7 @@ if (  empty($wedding_plan->wedding_plan_id) ||
 }
 elseif(!$wedding_plan->weddingPlanExists()){
     http_response_code(404);
-    echo json_encode(array("message" => "Wedding Plan not found."));
+    echo json_encode(array("message" => "Wedding Plan ID not found."));
     exit();
 }
 

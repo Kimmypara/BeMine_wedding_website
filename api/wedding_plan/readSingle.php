@@ -16,7 +16,7 @@ $wedding_plan = new WeddingPlan($db);
 // validate wedding_plan_id from query string
 if(empty($_GET["wedding_plan_id"])){
     http_response_code(400);
-    echo json_encode(array("message" => "Missing wedding_plan_id."));
+    echo json_encode(array("message" => "Missing Wedding Plan ID."));
     exit();
 }
 
@@ -41,7 +41,7 @@ if($num > 0){
 }
 else{
     http_response_code(404);
-    echo json_encode(array("message" => "User not found."));
+    echo json_encode(array("message" => "Wedding Plan not found."));
 }
 
 

@@ -30,7 +30,7 @@ elseif(!$wedding_plan->weddingPlanExists()){
 }
 elseif($wedding_plan->guestCountInvalid()){
     http_response_code(400);
-    echo json_encode(array("message" => "Invalid guest count."));
+    echo json_encode(array("message" => "Guest count must be a valid whole number."));
 }
 
 elseif($wedding_plan->updateGuestCount()){

@@ -3,13 +3,28 @@ site_name: BeMine Wedding Website API Documentation
 nav:
   - Home: index.md
 
+  - Category:
+      - Create Category: category/create.md
+
   - Users:
       - Create User: users/create.md
       - Login User: users/login.md
       - Get Users: users/getUsers.md
-      - Read Single User: users/readSingle.md
+      - Get Single User: users/readSingle.md
       - Update User: users/update.md
       - Update Password: users/updatePassword.md
 
+  - Wedding Plan:
+      - Create Wedding Plan: weddingPlan/create.md
+      - Get Wedding Plan: weddingPlan/getWeddingPlan.md
+      - Get Single Wedding Plan: weddingPlan/readSingle.md
+      - Get Wedding Plan by User ID: weddingPlan/readSingleByUserId.md
+      - Update Wedding Plan: weddingPlan/update.md
+      - Update Budget: weddingPlan/updateBudget.md
+      - Update Guest Count: weddingPlan/updateGuestCount.md
+      - Update Partner Nickname: weddingPlan/updatePartnerNickname.md
+      - Update User Nickname: weddingPlan/updateUserNickname.md
+      - Update Wedding Date: weddingPlan/updateWeddingDate.md
+
 extra_css:
-  - style/style_doc.css
+      - style/style_doc.css

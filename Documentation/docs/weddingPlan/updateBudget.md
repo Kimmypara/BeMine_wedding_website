@@ -1,45 +1,44 @@
-# Update Password 
+# Update Budget
 
-Update password for the user.
+Update Budget.
 
 ## Request Body
 
 ```json
 {
-    "user_id":"2",
-    "password": "123456"
+    "wedding_plan_id":"4",
+    "budget":"60000"
 }
 ```
 
 ## Request 
 
 <span class="box1">PATCH</span>
-<span class="endpoint-box1">/users/updatePassword.php</span>
+<span class="endpoint-box1">/wedding_plan/updateBudget.php</span>
 
 ### Body <span class="json">application/json</span>
 
-<span class="box">user_id</span>
+<span class="box">wedding_plan_id</span>
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-The user_id must be existing.  
+The wedding_plan_id must be existing.  
 
-<span class="box">password</span>
-<span class="endpoint-box">String</span>
+<span class="box">budget</span>
+<span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-Password of user does not have to be unique.
-
+The budget can be a decimal number. 
 
 ## Responses
 
 ### <span class="json">200 OK Updated</span>
 
-The request worked, so user password was updated.
+The request worked, so Budget was updated.
 
 ```json
 {
-    "message": "User's password updated."
+    "message": "Budget from Wedding Plan updated."
 }
 ```
 
@@ -51,23 +50,27 @@ The request has missing or invalid input.
 
 ```json
 {
-    "message": "User not updated. Missing or invalid input."
+    "message": "Wedding Plan not updated. Missing or invalid input."
 }
 ```
 
 Possible validation errors:
 
-
-### <span class="json">404 Not Found</span>
-
-The user_id is not found.
-
 ```json
 {
-    "message": "User ID does not exist."
+    "message": "Budget must be a valid number."
 }
 ```
 
+### <span class="json">404 Not Found</span>
+
+The wedding_plan_id is not found.
+
+```json
+{
+    "message": "Wedding plan Id does not exist."
+}
+```
 ---
 
 ### <span class="json">500 Server Error</span>
