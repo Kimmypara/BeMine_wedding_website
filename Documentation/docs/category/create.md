@@ -53,6 +53,31 @@ The request has missing or invalid input.
     "message": "Category not created. Missing or invalid input."
 }
 ```
+---
+
+### <span class="json">401 Unauthorized</span>
+
+Unauthorized.
+
+```json
+{
+    "message": "Unauthorized."
+}
+```
+
+
+
+---
+
+### <span class="json">403 Forbidden</span>
+
+Only administrators can create categories.
+
+```json
+{
+    "message": "Access denied. Admin only."
+}
+```
 
 ---
 

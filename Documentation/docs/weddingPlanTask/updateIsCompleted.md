@@ -1,45 +1,58 @@
-# Update Partner Nickname 
+# Update If Task is Completed 
 
-Update Partner Nickname.
+Update the wedding task if completed.
 
 ## Request Body
 
 ```json
 {
-    "wedding_plan_id":"4",
-    "partner_nickname":"Kirk"
+    "wedding_plan_task_id": "65",
+    "is_completed": "1",
+    "completed_at": "NULL"
 }
 ```
 
 ## Request 
 
 <span class="box1">PATCH</span>
-<span class="endpoint-box1">/wedding_plan/updatePartnerNickname.php</span>
+<span class="endpoint-box1">/wedding_plan_task/updateIsCompleted.php</span>
 
 ### Body <span class="json">application/json</span>
 
-<span class="box">wedding_plan_id</span>
+<span class="box">wedding_plan_task_id</span>
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-The wedding_plan_id must be existing.  
+The wedding_plan_task_id must be existing.  
 
-<span class="box">partner_nickname</span>
-<span class="endpoint-box">String</span>
+<span class="box">is_completed</span>
+<span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-Partner Nickname does not have to be unique.
+Determines whether the wedding task is completed. Is Completed must be:
+```
+0 = Inactive
+1 = Active
+```
+
+<span class="box">completed_at</span>
+<span class="endpoint-box">datetime</span>
+<span class="endpoint-box">Required</span>
+
+The completed_at is automatically updated.
+When is_completed is set to 1, the current date and time are saved.
+When is_completed is set to 0, the value can be set back to NULL. 
 
 
 ## Responses
 
 ### <span class="json">200 OK Updated</span>
 
-The request worked, so Partner Nickname was updated.
+The request worked, so Wedding Plan Task was updated.
 
 ```json
 {
-    "message": "Partner Nickname from Wedding Plan updated."
+    "message": "Wedding Plan Task updated."
 }
 ```
 
@@ -51,18 +64,25 @@ The request has missing or invalid input.
 
 ```json
 {
-    "message": "Wedding Plan not updated. Missing or invalid input."
+    "message": "Wedding Plan Task not updated. Missing or invalid input."
 }
 ```
 
-
-### <span class="json">404 Not Found</span>
-
-The wedding_plan_id is not found.
+Possible Validation errors:
 
 ```json
 {
-    "message": "Wedding plan Id does not exist."
+    "message": "Invalid Is Completed value. Use 0 or 1 only."
+}
+```
+
+### <span class="json">404 Not Found</span>
+
+The wedding_plan_task_id is not found.
+
+```json
+{
+    "message": "Wedding Plan Task Id not found."
 }
 ```
 

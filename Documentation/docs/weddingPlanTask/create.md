@@ -43,7 +43,7 @@ The task_id must be existing.
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-Determines whether the account is selected. Is Selected must be:
+Determines whether the wedding task is selected. Is Selected must be:
 ```
 0 = Inactive
 1 = Active
@@ -53,7 +53,7 @@ Determines whether the account is selected. Is Selected must be:
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-Determines whether the account is completed. Is Completed must be:
+Determines whether the wedding task is completed. Is Completed must be:
 ```
 0 = Inactive
 1 = Active

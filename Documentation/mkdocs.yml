@@ -18,6 +18,13 @@ nav:
       - Update User: users/update.md
       - Update Password: users/updatePassword.md
 
+  - Vendor:
+      - Create Vendor: vendor/create.md
+      - Delete Vendor: vendor/delete.md
+      - Get Vendor: vendor/getVendors.md
+      - Get Single Vendor: vendor/readSingle.md
+      - Update Vendor: vendor/update.md
+
   - Wedding Plan:
       - Create Wedding Plan: weddingPlan/create.md
       - Get Wedding Plan: weddingPlan/getWeddingPlan.md
@@ -35,6 +42,10 @@ nav:
       - Create Is Selected list: weddingPlanTask/createIsSelected.md
       - Get Wedding Plan Tasks: weddingPlanTask/getWeddingPlanTask.md
       - Get Single Wedding Plan Task: weddingPlanTask/readSingle.md
+      - Get Task By Wedding Plan ID: weddingPlanTask/readTasksByWeddingPlanId.md
+      - Update Wedding Plan Task: weddingPlanTask/update.md
+      - Update Is Completed: weddingPlanTask/updateIsCompleted.md
+      - Update Is Selected: weddingPlanTask/updateIsSelected.md
 
 
 extra_css:

@@ -1,44 +1,48 @@
-# Update Budget
+# Update If Task is Selected
 
-Update Budget.
+Update the wedding task if selected.
 
 ## Request Body
 
 ```json
 {
-    "wedding_plan_id":"4",
-    "budget":"60000"
+    "wedding_plan_task_id": "64",
+    "is_selected": "1"
 }
 ```
 
 ## Request 
 
 <span class="box1">PATCH</span>
-<span class="endpoint-box1">/wedding_plan/updateBudget.php</span>
+<span class="endpoint-box1">/wedding_plan_task/updateIsSelected.php</span>
 
 ### Body <span class="json">application/json</span>
 
-<span class="box">wedding_plan_id</span>
+<span class="box">wedding_plan_task_id</span>
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-The wedding_plan_id must be existing.  
+The wedding_plwedding_plan_task_idan_id must be existing.  
 
-<span class="box">budget</span>
+<span class="box">is_selected</span>
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-The budget can be a decimal number. 
+Determines whether the wedding task is selected. Is Selected must be:
+```
+0 = Inactive
+1 = Active
+```
 
 ## Responses
 
 ### <span class="json">200 OK Updated</span>
 
-The request worked, so Budget was updated.
+The request worked, so Wedding Plan Task was updated.
 
 ```json
 {
-    "message": "Budget from Wedding Plan updated."
+    "message": "Wedding Plan Task updated."
 }
 ```
 
@@ -50,7 +54,7 @@ The request has missing or invalid input.
 
 ```json
 {
-    "message": "Wedding Plan not updated. Missing or invalid input."
+    "message": "Wedding Plan Task not updated. Missing or invalid input."
 }
 ```
 
@@ -58,24 +62,24 @@ Possible validation errors:
 
 ```json
 {
-    "message": "Budget must be a valid number."
+    "message": "Invalid Is Selected value. Use 0 or 1 only."
 }
 ```
 
 ### <span class="json">404 Not Found</span>
 
-The wedding_plan_id is not found.
+The wedding_plan_task_id is not found.
 
 ```json
 {
-    "message": "Wedding plan Id does not exist."
+    "message": "Wedding Plan Task Id not found."
 }
 ```
 ---
 
 ### <span class="json">500 Server Error</span>
 
-The server failed to update the user.
+The server failed to update the wedding plan task.
 
 ```json
 {

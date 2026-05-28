@@ -66,6 +66,30 @@ The request has missing or invalid input.
 
 ---
 
+### <span class="json">401 Unauthorized</span>
+
+Unauthorized.
+
+```json
+{
+    "message": "Unauthorized."
+}
+```
+
+---
+
+### <span class="json">403 Forbidden</span>
+
+Only administrators can update categories.
+
+```json
+{
+    "message": "Access denied. Admin only."
+}
+```
+
+---
+
 ### <span class="json">409 Conflict</span>
 
 The category already exists.

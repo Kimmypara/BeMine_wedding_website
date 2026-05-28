@@ -8,6 +8,7 @@ Welcome to the documentation for the BeMine Wedding Website project.
 This project is a wedding planner website supports Maltese and foreign couples organising their wedding in Malta. 
 
 This website allow couples to:
+```
 - View the Home page 
 - Create a new account 
 - Login 
@@ -16,3 +17,4 @@ This website allow couples to:
 - View their wedding plan, check what is completed, view wedding date countdown and budget counter
 - Browse vendors by category
 - Create a guest list 
+```

@@ -46,6 +46,7 @@ if ($stmt->rowCount() > 0) {
     echo json_encode($tasks);
 
 } else {
+     http_response_code(404);
     echo json_encode([
         "message" => "No tasks found.",
         "data" => []
