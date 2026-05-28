@@ -1,26 +1,34 @@
-# Create Wedding Plan 
+# Update Wedding Plan
 
-Create a new Wedding Plan for the couple.  
+Update Wedding Plan for the couple.
 
 ## Request Body
 
 ```json
 {
-    "user_id": "20",
-    "user_nickname":"Kim",
-    "partner_nickname": "Tim",
-    "wedding_date": "2027/01/02",
-    "guest_count": "300",
-    "budget":"60000"
+    "wedding_plan_id":"4",
+    "user_id":"2",
+    "user_nickname":"Kitty",
+    "partner_nickname":"Mike",
+    "wedding_date":"2028-01-03",
+    "guest_count":"300",
+    "budget":"100000.50"
 }
 ```
 
 ## Request 
 
-<span class="box1">POST</span>
-<span class="endpoint-box1">/wedding_plan/create.php</span>
+<span class="box1">PATCH</span>
+<span class="endpoint-box1">/wedding_plan/update.php</span>
 
 ### Body <span class="json">application/json</span>
+
+<span class="box">wedding_plan_id</span>
+<span class="endpoint-box">int</span>
+<span class="endpoint-box">Required</span>
+
+The wedding_plan_id must be existing. 
+
 
 <span class="box">user_id</span>
 <span class="endpoint-box">int</span>
@@ -32,7 +40,7 @@ The user_id must be existing.
 <span class="endpoint-box">String</span>
 <span class="endpoint-box">Required</span>
 
-Nickname of user does not have to be unique. 
+Nickname of user does not have to be unique.
 
 <span class="box">partner_nickname</span>
 <span class="endpoint-box">String</span>
@@ -61,15 +69,17 @@ The guest count must be whole number.
 
 The budget can be a decimal number.
 
+---
+
 ## Responses
 
-### <span class="json">201 Created</span>
+### <span class="json">200 OK Updated</span>
 
-The request worked, so a new Wedding Plan was created.
+The request worked, so wedding plan was updated.
 
 ```json
 {
-    "message": "Wedding Plan created."
+    "message": "Wedding Plan updated."
 }
 ```
 
@@ -81,7 +91,7 @@ The request has missing or invalid input.
 
 ```json
 {
-    "message": "Wedding Plan not created. Missing or invalid input."
+    "message": "Wedding Plan not updated. Missing or invalid input."
 }
 ```
 
@@ -89,24 +99,31 @@ Possible validation errors:
 
 ```json
 {
-    "message": "Guest count must be a valid whole number."
+    "message": "Invalid wedding date format. Use YYYY-MM-DD."
 }
 ```
 
 ```json
 {
-    "message": "Budget must be a valid number."
+    "message": "Invalid Budget format."
 }
 ```
+
+```json
+{
+    "message": "Invalid guest count."
+}
+```
+
 ---
 
-### <span class="json">409 Conflict</span>
+### <span class="json">404 Not Found</span>
 
-The Wedding Plan already exists.
+The wedding_plan_id is not found.
 
 ```json
 {
-    "message": "Wedding Plan not created. Wedding Plan already exists."
+    "message": "Wedding Plan ID not found."
 }
 ```
 
@@ -114,7 +131,7 @@ The Wedding Plan already exists.
 
 ### <span class="json">500 Server Error</span>
 
-The server failed to create the Wedding Plan.
+The server failed to update the wedding plan.
 
 ```json
 {

@@ -50,6 +50,18 @@ elseif($wedding_plan_task->weddingPlanTaskExists()){
         "message" => "This task already exists for this category in the wedding plan."
     ));
 }
+elseif($wedding_plan_task->is_selected != 0 && $wedding_plan_task->is_selected != 1){
+    http_response_code(400);
+    echo json_encode(array(
+        "message" => "is_selected must be either 0 or 1."
+    ));
+}
+elseif($wedding_plan_task->is_completed != 0 && $wedding_plan_task->is_completed != 1){
+    http_response_code(400);
+    echo json_encode(array(
+        "message" => "is_completed must be either 0 or 1."
+    ));
+}
 elseif($wedding_plan_task->create()){
     http_response_code(201);
     echo json_encode(array("message" => "Wedding Plan Task created."));

@@ -1,4 +1,4 @@
-# Get Wedding Plan
+# Get Wedding Plans
 
 Get a list of all Wedding Plans. 
 
@@ -40,7 +40,7 @@ This endpoint returns all Wedding Plans stored in the database.
             "wedding_date": "2026-10-18",
             "guest_count": 100,
             "budget": "25000.00"
-        },
+        }
     ]
 }
 ```

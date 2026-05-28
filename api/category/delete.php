@@ -1,6 +1,6 @@
 <?php
 
-//Only for testing
+// Only for testing
 session_start();
 
 $_SESSION['user_id'] = 1;
@@ -10,15 +10,13 @@ $_SESSION['role_id'] = 1;
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Methods: DELETE");
-
 header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With");
 
-if($_SERVER["REQUEST_METHOD"] !="DELETE"){
+if($_SERVER["REQUEST_METHOD"] != "DELETE"){
     http_response_code(405);
     echo json_encode(array("message" => "Incorrect Request Method used."));
-    die();
+    exit();
 }
-
 
 include_once("../../includes/initialize.php");
 
@@ -46,14 +44,8 @@ function requireAdmin(){
 
 requireAdmin();
 
-// creat a new instance of the Category class
-// This allows us to use its structure and function
 $category = new Category($db);
-//read submitted json data from request body
-$data = json_decode(file_get_contents("php://input"));
 
-
-// check if ID is provided in query string
 if(empty($_GET["category_id"])){
     http_response_code(400);
     echo json_encode(array("message" => "Category ID was not provided."));
@@ -68,13 +60,24 @@ if(!$category->categoryIdExists()){
     exit();
 }
 
-if($category->delete()){
-    http_response_code(200);
-    echo json_encode(array("message" => "Category deleted."));
+try{
+
+    if($category->delete()){
+        http_response_code(200);
+        echo json_encode(array("message" => "Category deleted."));
+    }
+    else{
+        http_response_code(500);
+        echo json_encode(array("message" => "Server error."));
+    }
+
 }
-else{
-    http_response_code(500);
-    echo json_encode(array("message" => "Server error."));
+catch(PDOException $e){
+
+    http_response_code(409);
+    echo json_encode(array(
+        "message" => "Category cannot be deleted because it is linked to existing wedding plans."
+    ));
 }
 
 ?>

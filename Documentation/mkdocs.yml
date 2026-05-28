@@ -1,10 +1,14 @@
-site_name: BeMine Wedding Website API Documentation
+site_name: BeMine Wedding Website
 
 nav:
-  - Home: index.md
+  
 
   - Category:
       - Create Category: category/create.md
+      - Update Category: category/update.md
+      - Get Categories: category/getCategories.md
+      - Get Single Category: category/readSingle.md
+      - Delete Category: category/delete.md
 
   - Users:
       - Create User: users/create.md
@@ -25,6 +29,13 @@ nav:
       - Update Partner Nickname: weddingPlan/updatePartnerNickname.md
       - Update User Nickname: weddingPlan/updateUserNickname.md
       - Update Wedding Date: weddingPlan/updateWeddingDate.md
+
+  - Wedding Plan Task:
+      - Create Wedding Plan Task: weddingPlanTask/create.md
+      - Create Is Selected list: weddingPlanTask/createIsSelected.md
+      - Get Wedding Plan Tasks: weddingPlanTask/getWeddingPlanTask.md
+      - Get Single Wedding Plan Task: weddingPlanTask/readSingle.md
+
 
 extra_css:
       - style/style_doc.css

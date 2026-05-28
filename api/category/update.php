@@ -63,7 +63,7 @@ if (
 }
 elseif(!$category->categoryIdExists()){
     http_response_code(409);
-    echo json_encode(array("message" => "Category not updated. Category does not exists."));
+    echo json_encode(array("message" => "Category not updated. Category ID does not exists."));
 }
 elseif($category->categoryNameExists()){
     http_response_code(409);

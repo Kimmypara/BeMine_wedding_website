@@ -60,7 +60,7 @@ The request has missing or invalid input.
 
 The Category already exists.
 
-``````json
+```json
 {
     "message": "Category not created. Category already exists."
 }

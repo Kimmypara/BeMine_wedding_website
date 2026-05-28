@@ -1,4 +1,5 @@
-# BeMine Wedding Website API Documentation 
+# BeMine Wedding Website 
+## API Documentation 
 
 Welcome to the documentation for the BeMine Wedding Website project.
 
