@@ -22,7 +22,7 @@ Update the wedding task if selected.
 <span class="endpoint-box">int</span>
 <span class="endpoint-box">Required</span>
 
-The wedding_plwedding_plan_task_idan_id must be existing.  
+The wedding_plan_task_id must be existing.  
 
 <span class="box">is_selected</span>
 <span class="endpoint-box">int</span>

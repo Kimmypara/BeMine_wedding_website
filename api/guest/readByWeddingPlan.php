@@ -32,7 +32,7 @@ if($num > 0){
             "guest_name" => $guest_name,
             "guest_surname" => $guest_surname,
             "guest_email" => $guest_email,
-            "rsvp_status" => $rsvp_status.
+            "rsvp_status" => $rsvp_status,
             "guest_category" => $guest_category
         );
 

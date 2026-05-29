@@ -72,7 +72,7 @@ The wedding_plan_id is not found.
 
 ### <span class="json">500 Server Error</span>
 
-The server failed to update the user.
+The server failed to update the wedding date.
 
 ```json
 {

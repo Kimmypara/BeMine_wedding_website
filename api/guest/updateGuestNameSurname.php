@@ -31,7 +31,7 @@ if (
     echo json_encode(array("message" => "Guest not updated. Missing or invalid input."));
 }
 elseif(!$guest->GuestIdExists()){
-    http_response_code(409);
+    http_response_code(404);
     echo json_encode(array("message" => "Guest name and surname are not updated sine Guest Id does not exists."));
 }
 

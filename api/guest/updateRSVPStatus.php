@@ -24,7 +24,7 @@ if (
     empty($guest->rsvp_status) 
 ){
     http_response_code(400);
-    echo json_encode(array("message" => "RSVP not updated. Missing or invalid input."));
+    echo json_encode(array("message" => "RSVP status not updated. Missing or invalid input."));
 }
 elseif(!$guest->GuestIdExists()){
     http_response_code(400);
@@ -36,12 +36,12 @@ elseif($guest->rsvpStatusInvalid()){
 }
 elseif($guest->rsvpStatusSame()){
     http_response_code(409);
-    echo json_encode(array("message" => "RSVP not updated. This status is already set."));
+    echo json_encode(array("message" => "RSVP status not updated. This status is already set."));
     exit();
 }
 elseif($guest->updateRSVPStatus()){
     http_response_code(200);
-    echo json_encode(array("message" => "RSVP updated."));
+    echo json_encode(array("message" => "RSVP status updated."));
 }
 
 else{

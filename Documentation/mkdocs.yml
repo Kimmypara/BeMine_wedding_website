@@ -1,3 +1,4 @@
+
 site_name: BeMine Wedding Website
 
 nav:
@@ -9,6 +10,28 @@ nav:
       - Get Categories: category/getCategories.md
       - Get Single Category: category/readSingle.md
       - Delete Category: category/delete.md
+
+  - Guest:
+      - Create Guest: guest/create.md
+      - Get Guests: guest/getGuests.md
+      - Get Single Guest: guest/readSingle.md
+      - Get Guest by Wedding Plan ID: guest/readGuestByWeddingPlanId.md
+      - Update Guest: guest/update.md
+      - Update Guest Email: guest/updateGuestEmail.md
+      - Update Guest Name & Surname: guest/updateGuestNameSurname.md
+      - Update Guest RSVP Status: guest/updateRSVPstatus.md
+
+  - Role:
+      - Create Role: role/create.md
+      - Update Role: role/update.md
+      - Get Roles: role/getRoles.md
+      - Get Single Role: role/readSingle.md
+  
+  - Task:
+      - Create Task: task/create.md
+      - Update Task: task/update.md
+      - Get Tasks: task/getTasks.md
+      - Get Single Task: task/readSingle.md
 
   - Users:
       - Create User: users/create.md

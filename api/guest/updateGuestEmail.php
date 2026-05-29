@@ -27,7 +27,7 @@ if (
     empty($guest->guest_email) 
 ){
     http_response_code(400);
-    echo json_encode(array("message" => "Guest not created. Missing or invalid input."));
+    echo json_encode(array("message" => "Guest not updated. Missing or invalid input."));
 }
 elseif(!$guest->GuestIdExists()){
     http_response_code(409);
